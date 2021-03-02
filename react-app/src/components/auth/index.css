@@ -1,0 +1,31 @@
+.standard__form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(209, 255, 249);
+    margin-bottom: 10%;
+    padding: 2rem;
+    margin-top: -20px;
+    display: flex;
+    max-height: 514px;
+}
+.standard__form--div {
+    background-color: white;
+    padding: 2rem 4rem;
+    max-width: 13rem;
+}
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    position: relative;
+    /* top:-30px; */
+}
+input {
+    padding: .7rem;
+    border-radius: .7rem;
+    font-size: .7rem;
+    margin: .2rem;
+}
+form > div {
+    justify-content: center;
+}

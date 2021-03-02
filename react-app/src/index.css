@@ -41,7 +41,7 @@ body {
     color:rgb(238, 135, 45);
     background-color: white;
     border: 2px solid rgb(238, 135, 45);
-    border-radius: 2rem;
+    border-radius: 1rem;
     padding: .5rem;
     cursor:grab;
     font-size: 1.2rem;
@@ -56,7 +56,7 @@ body {
     /* color:rgb(209, 255, 249); */
     background-color: rgb(209, 255, 249);
     /* border: 2px solid rgb(209, 255, 249); */
-    border-radius: 2rem;
+    border-radius: 1rem;
     padding: 1rem;
     cursor:grab;
     font-size: 1.2rem;

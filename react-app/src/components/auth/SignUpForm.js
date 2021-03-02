@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Redirect } from 'react-router-dom';
+import { Link,  Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
+import './index.css'
 
 const SignUpForm = ({authenticated, setAuthenticated}) => {
   const [firstName, setFirstName] = useState("");
@@ -47,70 +48,84 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   }
 
   return (
-    <form onSubmit={onSignUp}
-    css={{
-      backgroundColor: 'red'
-    }}>
+    <div className='standard__form'>
       <div>
-        <label>First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          onChange={updateFirstName}
-          value={firstName}
-        ></input>
+        <img src='/signup.jpg' alt='party planets' className='standard__form--img' />
       </div>
-      <div>
-        <label>Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          onChange={updateLastName}
-          value={lastName}
-        ></input>
+      <div className='standard__form--div'>
+        <h2>Join the Galaxy</h2>
+        <form className='standarm__form-form' onSubmit={onSignUp}
+        css={{
+          backgroundColor: 'red'
+        }}>
+          <div>
+            {/* <label>First Name</label> */}
+            <input
+              type="text"
+              placeholder='First Name'
+              name="firstName"
+              onChange={updateFirstName}
+              value={firstName}
+              ></input>
+          </div>
+          <div>
+            {/* <label>Last Name</label> */}
+            <input
+              type="text"
+              placeholder='Last Name'
+              name="lastName"
+              onChange={updateLastName}
+              value={lastName}
+              ></input>
+          </div>
+          {/* <div>
+          </div> */}
+          <div>
+            {/* <label>Email</label> */}
+            <input
+              type="text"
+              placeholder='Email'
+              name="email"
+              onChange={updateEmail}
+              value={email}
+              ></input>
+          </div>
+          <div>
+            {/* <label>Password</label> */}
+            <input
+              type="password"
+              placeholder='Password'
+              name="password"
+              onChange={updatePassword}
+              value={password}
+              ></input>
+          </div>
+          <div>
+            {/* <label>Repeat Password</label> */}
+            <input
+              type="password"
+              placeholder='Re-enter Password'
+              name="repeat_password"
+              onChange={updateRepeatPassword}
+              value={repeatPassword}
+              required={true}
+              ></input>
+          </div>
+          <div>
+            <label>Upload a profile picture</label>
+            <input
+              type="file"
+              name="image_url"
+              onChange={updateImageUrl}
+              value={imageUrl}
+              required={false}
+              ></input>
+          </div>
+          <button className='button_secondary' type="submit">Sign Up</button>
+        </form>
+        <Link to='/login'>Already have an account?</Link>
       </div>
-      <div>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <div>
-        <label>Upload a photo</label>
-        <input
-          type="file"
-          name="image_url"
-          onChange={updateImageUrl}
-          value={imageUrl}
-          required={false}
-        ></input>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
+    </div>
   );
 };
 
