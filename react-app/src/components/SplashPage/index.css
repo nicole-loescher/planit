@@ -1,0 +1,44 @@
+.home__info {
+    box-sizing: border-box;
+    background-color: rgb(209, 255, 249);
+    position: relative;
+    top: -20px;
+    padding: 2rem;
+    display: flex;
+    width: 100%;
+    margin-bottom: 5%;
+}
+.home__info--tag {
+    font-size: 2rem;
+    max-width: 300px;
+    text-align: center;
+    position: relative;
+    top:1.5rem;
+    left: 3rem;
+}
+.home__info--img {
+    max-width: 600px;
+    position: absolute;
+    right: 3rem;
+    border-radius: 1rem;;
+}
+.home__howto {
+    text-align: center;
+    padding:.5rem;
+    margin: .5rem;
+    margin-bottom: 5%;
+}
+.home__howto h1 {
+    position: relative;
+    margin-top: 0;
+    font-weight: 600;
+    font-size: 4rem;;
+}
+.home__howto p {
+    font-size: 1.5rem;
+}
+.home__howto--tag {
+    font-size: .3rem;
+    position: absolute;
+    right: 48%;
+}

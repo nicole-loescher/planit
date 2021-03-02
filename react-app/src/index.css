@@ -1,1 +1,70 @@
 /* TODO Add site wide styles */
+body {
+    font-family: 'Rajdhani', sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+.banner_img{
+    /* max-height: 200px; */
+    width: 100%
+}
+.nav {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(209, 255, 249);
+    height: 60px;
+    padding: 2rem;
+}
+.nav a, 
+.nav ul li {
+    text-decoration: none;
+    list-style-type: none;
+    color:black;
+    padding: .5rem;
+    margin: auto;
+    /* align-items: center; */
+} 
+.links {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.3rem;
+}
+.logo {
+    font-size: 3rem;
+    color: black;
+}
+.button_secondary {
+    color:rgb(238, 135, 45);
+    background-color: white;
+    border: 2px solid rgb(238, 135, 45);
+    border-radius: 2rem;
+    padding: .5rem;
+    cursor:grab;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.button_secondary:hover {
+    background-color: rgb(238, 135, 45);
+    color: white;
+    font-size: 1.5rem;
+}
+.button_primary {
+    /* color:rgb(209, 255, 249); */
+    background-color: rgb(209, 255, 249);
+    /* border: 2px solid rgb(209, 255, 249); */
+    border-radius: 2rem;
+    padding: 1rem;
+    cursor:grab;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.button_primary:hover {
+    background-color: rgb(209, 255, 249);
+    color: black;
+    font-size: 1.5rem;
+}
+
