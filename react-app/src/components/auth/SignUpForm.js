@@ -113,13 +113,15 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
           </div>
           <div>
             <label>Upload a profile picture</label>
-            <input
-              type="file"
-              name="image_url"
-              onChange={updateImageUrl}
-              value={imageUrl}
-              required={false}
-              ></input>
+          </div>
+          <div>
+              <input
+                type="file"
+                name="image_url"
+                onChange={updateImageUrl}
+                value={imageUrl}
+                required={false}
+                />
           </div>
           <button className='button_secondary' type="submit">Sign Up</button>
         </form>

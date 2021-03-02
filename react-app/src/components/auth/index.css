@@ -3,29 +3,38 @@
     display: flex;
     justify-content: center;
     background-color: rgb(209, 255, 249);
-    margin-bottom: 10%;
     padding: 2rem;
     margin-top: -20px;
-    display: flex;
-    max-height: 514px;
+    height:40rem;
 }
 .standard__form--div {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
     background-color: white;
     padding: 2rem 4rem;
-    max-width: 13rem;
+    height: 514px;
+    width: 350px;
 }
 h2 {
     font-size: 2rem;
     text-align: center;
     position: relative;
-    /* top:-30px; */
 }
 input {
     padding: .7rem;
     border-radius: .7rem;
     font-size: .7rem;
     margin: .2rem;
+    width: 90%;
+    align-items:center;
 }
 form > div {
-    justify-content: center;
+    display: flex;
+    justify-self: center;
+}
+label {
+    position: relative;
+    left: 5%;
+    font-size: 1.2rem;
 }
