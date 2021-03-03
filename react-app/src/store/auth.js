@@ -60,6 +60,12 @@ export const logout = () => async (dispatch) => {
     return res;
 };
 
+export const restoreUser = () => async dispatch => {
+    const res = await fetch('/api/auth/');
+    dispatch(setUser(res.data.user));
+    return res;
+};
+
 const authReducer = (state = {user: {}}, action) => {
     let newState;
     switch (action.type) {
