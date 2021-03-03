@@ -68,3 +68,8 @@ body {
     font-size: 1.5rem;
 }
 
+a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}

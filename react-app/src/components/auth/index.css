@@ -16,6 +16,9 @@
     height: 514px;
     width: 350px;
 }
+.standard__form--form {
+    margin: 1rem;
+}
 h2 {
     font-size: 2rem;
     text-align: center;
@@ -29,12 +32,22 @@ input {
     width: 90%;
     align-items:center;
 }
-form > div {
+form  {
     display: flex;
+    flex-direction: column;
     justify-self: center;
 }
 label {
     position: relative;
     left: 5%;
     font-size: 1.2rem;
+}
+a {
+    display: flex;
+    align-self: center;
+}
+.errors {
+    color: red;
+    text-align: center;
+    margin-top: -20%;
 }
