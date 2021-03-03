@@ -45,6 +45,5 @@ export const signUp = async (first_name, last_name, image_url, email, password) 
       password,
     }),
   });
-  // console.log('-----------------', response.json(), '------------')
   return await response.json();
 }

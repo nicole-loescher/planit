@@ -24,7 +24,6 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        print('===============', current_user.to_dict())
         return current_user.to_dict()
     return {'message': ['no user logged in']}
 
