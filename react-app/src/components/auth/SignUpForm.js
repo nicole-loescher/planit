@@ -50,7 +50,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   return (
     <div className='standard__form'>
       <div>
-        <img src='/signup.jpg' alt='party planets' className='standard__form--img' />
+        <img src='https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg' alt='party planets' className='standard__form--img' />
       </div>
       <div className='standard__form--div'>
         <h2>Join the Galaxy</h2>

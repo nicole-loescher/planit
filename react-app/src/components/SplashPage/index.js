@@ -17,7 +17,7 @@ const SplashPage = () => {
                     <Link to='/sign-up'><button className='button_secondary'>Sign Up Today!</button></Link>
                 </div>
                 <div >
-                    <img className='home__info--img' src='/partyplanit.png' />
+                    <img className='home__info--img' src='https://myplanits.s3-us-west-1.amazonaws.com/partyplanit.png' />
                 </div>
             </div>
             <div className='home__howto'>
