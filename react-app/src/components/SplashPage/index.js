@@ -1,15 +1,25 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './index.css'
+import UserProfile from './UserProfile';
 
-const SplashPage = () => {
-
-    return (
+const SplashPage = ({ authenticated }) => {
+    const user = useSelector(state => state.auth.user)
+    let content;
+    if(authenticated){
+       
+        content =(
+            <UserProfile user={user} />
+        )
+    }
+    else{
+        content = (
         <div>
             <div className='home__info'>
                 <div className='home__info--tag'>
                     <p>Welcome to PlanIt!
-                    The app designed to help 
+                    The app designed to help
                     you plan that next
                     potluck without all the fuss!
                     Sign up today and host
@@ -28,8 +38,12 @@ const SplashPage = () => {
                 <p> 4. Have fun! Enjoy your PlanIt and know who is bringing what(without the endless group chats!)</p>
                 <Link to='/sign-up'><button className='button_primary'>Sign Up Today!</button></Link>
             </div>
+        </div>)
+    }
+    return (
+        <div>
+            {content}
         </div>
-
     )
 }
 

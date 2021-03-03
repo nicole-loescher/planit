@@ -36,7 +36,7 @@ function App() {
         
         <Switch>
           <Route path="/" exact={true} authenticated={authenticated}>
-            <SplashPage />
+          <SplashPage authenticated={authenticated}/>
           </Route>
           <Route path="/login" exact={true}>
             <LoginForm

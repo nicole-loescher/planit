@@ -42,3 +42,11 @@
     position: absolute;
     right: 48%;
 }
+.profile--pic {
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    position: absolute;
+    top: -3rem;
+    left: 43%;
+}
