@@ -33,7 +33,7 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(255), nullable = False)
 
   hosting = db.relationship('Party', lazy='joined', back_populates='host')
-  visiting = db.relationship('Party', lazy='joined', secondary='guest_list', back_populates='guests')
+  # visiting = db.relationship('Party', lazy='joined', secondary='guest_list', back_populates='guests')
   items = db.relationship('Item', lazy='joined', back_populates='guest')
 
   @property
@@ -74,7 +74,7 @@ class Party(db.Model):
   updated_at = db.Column(db.DateTime())
 
   host = db.relationship('User', lazy='joined', back_populates='hosting')
-  guests = db.relationship('User', lazy='joined', secondary='guest_list', back_populates='visiting')
+  # guests = db.relationship('User', lazy='joined', secondary='guest_list', back_populates='visiting')
   items = db.relationship('Item', lazy='joined', back_populates='party')
 
   def to_dict(self):
@@ -88,9 +88,7 @@ class Party(db.Model):
       "details": self.details,
       "host_id": self.host_id,
       "created_at": self.created_at,
-      "updateded_at": self.updateded_at,
-      "items": self.items.to_dict(),
-      "guests": self.guests.to_dict()
+      "updateded_at": self.updateded_at
     }
 
 
@@ -112,7 +110,5 @@ class Item(db.Model):
       'name': self.name,
       'quantity': self.quantity,
       'user_id': self.user_id,
-      'party_id': self.party_id,
-      'guest': self.guest.to_dict(),
-      'party': self.guest.to_dict(),
+      'party_id': self.party_id
     }
