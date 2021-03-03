@@ -9,7 +9,7 @@ const UserProfile = ({user}) =>{
     return (
         <div className='home__info'>
             <img className='profile--pic' alt='profile picture' src='https://myplanits.s3-us-west-1.amazonaws.com/nicolePhoto.jpeg' />
-         <h1> welcome, {user.first_name}</h1>
+         <h1 className='profile--welcome'> Welcome back, {user.first_name}!</h1>
     
 
         </div>

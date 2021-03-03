@@ -24,8 +24,9 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
+        print('===============', current_user.to_dict())
         return current_user.to_dict()
-    return {'errors': ['Unauthorized']}, 401
+    return {'message': ['no user logged in']}
 
 
 @auth_routes.route('/login', methods=['POST'])

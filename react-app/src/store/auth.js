@@ -60,11 +60,18 @@ export const logout = () => async (dispatch) => {
     return res;
 };
 
-export const restoreUser = () => async dispatch => {
-    const res = await fetch('/api/auth/');
-    dispatch(setUser(res.data.user));
-    return res;
-};
+
+export const authenticate = () => async dispatch => {
+    const response = await fetch('/api/auth/', {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const user = await response.json()
+    dispatch(setUser(user));
+    return user
+}
+
 
 const authReducer = (state = {user: {}}, action) => {
     let newState;

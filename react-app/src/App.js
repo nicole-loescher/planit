@@ -6,16 +6,18 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import { authenticate } from "./services/auth";
+import { authenticate } from "./store/auth";
 import SplashPage from './components/SplashPage'
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     (async() => {
-      const user = await authenticate();
+      const user = dispatch(authenticate());
       if (!user.errors) {
         setAuthenticated(true);
       }
