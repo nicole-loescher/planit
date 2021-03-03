@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
 import * as authActions from "../../store/auth";
 
 const LogoutButton = ({setAuthenticated}) => {
@@ -12,9 +11,6 @@ const LogoutButton = ({setAuthenticated}) => {
     setAuthenticated(false);
   };
 
-  // if (!authenticated) {
-  //   return <Redirect to="/login" />;
-  // }
   return <button className='button_secondary' onClick={onLogout}>Log Out</button>;
 };
 

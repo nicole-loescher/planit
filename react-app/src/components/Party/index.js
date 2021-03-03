@@ -8,7 +8,6 @@ const Party = () => {
     const [item, setItem] = useState([]);
     const [location, setLocation] = useState('');
     const [guest, setGuest] = useState([]);
-    const items = [...item]
 
     return(
         <div className='standard__form'>
