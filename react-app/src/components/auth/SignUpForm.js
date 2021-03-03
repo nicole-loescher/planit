@@ -6,6 +6,7 @@ import './index.css'
 
 const SignUpForm = ({authenticated, setAuthenticated}) => {
   const dispatch = useDispatch()
+  const [errors, setErrors] = useState([]);
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +20,12 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
       const user = await dispatch(authActions.signUp(first_name, last_name, image_url, email, password));
       if (!user.errors) {
         setAuthenticated(true);
+      } else {
+        setErrors(user.errors);
       }
+    }
+    else if( password !== repeatPassword){
+      setErrors(['Passwords do not match.'])
     }
   };
 
@@ -48,6 +54,17 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   if (authenticated) {
     return <Redirect to="/" />;
   }
+  let errordiv;
+  if (errors.length > 0) {
+    errordiv = (
+      <div>
+        <h3>Huston we have a problem: </h3>
+        {errors.map((error) => (
+          <div>{error}</div>
+        ))}
+      </div>
+    )
+  }
 
   return (
     <div className='standard__form'>
@@ -56,10 +73,13 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
       </div>
       <div className='standard__form--div'>
         <h2>Join the Galaxy</h2>
-        <form className='standarm__form-form' onSubmit={onSignUp}
+        <form className='standard__form--form' onSubmit={onSignUp}
         css={{
           backgroundColor: 'red'
         }}>
+          <div className='errors'>
+            {errordiv}
+          </div>
           <div>
             {/* <label>First Name</label> */}
             <input
