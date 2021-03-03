@@ -4,17 +4,17 @@ import { signUp } from '../../services/auth';
 import './index.css'
 
 const SignUpForm = ({authenticated, setAuthenticated}) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [image_url, setImageUrl] = useState("");
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(firstName, lastName, email, password);
+      const user = await signUp(first_name, last_name, image_url, email, password);
       if (!user.errors) {
         setAuthenticated(true);
       }
@@ -65,7 +65,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
               placeholder='First Name'
               name="firstName"
               onChange={updateFirstName}
-              value={firstName}
+              value={first_name}
               ></input>
           </div>
           <div>
@@ -75,7 +75,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
               placeholder='Last Name'
               name="lastName"
               onChange={updateLastName}
-              value={lastName}
+              value={last_name}
               ></input>
           </div>
           {/* <div>
@@ -119,7 +119,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
                 type="file"
                 name="image_url"
                 onChange={updateImageUrl}
-                value={imageUrl}
+                value={image_url}
                 required={false}
                 />
           </div>

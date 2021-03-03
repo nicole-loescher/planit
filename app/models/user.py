@@ -37,9 +37,9 @@ class User(db.Model, UserMixin):
       "last_name": self.last_name,
       "image_url": self.image_url,
       "email": self.email,
-      "hosting": self.hosting.to_dict(),
-      "visiting": self.visiting.to_dict(),
-      "items": self.items.to_dict(),
+      # "hosting": self.hosting.to_dict(),
+      # "visiting": self.visiting.to_dict(),
+      # "items": self.items.to_dict(),
     }
 
 class Party(db.Model):
@@ -84,7 +84,7 @@ class Party(db.Model):
     party_id = db.Column(db.Integer, db.ForeignKey('parties.id'))
     rsvp = db.Column(db.Boolean)
 
-    party = db.relationship('Party', lazy='joined', back_populates='guests')
+    # party = db.relationship('Party', lazy='joined', back_populates='guests')
 
     def to_dict(self):
       return {

@@ -66,12 +66,14 @@ def sign_up():
         user = User(
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
+            image_url=form.data['image_url'],
             email=form.data['email'],
             password=form.data['password']
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
+        print('+++++++++++++', user.to_dict(), '++++++++++')
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
