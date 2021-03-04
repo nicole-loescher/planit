@@ -10,6 +10,12 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const onDemo = async (e) => {
+    e.preventDefault();
+    const demoUser = await dispatch(authActions.login('demo@aa.io', 'password'))
+    setAuthenticated(true)
+  }
+
   const onLogin = async (e) => {
     e.preventDefault();
     const user = await dispatch(authActions.login(email, password));
@@ -79,6 +85,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
             <button className='button_primary' type="submit">Log In</button>
         </form>
         <Link to='/sign-up'>Not a member yet?</Link>
+        <button type='submit' onClick={onDemo} className='button_secondary'>Demo Log In</button>
       </div>
     </div>
   );
