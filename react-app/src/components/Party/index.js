@@ -11,14 +11,38 @@ const Party = () => {
     const [starts_at, setStarts_at] = useState('');
     const [ends_at, setEnds_at] = useState('');
     const [image_url, setImage_url] = useState('');
-    const [item, setItem] = useState([]);
+    const [item, setItem] = useState('');
+    const [quantity, setQuantity] = useState(1);
     const [location, setLocation] = useState('');
     const [guest, setGuest] = useState([]);
 
+    const [state, setState] = useState({items: []})
+
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log('tttttttttttttttttttttttttttttttt',starts_at)
         const party = await dispatch(partyActions.create(host_id, name, details, starts_at, ends_at, image_url, location))
+    }
+    const itemSubmit = async (e) => {
+        e.preventDefault();
+        // const items = await dispatch(partyActions.addItem(name, quantity, party_id))
+    }
+    const guestSubmit = async (e) => {
+        e.preventDefault();
+    }
+    const addItem = (e) =>{
+        e.preventDefault();
+        setState({items: [...state.items, '']})
+    }
+    const handleChange = (e, index) =>{
+        e.preventDefault();
+        state.items[index] = e.target.value
+        setState({items: state.items})
+    }
+    const handleDelete = (e, index)=>{
+        e.preventDefault();
+        state.items.splice(index, 1)
+        console.log(state.items, '...................')
+        setState({items: state.items})
     }
 
     return(
@@ -60,8 +84,23 @@ const Party = () => {
                     value={details}
                     onChange={e => setDetails(e.target.value)}
                     />
-                   
-                    <input
+                    <button>Submit</button>
+                   {/* </form> */}
+                   {/* <form onSubmit={itemSubmit}> */}
+                       {state.items.map((item, index)=>{
+                           return (
+                               <div key={index}>
+                                   <input 
+                                   value={item}
+                                   placeholder='enter item name' 
+                                   onChange={e => handleChange(e, index)}
+                                   />
+                                   <button onClick={e => handleDelete(e, index)}>Delete</button>
+                               </div>
+                           )
+                        })}
+                        <button onClick={e => addItem(e)}>Add more items</button>
+                    {/* <input
                     name='item'
                     placeholder='Add supplies to your list'
                     type='text'
@@ -69,14 +108,23 @@ const Party = () => {
                     onChange={e => setItem(e.target.value)}
                     />
                     <input
+                    name='quantity'
+                    type='number'
+                    value={quantity}
+                    onChange={e => setQuantity(e.target.value)}
+                    />
+                    <button>add more items</button>
+                    </form>
+                    <form onSubmit={guestSubmit}>
+                    <input
                     name='guest'
                     placeholder='Add friends to your galaxy'
                     type='text'
                     value={guest}
                     onChange={e => setGuest(e.target.value)}
                     />
-                    <button>Submit</button>
-                </form>
+                    <button>Add more guests</button> */}
+                </form> 
             </div>
             <div className='photo_selector'>
                 <h1>upload a photo for your party</h1>
