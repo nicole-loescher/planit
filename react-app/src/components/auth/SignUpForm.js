@@ -58,7 +58,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   if (errors.length > 0) {
     errordiv = (
       <div>
-        <h3>Huston we have a problem: </h3>
+        <h3>Houston we have a problem: </h3>
         {errors.map((error) => (
           <div>{error}</div>
         ))}
@@ -73,10 +73,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
       </div>
       <div className='standard__form--div'>
         <h2>Join the Galaxy</h2>
-        <form className='standard__form--form' onSubmit={onSignUp}
-        css={{
-          backgroundColor: 'red'
-        }}>
+        <form className='standard__form--form' onSubmit={onSignUp}>
           <div className='errors'>
             {errordiv}
           </div>

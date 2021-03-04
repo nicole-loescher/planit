@@ -32,11 +32,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <div className='page_container'> */}
-        <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} />
-    
-      <img className='banner_img' src='https://myplanits.s3-us-west-1.amazonaws.com/space-party.jpg' alt='space banner'/>
-        
+      <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} />  
+      <img className='banner_img' src='https://myplanits.s3-us-west-1.amazonaws.com/space-party.jpg' alt='space banner'/>  
         <Switch>
           <Route path="/" exact={true} authenticated={authenticated}>
           <SplashPage authenticated={authenticated}/>
@@ -60,7 +57,6 @@ function App() {
             <User />
           </ProtectedRoute>
         </Switch>
-      {/* </div> */}
     </BrowserRouter>
   );
 }
