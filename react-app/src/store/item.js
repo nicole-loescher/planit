@@ -50,7 +50,7 @@ const itemsReducer = (state = {items: []}, action) => {
     switch (action.type) {
         case LOAD_ITEMS: {
             const newItems = {};
-            action.items.forEach(item => {
+            action.payload.forEach(item => {
                 newItems[item.id] = item;
             })
             return {
