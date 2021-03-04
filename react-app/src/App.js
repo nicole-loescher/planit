@@ -9,6 +9,7 @@ import User from "./components/User";
 import { authenticate } from "./store/auth";
 import SplashPage from './components/SplashPage'
 import { useDispatch } from "react-redux";
+import Party from "./components/Party";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function App() {
       }
       setLoaded(true);
     })();
-  }, []);
+  }, [dispatch]);
 
   if (!loaded) {
     return null;
@@ -31,11 +32,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <div className='page_container'> */}
-        <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} />
-    
-      <img className='banner_img' src='https://myplanits.s3-us-west-1.amazonaws.com/space-party.jpg' alt='space banner'/>
-        
+      <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} />  
+      <img className='banner_img' src='https://myplanits.s3-us-west-1.amazonaws.com/space-party.jpg' alt='space banner'/>  
         <Switch>
           <Route path="/" exact={true} authenticated={authenticated}>
           <SplashPage authenticated={authenticated}/>
@@ -52,11 +50,13 @@ function App() {
           <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
             <UsersList/>
           </ProtectedRoute>
+          <ProtectedRoute path="/planits/create" exact={true} authenticated={authenticated}>
+            <Party />
+          </ProtectedRoute>
           <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
             <User />
           </ProtectedRoute>
         </Switch>
-      {/* </div> */}
     </BrowserRouter>
   );
 }

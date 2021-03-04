@@ -36,7 +36,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   if(errors.length > 0){
     errordiv = (
       <div>
-      <h3>Huston we have a problem: </h3>
+      <h3>Houston we have a problem: </h3>
         {errors.map((error) => (
           <div>{error}</div>
         )) }  

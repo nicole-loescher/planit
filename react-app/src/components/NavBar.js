@@ -1,6 +1,5 @@
 /** @jsx jsx */
-import React from 'react';
-import { jsx, css } from "@emotion/react";
+import { jsx } from "@emotion/react";
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import '../index.css'

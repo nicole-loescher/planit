@@ -66,8 +66,8 @@ class Party(db.Model):
   name = db.Column(db.String(50), nullable=False)
   location = db.Column(db.String(50), nullable=False)
   image_url = db.Column(db.String(255))
-  starts_at = db.Column(db.DateTime(), nullable=False)
-  ends_at = db.Column(db.DateTime())
+  starts_at = db.Column(db.String(20), nullable=False)
+  ends_at = db.Column(db.String(20))
   details = db.Column(db.String(255))
   host_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   created_at = db.Column(db.DateTime())
@@ -88,7 +88,7 @@ class Party(db.Model):
       "details": self.details,
       "host_id": self.host_id,
       "created_at": self.created_at,
-      "updateded_at": self.updateded_at
+      "updated_at": self.updated_at
     }
 
 
