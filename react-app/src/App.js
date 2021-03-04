@@ -6,7 +6,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import { authenticate } from "./store/auth";
+import { authenticate } from "./services/auth";
 import SplashPage from './components/SplashPage'
 import { useDispatch } from "react-redux";
 import Party from "./components/Party";
@@ -18,13 +18,13 @@ function App() {
 
   useEffect(() => {
     (async() => {
-      const user = dispatch(authenticate());
+      const user = authenticate();
       if (!user.errors) {
         setAuthenticated(true);
       }
       setLoaded(true);
     })();
-  }, [dispatch]);
+  }, []);
 
   if (!loaded) {
     return null;

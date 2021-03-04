@@ -61,16 +61,16 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const authenticate = () => async dispatch => {
-    const response = await fetch('/api/auth/', {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    const user = await response.json()
-    dispatch(setUser(user));
-    return user
-}
+// export const authenticate = () => async dispatch => {
+//     const response = await fetch('/api/auth/', {
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     });
+//     const user = await response.json()
+//     dispatch(setUser(user));
+//     return user
+// }
 
 
 const authReducer = (state = {user: {}}, action) => {

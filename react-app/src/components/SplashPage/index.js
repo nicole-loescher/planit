@@ -5,8 +5,8 @@ import './index.css'
 import UserProfile from './UserProfile';
 
 const SplashPage = ({ authenticated }) => {
-    const user = useSelector(state => state.auth.user)
     let content;
+    const user = useSelector(state => state.auth.user)
     if(authenticated){
        
         content =(
