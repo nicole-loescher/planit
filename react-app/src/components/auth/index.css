@@ -5,7 +5,8 @@
     background-color: rgb(209, 255, 249);
     padding: 2rem;
     margin-top: -20px;
-    height:40rem;
+    min-height:40rem;
+    max-height: auto;
 }
 .standard__form--div {
     display: flex;

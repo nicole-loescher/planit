@@ -1,0 +1,41 @@
+.planit__form {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* grid-template-columns: 10% 40% 40% 10%;
+    grid-template-rows: 10% 40% 40% 10%; */
+    justify-content: space-around;
+    background-color: rgb(209, 255, 249);
+    padding: 2rem;
+    margin-top: -20px;
+    min-height:40rem;
+    max-height: auto;
+    
+}
+.planit__form--div {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: white;
+    padding: 2rem 4rem;
+    min-height: 514px;
+    max-height: auto;
+    width: 350px;
+    border-radius: 2rem;
+    
+}
+.title {
+    position: relative;
+    left: 50%;
+    margin-bottom: 1rem;
+}
+/* .one {
+     grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 4;
+} */
+/* .items {
+    min-height: auto;
+} */
