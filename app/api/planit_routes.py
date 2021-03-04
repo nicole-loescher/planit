@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import User, Party, Item, Guest_List, db
-from app.forms import PartyForm
+from app.forms import PartyForm, ItemForm
 
 planit_routes = Blueprint('planits', __name__)
 
@@ -47,4 +47,25 @@ def host_planit():
         db.session.add(party)
         db.session.commit() 
         return party.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@planit_routes.route('/<int:id>/items', methods=['POST'])
+def planit_items(id):
+    """
+    Creates items for a party.
+    """
+    form = ItemForm()
+    print(request.get_json())
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print('==============', form.data)
+        item = Item(
+            name=form.data['name'],
+            party_id=form.data['party_id'],
+            # user_id=form.data['user_id']
+        )
+        db.session.add(item)
+        db.session.commit() 
+        return item.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}

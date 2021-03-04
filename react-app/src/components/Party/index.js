@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as partyActions from '../../store/party'
+import * as itemActions from '../../store/item'
 
 const Party = () => {
     const user = useSelector(state => state.auth.user)
@@ -21,13 +22,12 @@ const Party = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const party = await dispatch(partyActions.create(host_id, name, details, starts_at, ends_at, image_url, location))
-    }
-    const itemSubmit = async (e) => {
-        e.preventDefault();
-        // const items = await dispatch(partyActions.addItem(name, quantity, party_id))
-    }
-    const guestSubmit = async (e) => {
-        e.preventDefault();
+        console.log('**************', party)
+        if(party){
+            const party_id = party.id
+            const user_id = null
+            state.items.map(async(name)=> await dispatch(itemActions.addOneItem(name, party_id, user_id)))
+        }
     }
     const addItem = (e) =>{
         e.preventDefault();
@@ -41,7 +41,6 @@ const Party = () => {
     const handleDelete = (e, index)=>{
         e.preventDefault();
         state.items.splice(index, 1)
-        console.log(state.items, '...................')
         setState({items: state.items})
     }
 
@@ -62,16 +61,18 @@ const Party = () => {
                     <input
                     name='location'
                     type='text'
-                    placeholder='Where is your PlanIt'
+                    placeholder='Where is your PlanIt located?'
                     value={location}
                     onChange={e=> setLocation(e.target.value)}
                     />
+                    <label>When does it start?</label>
                     <input
                     name='starts_at'
                     type='date'
                     value={starts_at}
                     onChange={e => setStarts_at(e.target.value)}
                     />
+                    <label>When does it end?</label>
                     <input
                     name='ends_at'
                     type='date'
@@ -84,9 +85,9 @@ const Party = () => {
                     value={details}
                     onChange={e => setDetails(e.target.value)}
                     />
-                    <button>Submit</button>
-                   {/* </form> */}
-                   {/* <form onSubmit={itemSubmit}> */}
+                    <div>
+
+                    <h3>Tell your galaxy what to bring</h3>
                        {state.items.map((item, index)=>{
                            return (
                                <div key={index}>
@@ -100,6 +101,7 @@ const Party = () => {
                            )
                         })}
                         <button onClick={e => addItem(e)}>Add more items</button>
+                    </div>
                     {/* <input
                     name='item'
                     placeholder='Add supplies to your list'
@@ -123,7 +125,8 @@ const Party = () => {
                     value={guest}
                     onChange={e => setGuest(e.target.value)}
                     />
-                    <button>Add more guests</button> */}
+                <button>Add more guests</button> */}
+                <button className='button_secondary'>Submit</button>
                 </form> 
             </div>
             <div className='photo_selector'>
