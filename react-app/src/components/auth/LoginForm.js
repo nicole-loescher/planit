@@ -85,7 +85,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
             <button className='button_primary' type="submit">Log In</button>
         </form>
         <Link to='/sign-up'>Not a member yet?</Link>
-        <form onSubmit={onDemo}><button className='button_secondary'>Demo Log In</button></form>
+        <button type='submit' onClick={onDemo} className='button_secondary'>Demo Log In</button>
       </div>
     </div>
   );
