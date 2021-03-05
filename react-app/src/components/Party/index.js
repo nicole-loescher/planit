@@ -161,7 +161,7 @@ const Party = () => {
     }
     if(count === 4){
         content = (
-            <div>
+            <div className='planit__form--div'>
                 <h1 className='title'>Prepare to Launch</h1>
                 <button className='button_secondary'>Submit</button>
             </div>
