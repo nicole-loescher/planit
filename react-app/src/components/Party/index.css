@@ -1,11 +1,10 @@
 .planit__form {
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    /* grid-template-columns: 10% 40% 40% 10%;
-    grid-template-rows: 10% 40% 40% 10%; */
-    justify-content: space-around;
+ 
+    align-items: center;
     background-color: rgb(209, 255, 249);
     padding: 2rem;
     margin-top: -20px;
@@ -14,21 +13,37 @@
     
 }
 .planit__form--div {
+    /* box-sizing: border-box; */
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
+    justify-content: center;
     background-color: white;
-    padding: 2rem 4rem;
+    padding: 1rem 4rem;
     min-height: 514px;
     max-height: auto;
-    width: 350px;
+    max-width: 850px;
+    min-width: 400px;
     border-radius: 2rem;
+    margin: 0rem 4rem;
     
 }
 .title {
-    position: relative;
-    left: 50%;
+    /* position: relative; */
+    float: center;
     margin-bottom: 1rem;
+}
+h1 {
+    font-size: 3rem;
+}
+textarea {
+    box-sizing: border-box;
+    width: 100%;
+    height: 4rem;
+    margin-bottom: 2rem;
+    justify-self: center;
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding: 1rem;
 }
 /* .one {
      grid-row-start: 2;
@@ -39,3 +54,13 @@
 /* .items {
     min-height: auto;
 } */
+.planit__img {
+    max-width: 400px;
+    border-radius: 2rem;
+    align-items: center;
+}
+.button__div {
+    display: flex;
+    flex-direction: column;
+   
+}
