@@ -12,12 +12,12 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [image_url, setImageUrl] = useState("");
+  const [image, setImage] = useState("");
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await dispatch(authActions.signUp(first_name, last_name, image_url, email, password));
+      const user = await dispatch(authActions.signUp(first_name, last_name, image, email, password));
       if (!user.errors) {
         setAuthenticated(true);
       } else {
@@ -47,8 +47,8 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
   };
-  const updateImageUrl = (e) => {
-    setImageUrl(e.target.value);
+  const updateImage = (e) => {
+    setImage(e.target.files[0]);
   };
 
   if (authenticated) {
@@ -136,9 +136,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
           <div>
               <input
                 type="file"
-                name="image_url"
-                onChange={updateImageUrl}
-                value={image_url}
+                onChange={updateImage}
                 required={false}
                 />
           </div>

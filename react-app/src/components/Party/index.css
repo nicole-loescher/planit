@@ -56,5 +56,48 @@ textarea {
 }
 .party__div{
     display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+.party__div--img{
+    display: flex;
     flex-direction: row;
+    align-self: start;
+}
+.party__title {
+    position: absolute;
+    top: -34%;
+    font-size: 8rem;
+    color:white;
+}
+.party__date {
+    font-size: 3rem;
+    /* position: relative; */
+    /* top: -30%; */
+}
+.party__time {
+    font-size: 2rem;
+    /* position: relative; */
+    /* top: -60%; */
+}
+.party__location {
+    font-size: 1.4rem;
+    /* position: relative;
+    top: -180%; */
+}
+.party__form--div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: white;
+    padding: 2rem 4rem;
+    /* min-height: 514px; */
+    max-height: auto;
+    min-width: 900px;
+    /* max-width: 850px; */
+
+    border-radius: 2rem;
+
+    
 }

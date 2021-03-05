@@ -14,19 +14,16 @@ const removeUser = () => {
     };
 };
 
-export const signUp = (first_name, last_name, image_url, email, password) => async dispatch =>{
+export const signUp = (first_name, last_name, image, email, password) => async dispatch =>{
+    const form = new FormData();
+    form.append('first_name', first_name)
+    form.append('last_name', last_name)
+    form.append('image', image)
+    form.append('email', email)
+    form.append('password', password)
     const response = await fetch("/api/auth/signup", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            first_name,
-            last_name,
-            image_url,
-            email,
-            password,
-        }),
+        body: form,
     });
     const user = await response.json()
     dispatch(setUser(user));

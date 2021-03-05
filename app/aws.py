@@ -17,13 +17,13 @@ s3 = boto3.client(
    aws_secret_access_key=Config.S3_SECRET
 )
 
-def upload_file_to_s3(file, bucket_name, acl="public-read"):
-
+def upload_file_to_s3(file, acl="public-read"):
+    print(Config.S3_BUCKET)
     try:
 
         s3.upload_fileobj(
             file,
-            bucket_name,
+            Config.S3_BUCKET,
             file.filename,
             ExtraArgs={
                 "ACL": acl,
@@ -34,10 +34,10 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
     except Exception as e:
         # This is a catch all exception, edit this part to fit your needs.
         print("Something Happened: ", e)
-        return e
+        return {'errors': str(e)}
 
 
-    return f"{Config.S3_LOCATION}{file.filename}"
+    return {'url' : f"{Config.S3_LOCATION}{file.filename}"}
 
 
 def allowed_file(filename):
