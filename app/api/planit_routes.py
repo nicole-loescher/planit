@@ -60,3 +60,21 @@ def planit_items(id):
         db.session.commit() 
         return item.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@planit_routes.route('/<int:id>/items')
+def getItems(id):
+    """
+    gets party items
+    """
+    items = Item.query.filter(Item.party_id == id).all()
+    return {'party_items': [item.to_dict() for item in items]}
+
+
+@planit_routes.route('/<int:id>')
+def get_party(id):
+    """
+    Gets a single party.
+    """
+    party = Party.query.get(id)
+    return party.to_dict()

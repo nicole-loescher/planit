@@ -16,17 +16,17 @@ const addItem = (item) => {
     };
 };
 
-// export const loadParties = (userId) => async dispatch => {
-//     const response = await fetch('/api/planits/', {
-//         method: 'GET',
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//     })
-//     const parties = await response.json();
-//     dispatch(loadParty(parties));
-//     return parties;
-// }
+export const loadAllItems = (partyId) => async dispatch => {
+    const response = await fetch(`/api/planits/${partyId}/items`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    const items = await response.json();
+    dispatch(loadItems(items));
+    return items;
+}
 
 export const addOneItem = (name, party_id, user_id) => async dispatch => {
     const response = await fetch(`/api/planits/${party_id}/items`, {
@@ -41,7 +41,6 @@ export const addOneItem = (name, party_id, user_id) => async dispatch => {
         }),
     });
     const item = await response.json()
-    console.log('=======================', item)
     dispatch(addItem(item))
     return item
 }
@@ -50,7 +49,7 @@ const itemsReducer = (state = {items: []}, action) => {
     switch (action.type) {
         case LOAD_ITEMS: {
             const newItems = {};
-            action.payload.forEach(item => {
+            action.payload.party_items.forEach(item => {
                 newItems[item.id] = item;
             })
             return {

@@ -180,6 +180,7 @@ const Party = () => {
             <div className='planit__form--div'>
                 <h1 className='title'>Prepare to Launch</h1>
                 <button className='button_secondary'>Submit</button>
+                <button className='button_primary' onClick={onPrev}>Previous</button>
             </div>
         )
     }

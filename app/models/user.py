@@ -87,8 +87,7 @@ class Party(db.Model):
       "ends_at": self.ends_at,
       "details": self.details,
       "host_id": self.host_id,
-      "created_at": self.created_at,
-      "updated_at": self.updated_at
+      'host': self.host.to_dict()
     }
 
 
