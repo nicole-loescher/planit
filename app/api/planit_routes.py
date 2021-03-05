@@ -16,15 +16,6 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@planit_routes.route('/')
-def get_parties():
-    """
-    Gets parties filtered by user.
-    """
-    hosted = Party.query.filter(Party.host_id == form.data['host_id']).all()
-    
-    return {'hosted_parties': [party.to_dict() for party in hosted]}
-
 @planit_routes.route('/', methods=['POST'])
 def host_planit():
     """

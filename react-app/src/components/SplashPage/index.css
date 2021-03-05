@@ -1,4 +1,6 @@
 .home__info {
+    /* display: flex;
+    flex-direction: row; */
     box-sizing: border-box;
     background-color: rgb(209, 255, 249);
     position: relative;
@@ -44,14 +46,35 @@
 }
 .profile--pic {
     border-radius: 50%;
-    width: 6rem;
-    height: 6rem;
-    position: absolute;
-    top: -3rem;
-    left: 43%;
+    width: 8rem;
+    height: 8rem;
+    /* position: absolute; */
+    /* top: -5%; */
+    /* left: 44% */
 }
 .profile--welcome {
-    text-align: center;
+    margin: 1rem 3rem;
+    font-size: 2em;
+    color:red;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-self: center;
+    align-self: flex-start;
+}
+.standard__form--div {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 2rem;
+    margin: 2rem 2rem;
+    background-color: white;
+    padding: 2rem 4rem;
+    height: 514px;
+    width: 350px;
+}
+.standard__form--container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }

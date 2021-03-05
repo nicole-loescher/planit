@@ -24,7 +24,7 @@ const removeParty = () => {
 };
 
 export const loadParties = (userId) => async dispatch => {
-    const response = await fetch('/api/planits/', {
+    const response = await fetch(`/api/users/${userId}/planits`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",

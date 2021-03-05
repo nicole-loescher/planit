@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as partyActions from '../../store/party'
 import * as itemActions from '../../store/item'
 import './index.css'
+import { useHistory } from 'react-router-dom';
 
 const Party = () => {
-    const user = useSelector(state => state.auth.user)
-    const host_id = user.id
+    const history = useHistory();
+    const user = useSelector(state => state.auth.user);
+    const host_id = user.id;
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [details, setDetails] = useState('');
@@ -14,10 +16,11 @@ const Party = () => {
     const [ends_at, setEnds_at] = useState('');
     const [image_url, setImage_url] = useState("https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg");
     const [location, setLocation] = useState('');
-    const [state, setState] = useState({items: []})
-    const [count, setCount] = useState(1)
+    const [state, setState] = useState({items: []});
+    const [count, setCount] = useState(1);
 
     let content;
+    let errordiv;
     
     useEffect(async (e) => {
 
@@ -26,10 +29,23 @@ const Party = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const party = await dispatch(partyActions.create(host_id, name, details, starts_at, ends_at, image_url, location))
-        if(party){
+        console.log('.................', party)
+        if(!party.errors){
+            console.log('no errors hereeeeee')
             const party_id = party.id
             const user_id = null
             state.items.map(async(name)=> await dispatch(itemActions.addOneItem(name, party_id, user_id)))
+            history.push('/')
+        }
+        else {
+            errordiv = (
+                <div>
+                    <h3>Houston we have a problem: </h3>
+                    {party.errors.map((error, i) => (
+                        <div key={i}>{error}</div>
+                    ))}
+                </div>
+            )
         }
     }
     const addItem = (e) =>{
