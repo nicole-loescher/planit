@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
- 
     align-items: center;
     background-color: rgb(209, 255, 249);
     padding: 2rem;
@@ -13,7 +12,6 @@
     
 }
 .planit__form--div {
-    /* box-sizing: border-box; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,13 +26,10 @@
     
 }
 .title {
-    /* position: relative; */
     float: center;
     margin-bottom: 1rem;
 }
-/* h1 {
-    font-size: 3rem;
-} */
+
 textarea {
     box-sizing: border-box;
     width: 100%;
@@ -45,15 +40,6 @@ textarea {
     border-radius: 1rem;
     padding: 1rem;
 }
-/* .one {
-     grid-row-start: 2;
-    grid-row-end: 4;
-    grid-column-start: 2;
-    grid-column-end: 4;
-} */
-/* .items {
-    min-height: auto;
-} */
 .planit__img {
     max-width: 400px;
     border-radius: 2rem;
@@ -63,4 +49,12 @@ textarea {
     display: flex;
     flex-direction: column;
    
+}
+.party_pic {
+    max-height: 20rem;
+    border-radius: 2rem;
+}
+.party__div{
+    display: flex;
+    flex-direction: row;
 }

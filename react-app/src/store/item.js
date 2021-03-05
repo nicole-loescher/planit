@@ -54,7 +54,8 @@ const itemsReducer = (state = {items: []}, action) => {
             })
             return {
                 ...state,
-                ...newItems
+                ...newItems,
+                items: [action.payload.party_items]
             }
         }
         case REMOVE_ITEM: {
