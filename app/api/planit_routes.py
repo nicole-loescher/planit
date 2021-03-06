@@ -78,3 +78,14 @@ def get_party(id):
     """
     party = Party.query.get(id)
     return party.to_dict()
+
+
+@planit_routes.route('/<int:id>', methods=['DELETE'])
+def delete_party(id):
+    """
+    Deletes a single party.
+    """
+    deleted = Party.query.get(id)
+    db.session.delete(deleted)
+    db.session.commit()
+    return deleted.to_dict()

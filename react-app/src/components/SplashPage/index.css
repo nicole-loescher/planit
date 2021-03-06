@@ -61,7 +61,7 @@
     justify-self: center;
     align-self: flex-start;
 }
-.standard__form--div {
+.standard__form--div2 {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;

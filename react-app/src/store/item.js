@@ -16,6 +16,20 @@ const addItem = (item) => {
     };
 };
 
+const removeItem = (item) => {
+    return {
+        type: REMOVE_ITEM,
+    }
+};
+
+export const deleteItem = (id) => async dispatch => {
+    const response = await fetch(`/api/planits/${id}/items`, {
+        method: 'DELETE',
+    })
+    const deleted = await response.json();
+    dispatch(removeItem(deleted))
+}
+
 export const loadAllItems = (partyId) => async dispatch => {
     const response = await fetch(`/api/planits/${partyId}/items`, {
         method: 'GET',

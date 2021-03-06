@@ -1,14 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import * as authActions from "../../store/auth";
 
 const LogoutButton = ({setAuthenticated}) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onLogout = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     await dispatch(authActions.logout());
     setAuthenticated(false);
+    history.push('/');
+
   };
 
   return <button className='button_secondary' onClick={onLogout}>Log Out</button>;

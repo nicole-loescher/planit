@@ -23,6 +23,14 @@ const removeParty = () => {
     };
 };
 
+export const deleteParty = (id) => async dispatch => {
+    const response = await fetch(`/api/planits/${id}`, {
+        method: 'DELETE',
+    })
+    const deleted = await response.json();
+    dispatch(removeParty(deleted))
+}
+
 export const getOneParty = (id) => async dispatch =>{
     const response = await fetch(`/api/planits/${id}`, {
         method: 'GET',

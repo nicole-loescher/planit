@@ -16,7 +16,7 @@ const Party = () => {
     const [ends_at, setEnds_at] = useState('');
     const [image_url, setImage_url] = useState("https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg");
     const [location, setLocation] = useState('');
-    const [state, setState] = useState({items: []});
+    const [state, setState] = useState({items: ['']});
     const [count, setCount] = useState(1);
 
     let content;

@@ -31,7 +31,7 @@ const UserProfile = ({user}) =>{
             </div>     */}
             
             <div className='standard__form--container'>
-                <div className='standard__form--div'>
+                <div className='standard__form--div2'>
                     <h1> for hosted parties </h1>
                     {hosted.hosted_parties.map((party, i) => {
                        return ( <div key={i}>
@@ -40,10 +40,10 @@ const UserProfile = ({user}) =>{
                        )
                     })}
                 </div>
-                <div className='standard__form--div'>
+                <div className='standard__form--div2'>
                     <h1> for visiting parties </h1>
                 </div>
-                <div className='standard__form--div'>
+                <div className='standard__form--div2'>
                     <h1> for items </h1>
                 </div>
             </div>

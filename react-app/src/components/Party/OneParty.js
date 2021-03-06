@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { loadAllItems } from '../../store/item';
-import {getOneParty} from '../../store/party'
+import {deleteParty, getOneParty} from '../../store/party'
 
 const OneParty = () => {
     const user = useSelector(state => state.auth.user)
+    const history = useHistory();
     const {id} = useParams();
     const dispatch = useDispatch();
     const [party, setParty] = useState('');
@@ -32,15 +33,29 @@ const OneParty = () => {
         e.preventDefault();
 
     }
+    const onEdit = async (e) =>{
+        e.preventDefault()
+    }
+    const onDelete = async (e) =>{
+        e.preventDefault();
+        dispatch(deleteParty(party.id))
+        history.push('/')
+    }
+    const onRSVP = async (e) =>{
+        e.preventDefault()
+    }
     let content2;
     if(host.id === user.id){
         content2 = (
-            <div>your party</div>
+            <div>
+                <button onClick={onEdit}>edit</button>
+                <button onClick={onDelete}>delete</button>
+            </div>
         )
     }
     if(host.id !== user.id){
         content2 = (
-            <div>youre invited to this party</div>
+            <button onClick={onRSVP}>RSVP</button>
         )
     }
  
