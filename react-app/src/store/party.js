@@ -23,8 +23,28 @@ const removeParty = () => {
     };
 };
 
+export const deleteParty = (id) => async dispatch => {
+    const response = await fetch(`/api/planits/${id}`, {
+        method: 'DELETE',
+    })
+    const deleted = await response.json();
+    dispatch(removeParty(deleted))
+}
+
+export const getOneParty = (id) => async dispatch =>{
+    const response = await fetch(`/api/planits/${id}`, {
+        method: 'GET',
+        headers: {
+            "content-Type": "application/json"
+        },
+    })
+    const party = await response.json();
+    dispatch(oneParty(party));
+    return party;
+}
+
 export const loadParties = (userId) => async dispatch => {
-    const response = await fetch('/api/planits/', {
+    const response = await fetch(`/api/users/${userId}/planits`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -36,7 +56,6 @@ export const loadParties = (userId) => async dispatch => {
 }
 
 export const create = ( host_id, name, details, starts_at, ends_at, image_url, location) => async dispatch => {
-    console.log('++++++++++++++++++++++++++++++++')
     const response = await fetch('/api/planits/', {
         method: 'POST',
         headers: {
@@ -53,7 +72,6 @@ export const create = ( host_id, name, details, starts_at, ends_at, image_url, l
         }),
     });
     const party = await response.json()
-    console.log('=======================', party)
     dispatch(oneParty(party))
     return party
 }

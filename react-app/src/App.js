@@ -10,6 +10,7 @@ import { authenticate } from "./store/auth";
 import SplashPage from './components/SplashPage'
 import { useDispatch } from "react-redux";
 import Party from "./components/Party";
+import OneParty from "./components/Party/OneParty";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path="/planits/create" exact={true} authenticated={authenticated}>
             <Party />
+          </ProtectedRoute>
+          <ProtectedRoute path="/planits/:id" exact={true} authenticated={authenticated}>
+            <OneParty />
           </ProtectedRoute>
           <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
             <User />

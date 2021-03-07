@@ -16,15 +16,6 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@planit_routes.route('/')
-def get_parties():
-    """
-    Gets parties filtered by user.
-    """
-    hosted = Party.query.filter(Party.host_id == form.data['host_id']).all()
-    
-    return {'hosted_parties': [party.to_dict() for party in hosted]}
-
 @planit_routes.route('/', methods=['POST'])
 def host_planit():
     """
@@ -69,3 +60,32 @@ def planit_items(id):
         db.session.commit() 
         return item.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@planit_routes.route('/<int:id>/items')
+def getItems(id):
+    """
+    gets party items
+    """
+    items = Item.query.filter(Item.party_id == id).all()
+    return {'party_items': [item.to_dict() for item in items]}
+
+
+@planit_routes.route('/<int:id>')
+def get_party(id):
+    """
+    Gets a single party.
+    """
+    party = Party.query.get(id)
+    return party.to_dict()
+
+
+@planit_routes.route('/<int:id>', methods=['DELETE'])
+def delete_party(id):
+    """
+    Deletes a single party.
+    """
+    deleted = Party.query.get(id)
+    db.session.delete(deleted)
+    db.session.commit()
+    return deleted.to_dict()

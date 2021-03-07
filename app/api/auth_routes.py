@@ -66,22 +66,24 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
    
     if form.validate_on_submit():
-        print('>>>>>>>>>>>>>>>>>>>>.', request.files.to_dict())
-        # if "image_url" not in request.files:
-        #     return {"image_url": 'https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg'}
-        # image = request.files["image_url"]
-        # if not allowed_file(image):
-        #     return {"errors": "file type not permitted"}, 400
-        # image.filename = get_unique_filename(image)
-        # upload = upload_file_to_s3(image)
-        # if "url" not in upload:
-        #     return upload, 400
-        # url = upload["url"]
+        # print(dir(request.files['image']), '-----------------')
+        if "image" not in request.files:
+            url = 'https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg'
+        else:
+            image = request.files["image"]
+            # if not allowed_file(image.filename):
+            #     return {"errors": "file type not permitted"}, 400
+            # image.filename = get_unique_filename(image.filename)
+            print(image.content_type, '----------------------')
+            upload = upload_file_to_s3(image)
+            if "url" not in upload:
+                upload['url'] = 'https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg'
+            url = upload['url']
 
         user = User(
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
-            # image_url=url,
+            image_url=url,
             email=form.data['email'],
             password=form.data['password']
         )

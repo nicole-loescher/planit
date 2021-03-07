@@ -75,7 +75,7 @@ class Party(db.Model):
 
   host = db.relationship('User', lazy='joined', back_populates='hosting')
   # guests = db.relationship('User', lazy='joined', secondary='guest_list', back_populates='visiting')
-  items = db.relationship('Item', lazy='joined', back_populates='party')
+  items = db.relationship('Item', lazy='joined', back_populates='party', cascade='all, delete')
 
   def to_dict(self):
     return {
@@ -87,8 +87,7 @@ class Party(db.Model):
       "ends_at": self.ends_at,
       "details": self.details,
       "host_id": self.host_id,
-      "created_at": self.created_at,
-      "updated_at": self.updated_at
+      'host': self.host.to_dict()
     }
 
 
