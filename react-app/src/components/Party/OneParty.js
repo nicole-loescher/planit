@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import Party from '.';
 import { loadAllItems } from '../../store/item';
 import {deleteParty, getOneParty} from '../../store/party'
 
@@ -12,17 +13,13 @@ const OneParty = () => {
     const [party, setParty] = useState('');
     const items = useSelector(state => state.items.items[0])
     const host = party.host
-
-    console.log(party.host);
-
+    
     useEffect(async()=>{
         const newparty = await dispatch(getOneParty(id))
         const allItems = await dispatch(loadAllItems(newparty.id))
-        // console.log(newparty)
         setParty(newparty)
-        // setItems(allItems)
     },[dispatch])
-
+    
     if(!items){
         return null
     }
@@ -31,15 +28,16 @@ const OneParty = () => {
     }
     const bringItem = async (e) => {
         e.preventDefault();
-
-    }
-    const onEdit = async (e) =>{
-        e.preventDefault()
+        
     }
     const onDelete = async (e) =>{
         e.preventDefault();
         dispatch(deleteParty(party.id))
-        history.push('/')
+        
+    }
+    const onEdit = async (e) =>{
+        e.preventDefault()
+        console.log('working on edit functionality')
     }
     const onRSVP = async (e) =>{
         e.preventDefault()

@@ -5,7 +5,7 @@ import * as itemActions from '../../store/item'
 import './index.css'
 import { useHistory } from 'react-router-dom';
 
-const Party = () => {
+const Party = ({edit}) => {
     const history = useHistory();
     const user = useSelector(state => state.auth.user);
     const host_id = user.id;
@@ -19,6 +19,7 @@ const Party = () => {
     const [state, setState] = useState({items: ['']});
     const [count, setCount] = useState(1);
 
+    console.log(edit)
     let content;
     let errordiv;
     
