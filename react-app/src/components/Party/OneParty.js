@@ -13,7 +13,14 @@ const OneParty = () => {
     const [party, setParty] = useState('');
     const items = useSelector(state => state.items.items[0])
     const host = party.host
+    const [editForm, setEditForm] = useState(false)
     
+    let content
+    if(editForm){
+        content = (
+            <Party edit={party} items={items} />
+        )
+    }
     useEffect(async()=>{
         const newparty = await dispatch(getOneParty(id))
         const allItems = await dispatch(loadAllItems(newparty.id))
@@ -38,6 +45,8 @@ const OneParty = () => {
     const onEdit = async (e) =>{
         e.preventDefault()
         console.log('working on edit functionality')
+        setEditForm(true)
+        window.scrollTo(0, 0)
     }
     const onRSVP = async (e) =>{
         e.preventDefault()
@@ -60,6 +69,7 @@ const OneParty = () => {
 
     return (
         <div className='planit__form'>
+            {content}
                 <h1 className='party__title'>{party.name}</h1>
             <div className='party__form--div'>
                 <div className='party__div--img'>
