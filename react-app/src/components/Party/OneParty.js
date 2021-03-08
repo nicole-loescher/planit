@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import Party from '.';
-import { loadAllItems } from '../../store/item';
+import { loadAllItems, claimOneItem } from '../../store/item';
 import {deleteParty, getOneParty} from '../../store/party'
 
 const OneParty = () => {
@@ -35,6 +35,8 @@ const OneParty = () => {
     }
     const bringItem = async (e) => {
         e.preventDefault();
+        // console.log(user.id)
+        await dispatch(claimOneItem(e.target.value))
         
     }
     const onDelete = async (e) =>{
@@ -107,8 +109,8 @@ const OneParty = () => {
                         {items.map((item, i)=>{
                             return ( 
                                 <div key={i}>
-                                    <button onClick={bringItem}>Bring me</button>
-                                    {item.name}
+                                    <button value={item.id} onClick={bringItem}>Bring me</button>
+                                    {item.name} 
                                 </div>
                                 )
                             })}

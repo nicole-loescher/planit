@@ -21,6 +21,14 @@ const removeItem = (item) => {
         type: REMOVE_ITEM,
     }
 };
+export const claimOneItem = (id) => async dispatch => {
+    const response = await fetch(`/api/items/${id}`, {
+        method: 'PUT',
+    })
+    const item = await response.json();
+    dispatch(addItem(item))
+    
+}
 
 export const deleteItem = (id) => async dispatch => {
     const response = await fetch(`/api/planits/${id}/items`, {

@@ -7,7 +7,7 @@ import partyReducer from "./party";
 const rootReducer = combineReducers({
     auth: authReducer,
     party: partyReducer,
-    items: itemsReducer
+    items: itemsReducer,
 });
 
 let enhancer;
