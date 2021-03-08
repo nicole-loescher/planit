@@ -46,7 +46,10 @@ const UserProfile = ({user}) =>{
                                 <Link key={i} to={`/planits/${party.id}`} className='party-tag'>
                                     <img src={party.image_url} className='profile__party-pic'/>
                                     <h2>{party.name}</h2>
-                                     <p>{party.starts_at}</p>
+                                    <div>
+                                        <p>{party.starts_at}</p>
+                                        <p>@{party.time}</p>
+                                    </div>
                                 </Link>
                                 <div>
                                     <hr /> 
@@ -68,7 +71,9 @@ const UserProfile = ({user}) =>{
                                     <img src={item.party.image_url} className='profile__party-pic'/>
                                     <h2>{item.name}</h2>
                                     <div>
-                                    <p>{item.party.name} </p><p>{item.party.starts_at}</p>
+                                    <p>{item.party.name}</p>
+                                    <p>{item.party.starts_at}</p>
+                                    <p>@{item.party.time}</p>
                                     </div>
                                 </Link>
                                     <div>

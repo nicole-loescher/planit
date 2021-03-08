@@ -10,5 +10,5 @@ class PartyForm(FlaskForm):
     image_url = StringField('image_url')
     details = StringField('details')
     starts_at = StringField('starts_at')
-    ends_at = StringField('ends_at')
+    time = StringField('time')
     host_id = IntegerField('host_id', validators=[DataRequired()])
