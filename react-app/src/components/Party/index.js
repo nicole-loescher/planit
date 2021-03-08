@@ -18,7 +18,7 @@ const Party = ({edit, items}) => {
     let locationContent;
     let detailsContent;
     let starts_atContent;
-    let ends_atContent;
+    let timeContent;
     let imageContent;
     let itemContent;
     
@@ -28,7 +28,7 @@ const Party = ({edit, items}) => {
         detailsContent = edit.name
         imageContent = edit.image_url
         starts_atContent = edit.starts_at
-        ends_atContent = edit.ends_at
+        timeContent = edit.time
         let itemList=[]
         items.map(item=>{
             itemList.push(item.name)
@@ -40,7 +40,7 @@ const Party = ({edit, items}) => {
         nameContent = ''
         detailsContent = 'Come join us for a party! Please bring an item from the list below!'
         starts_atContent = ''
-        ends_atContent = ''
+        timeContent = ''
         itemContent = { items: [''] }
     }
     
@@ -48,7 +48,7 @@ const Party = ({edit, items}) => {
     const [details, setDetails] = useState(detailsContent);
     const [starts_at, setStarts_at] = useState(starts_atContent);
     const [location, setLocation] = useState(locationContent);
-    const [ends_at, setEnds_at] = useState(ends_atContent);
+    const [time, setTime] = useState(timeContent);
     const [image_url, setImage_url] = useState(imageContent);
     const [state, setState] = useState(itemContent);
     
@@ -58,7 +58,7 @@ const Party = ({edit, items}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const party = await dispatch(partyActions.create(host_id, name, details, starts_at, ends_at, image_url, location))
+        const party = await dispatch(partyActions.create(host_id, name, details, starts_at, time, image_url, location))
         if(!party.errors){
             console.log('no errors hereeeeee')
             const party_id = party.id
@@ -85,7 +85,7 @@ const Party = ({edit, items}) => {
             name, 
             details, 
             starts_at, 
-            ends_at, 
+            time, 
             image_url, 
             location))
         
@@ -132,19 +132,20 @@ const Party = ({edit, items}) => {
                     value={location}
                     onChange={e => setLocation(e.target.value)}
                 />
-                <label>When does it start?</label>
+                <label>What day is the PlanIt?</label>
                 <input
                     name='starts_at'
                     type='date'
                     value={starts_at}
                     onChange={e => setStarts_at(e.target.value)}
                 />
-                <label>When does it end?</label>
+                <label>What time does it start?</label>
                 <input
-                    name='ends_at'
-                    type='date'
-                    value={ends_at}
-                    onChange={e => setEnds_at(e.target.value)}
+                    name='time'
+                    type='text'
+                    placeholder='What time is your PlanIt?'
+                    value={time}
+                    onChange={e => setTime(e.target.value)}
                 />
                 <label>What is your PlanIt for?</label>
                 <textarea

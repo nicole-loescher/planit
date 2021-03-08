@@ -23,7 +23,7 @@ const removeParty = () => {
     };
 };
 
-export const updateParty = (id, host_id, name, details, starts_at, ends_at, image_url, location) => async dispatch => {
+export const updateParty = (id, host_id, name, details, starts_at, time, image_url, location) => async dispatch => {
     const response = await fetch(`/api/planits/${id}`, {
         method: 'PUT',
         headers: {
@@ -34,7 +34,7 @@ export const updateParty = (id, host_id, name, details, starts_at, ends_at, imag
             name,
             details,
             starts_at,
-            ends_at,
+            time,
             image_url,
             location,
         }),
@@ -76,7 +76,7 @@ export const loadParties = (userId) => async dispatch => {
     return parties;
 }
 
-export const create = ( host_id, name, details, starts_at, ends_at, image_url, location) => async dispatch => {
+export const create = ( host_id, name, details, starts_at, time, image_url, location) => async dispatch => {
     const response = await fetch('/api/planits/', {
         method: 'POST',
         headers: {
@@ -87,7 +87,7 @@ export const create = ( host_id, name, details, starts_at, ends_at, image_url, l
             name, 
             details, 
             starts_at, 
-            ends_at, 
+            time, 
             image_url, 
             location,
         }),

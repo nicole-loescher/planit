@@ -31,7 +31,7 @@ def host_planit():
             location=form.data['location'],
             image_url=form.data['image_url'],
             host_id=form.data['host_id'],
-            ends_at=form.data['ends_at'],
+            time=form.data['time'],
             starts_at=form.data['starts_at'], 
         )
         db.session.add(party)
@@ -55,7 +55,7 @@ def update_planit():
             location=form.data['location'],
             image_url=form.data['image_url'],
             host_id=form.data['host_id'],
-            ends_at=form.data['ends_at'],
+            time=form.data['time'],
             starts_at=form.data['starts_at'], 
         )
         db.session.add(party)

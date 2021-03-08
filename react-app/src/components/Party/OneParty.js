@@ -87,7 +87,7 @@ const OneParty = () => {
                 <div>
                     <p className='party__date'>{party.starts_at}</p>
                     <p className='party__time'>start and end time here</p>
-                    {/* <p>{party.ends_at}</p> */}
+                    {/* <p>{party.time}</p> */}
                 </div>
                 <div>
                     <h3 className='party__location'>The Planit location:</h3>
