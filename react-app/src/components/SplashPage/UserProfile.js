@@ -4,20 +4,27 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { Link} from 'react-router-dom';
 import * as partyActions from '../../store/party'
+import * as itemActions from '../../store/item'
 const UserProfile = ({user}) =>{
     const [hosted, setHosted] = useState('')
-    console.log(hosted, '-------')
+    const [items, setItems] = useState('')
+    console.log(items, '-------')
     const dispatch = useDispatch()
 
     useEffect(async(e)=>{
         const hosting = await dispatch(partyActions.loadParties(user.id))
-        console.log(hosting)
+        const items = await dispatch(itemActions.loadMyItems(user.id))
+        
         setHosted(hosting)
+        setItems(items)
     },[dispatch])
     if(!user ){
         return <h1>Loading...</h1>
     }
     if(!hosted ){
+        return null
+    }
+    if(!items ){
         return null
     }
     return (
@@ -45,6 +52,14 @@ const UserProfile = ({user}) =>{
                 </div>
                 <div className='standard__form--div2'>
                     <h1> for items </h1>
+                    {items.party_items.map((item, i)=>{
+                        return (
+                            <div key={i}>
+                                {item.name}
+                                {item.party.name}
+                                </div>
+                        )
+                    })}
                 </div>
             </div>
         </div>

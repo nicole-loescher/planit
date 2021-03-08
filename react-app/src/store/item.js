@@ -1,8 +1,15 @@
 const LOAD_ITEMS = 'item/loadItems';
+const LOAD_MY_ITEMS = 'item/loadMy';
 const ADD_ITEM = 'item/addItem';
 const REMOVE_ITEM = 'item/removeItem';
 
 const loadItems = (items) => {
+    return {
+        type: LOAD_ITEMS,
+        payload: items,
+    };
+};
+const loadMy = (items) => {
     return {
         type: LOAD_ITEMS,
         payload: items,
@@ -50,6 +57,18 @@ export const loadAllItems = (partyId) => async dispatch => {
     return items;
 }
 
+export const loadMyItems = (userId) => async dispatch => {
+    const response = await fetch(`/api/users/${userId}/items`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    const items = await response.json();
+    dispatch(loadMy(items));
+    return items;
+}
+
 export const addOneItem = (name, party_id, user_id) => async dispatch => {
     const response = await fetch(`/api/planits/${party_id}/items`, {
         method: 'POST',
@@ -78,6 +97,17 @@ const itemsReducer = (state = {items: []}, action) => {
                 ...state,
                 ...newItems,
                 items: [action.payload.party_items]
+            }
+        }
+        case LOAD_MY_ITEMS: {
+            const newItems = {};
+            action.payload.claimed_items.forEach(item => {
+                newItems[item.id] = item;
+            })
+            return {
+                ...state,
+                ...newItems,
+                items: [action.payload.claimed_items]
             }
         }
         case REMOVE_ITEM: {
