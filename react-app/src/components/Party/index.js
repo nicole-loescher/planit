@@ -59,7 +59,6 @@ const Party = ({edit, items}) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const party = await dispatch(partyActions.create(host_id, name, details, starts_at, ends_at, image_url, location))
-        console.log(party, '.............')
         if(!party.errors){
             console.log('no errors hereeeeee')
             const party_id = party.id
@@ -78,6 +77,18 @@ const Party = ({edit, items}) => {
                 </div>
             )
         }
+    }
+    const onEdit = async (e) => {
+        e.preventDefault()
+        const party = await dispatch(partyActions.updateParty(
+            host_id, 
+            name, 
+            details, 
+            starts_at, 
+            ends_at, 
+            image_url, 
+            location))
+        
     }
     const addItem = (e) =>{
         e.preventDefault();

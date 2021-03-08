@@ -23,6 +23,27 @@ const removeParty = () => {
     };
 };
 
+export const updateParty = (id, host_id, name, details, starts_at, ends_at, image_url, location) => async dispatch => {
+    const response = await fetch(`/api/planits/${id}`, {
+        method: 'PUT',
+        headers: {
+            "content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            host_id,
+            name,
+            details,
+            starts_at,
+            ends_at,
+            image_url,
+            location,
+        }),
+    })
+    const party = response.json()
+    dispatch(oneParty(party))
+    return party;
+}
+
 export const deleteParty = (id) => async dispatch => {
     const response = await fetch(`/api/planits/${id}`, {
         method: 'DELETE',
