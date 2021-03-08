@@ -37,7 +37,6 @@ const OneParty = () => {
         e.preventDefault();
         // console.log(user.id)
         await dispatch(claimOneItem(e.target.value))
-        
     }
     const onDelete = async (e) =>{
         e.preventDefault();
@@ -97,7 +96,7 @@ const OneParty = () => {
                 </div>
                 <div>
                     <h3>A message from the shooting star:</h3>
-                    <p>{party.details} Join us for the celebration!</p>
+                    <p>{party.details}</p>
                 </div>
             </div>
                         {content2}

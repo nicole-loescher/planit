@@ -53,23 +53,24 @@ body {
     font-size: 1.5rem;
 }
 .button_primary {
-    /* color:rgb(209, 255, 249); */
+    color:black;
     background-color: rgb(209, 255, 249);
     /* border: 2px solid rgb(209, 255, 249); */
-    border-radius: 1rem;
-    padding: 1rem;
+    border-radius: 2rem;
+    padding: 1rem 2rem;
     cursor:grab;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: 600;
 }
 .button_primary:hover {
     background-color: rgb(209, 255, 249);
     color: black;
-    font-size: 1.5rem;
+    font-size: 2.2rem;
 }
 
 a {
     text-decoration: none;
     display: flex;
     justify-content: center;
+    color: black;
 }

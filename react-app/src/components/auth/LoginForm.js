@@ -82,10 +82,13 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
               onChange={updatePassword}
               />
           </div>
-            <button className='button_primary' type="submit">Log In</button>
+            <button className='button_secondary' type="submit">Log In</button>
         </form>
-        <button type='submit' onClick={onDemo} className='button_secondary'>Demo Log In</button>
         <Link to='/sign-up'>Not a member yet?</Link>
+        <div className='demo'>
+          <h3>Wanna try it out first? Check out the demo user!</h3>
+          <button type='submit' onClick={onDemo} className='button_primary'>Demo</button>
+        </div>
       </div>
     </div>
   );

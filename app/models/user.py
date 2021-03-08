@@ -109,5 +109,6 @@ class Item(db.Model):
       'name': self.name,
       'quantity': self.quantity,
       'user_id': self.user_id,
-      'party_id': self.party_id
+      'party_id': self.party_id,
+      'party': self.party.to_dict()
     }
