@@ -30,7 +30,7 @@ const UserProfile = ({user}) =>{
     return (
         <div className='home__info2'>
             <div>
-                <img className='profile--pic' alt='profile' src='https://myplanits.s3-us-west-1.amazonaws.com/nicolePhoto.jpeg' />
+                <img className='profile--pic' alt='profile' src={user.image_url} />
             </div>
             <div className='profile--welcome'>
                 <p className='profile--welcome'> Welcome back, {user.first_name}!</p>
