@@ -1,4 +1,4 @@
-.home__info {
+.home__info2 {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -8,8 +8,17 @@
     padding: 2rem;
     display: flex;
     width: 100%;
+    height: auto;
+}
+.home__info {
+    box-sizing: border-box;
+    background-color: rgb(209, 255, 249);
+    position: relative;
+    top: -20px;
+    padding: 2rem;
+    display: flex;
+    width: 100%;
     margin-bottom: 5%;
-    height: 100%;
 }
 .home__info--tag {
     font-size: 2rem;
@@ -68,14 +77,14 @@
 .standard__form--div2 {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    /* align-items: flex-start; */
     box-sizing: border-box;
     border-radius: 2rem;
     margin: 2rem 2rem;
     background-color: white;
     padding: 2rem 4rem;
     height: auto;
-    width: 30rem;
+    width: 35rem;
     text-align:center;
     box-shadow: 5px 5px 10px rgb( 0 0 0 / 25%);
 }
@@ -92,7 +101,12 @@
 .party-tag {
     padding: 1rem;
     border-radius: 1rem;
+    justify-content: space-between;
     margin: 1rem .3rem;
     align-items: flex-start;
     box-shadow: 5px 5px 10px rgb( 0 0 0 / 25%);
+}
+.demo {
+    text-align: center;
+    justify-content: center;
 }
