@@ -38,7 +38,7 @@ const Party = ({edit, items}) => {
     }
     if(!edit){
         nameContent = ''
-        detailsContent = ''
+        detailsContent = 'Come join us for a party! Please bring an item from the list below!'
         starts_atContent = ''
         ends_atContent = ''
         itemContent = { items: [''] }
