@@ -31,35 +31,39 @@ const UserProfile = ({user}) =>{
         <div className='home__info'>
             <div>
                 <img className='profile--pic' alt='profile' src='https://myplanits.s3-us-west-1.amazonaws.com/nicolePhoto.jpeg' />
-                <Link to='/planits/create' className='button_secondary'>Host a PlanIt</Link>
             </div>
-            {/* <div className='profile--welcome'>
+            <div className='profile--welcome'>
                 <p className='profile--welcome'> Welcome back, {user.first_name}!</p>
-            </div>     */}
+                <Link to='/planits/create' className='button_primary'>Host a PlanIt</Link>
+            </div>    
             
             <div className='standard__form--container'>
                 <div className='standard__form--div2'>
-                    <h1> for hosted parties </h1>
+                    <h1> PlanIts hosted by you </h1>
                     {hosted.hosted_parties.map((party, i) => {
-                       return ( <div key={i}>
-                            {party.name} : {party.starts_at}
-                        </div>
+                       return ( <Link key={i} to={`/planits/${party.id}`} className='party-tag'>
+                           <img src={party.image_url} className='profile__party-pic'/>
+                           {party.name} : {party.starts_at}
+                        </Link>
                        )
                     })}
+                    <Link className='button_primary' to={`/user/${user.id}/planits`}> View all my PlanIts </Link>
                 </div>
-                <div className='standard__form--div2'>
+                {/* <div className='standard__form--div2'>
                     <h1> for visiting parties </h1>
-                </div>
+                </div> */}
                 <div className='standard__form--div2'>
-                    <h1> for items </h1>
+                    <h1> Supplies you're bringing </h1>
                     {items.party_items.map((item, i)=>{
                         return (
-                            <div key={i}>
+                            <Link key={i} to={`/planits/${item.party.id}`} className='party-tag'>
+                                <img src={item.party.image_url} className='profile__party-pic'/>
                                 {item.name}
                                 {item.party.name}
-                                </div>
+                                </Link>
                         )
                     })}
+                    <Link className='button_primary' to={`/user/${user.id}/items`}> View all my Items </Link>
                 </div>
             </div>
         </div>

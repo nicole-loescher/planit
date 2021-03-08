@@ -1,14 +1,15 @@
 .home__info {
-    /* display: flex;
-    flex-direction: row; */
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
-    background-color: rgb(209, 255, 249);
+    background-color: rgb(248, 248, 248);
     position: relative;
     top: -20px;
     padding: 2rem;
     display: flex;
     width: 100%;
     margin-bottom: 5%;
+    height: 100%;
 }
 .home__info--tag {
     font-size: 2rem;
@@ -45,36 +46,53 @@
     right: 48%;
 }
 .profile--pic {
-    border-radius: 50%;
+    border-radius: 100%;
     width: 8rem;
     height: 8rem;
-    /* position: absolute; */
-    /* top: -5%; */
-    /* left: 44% */
+    position: absolute;
+    top: -70px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 .profile--welcome {
-    margin: 1rem 3rem;
-    font-size: 2em;
-    color:red;
+    margin: 1rem 1rem;
+    font-size: 1.7em;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-self: center;
-    align-self: flex-start;
+    align-self: center;
 }
 .standard__form--div2 {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     box-sizing: border-box;
     border-radius: 2rem;
     margin: 2rem 2rem;
     background-color: white;
     padding: 2rem 4rem;
-    height: 514px;
-    width: 350px;
+    height: auto;
+    width: 30rem;
+    text-align:center;
+    box-shadow: 5px 5px 10px rgb( 0 0 0 / 25%);
 }
 .standard__form--container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+.profile__party-pic {
+    max-width: 6rem;
+    padding: 2px;
+}
+.party-tag {
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem .3rem;
+    align-items: flex-start;
+    box-shadow: 5px 5px 10px rgb( 0 0 0 / 25%);
 }

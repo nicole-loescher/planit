@@ -24,7 +24,7 @@ def get_parties(id):
     """
     Gets parties filtered by user.
     """
-    hosted = Party.query.filter(Party.host_id == id).all()
+    hosted = Party.query.filter(Party.host_id == id).order_by(Party.starts_at.asc()).all()
     
     return {'hosted_parties': [party.to_dict() for party in hosted]}
 
