@@ -25,7 +25,30 @@ def host_planit():
     print(request.get_json())
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('==============', form.data)
+        party = Party(
+            name=form.data['name'],
+            details=form.data['details'],
+            location=form.data['location'],
+            image_url=form.data['image_url'],
+            host_id=form.data['host_id'],
+            ends_at=form.data['ends_at'],
+            starts_at=form.data['starts_at'], 
+        )
+        db.session.add(party)
+        db.session.commit() 
+        return party.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@planit_routes.route('/<int:id>', methods=['PUT'])
+def update_planit():
+    """
+    Updates a party.
+    """
+    form = PartyForm()
+    print(request.get_json())
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
         party = Party(
             name=form.data['name'],
             details=form.data['details'],
@@ -50,7 +73,6 @@ def planit_items(id):
     print(request.get_json())
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('==============', form.data)
         item = Item(
             name=form.data['name'],
             party_id=form.data['party_id'],
