@@ -94,9 +94,9 @@ const itemsReducer = (state = {items: []}, action) => {
                 newItems[item.id] = item;
             })
             return {
-                ...state,
+                // ...state,
                 ...newItems,
-                items: [action.payload.party_items]
+                // items: [action.payload.party_items]
             }
         }
         case LOAD_MY_ITEMS: {
