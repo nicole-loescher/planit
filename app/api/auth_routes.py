@@ -67,25 +67,24 @@ def sign_up():
    
     if form.validate_on_submit():
         
-        # if "image" not in request.files:
-        #     url = 'https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg'
-        # else:
-        #     image = request.files["image"]
-        #     # if not allowed_file(image.filename):
-        #     #     return {"errors": "file type not permitted"}, 400
-        #     # image.filename = get_unique_filename(image.filename)
-        #     upload = upload_file_to_s3(image)
-        #     if "url" not in upload:
-        #         upload['url'] = 'https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg'
-        #     url = upload['url']
-        url = {'url': ''}
-        if request.files:
-            url = upload_file_to_s3(request.files['image'])
-        # print('====================', url)
+        if "image" not in request.files:
+            url = 'https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg'
+        else:
+            image = request.files["image"]
+            if not allowed_file(image.filename):
+                return {"errors": "file type not permitted"}, 400
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            if "url" not in upload:
+                upload['url'] = ''
+            url = upload['url']
+        # url = {'url': ''}
+            # if request.files:
+            # url = upload_file_to_s3(request.files['image'])
         user = User(
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
-            image_url=url['url'],
+            image_url=url,
             email=form.data['email'],
             password=form.data['password']
         )
