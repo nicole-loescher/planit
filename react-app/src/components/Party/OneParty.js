@@ -30,7 +30,7 @@ const OneParty = () => {
         const newparty = await dispatch(getOneParty(id))
         const allItems = await dispatch(loadAllItems(newparty.id))
         setParty(newparty)
-    },[dispatch, bringItem])
+    },[dispatch])
     
     if(!items){
         return null
@@ -129,8 +129,8 @@ const OneParty = () => {
                                         <button value={item.id} onClick={bringItem}>Bring me</button>
                                     }
                                     {item.user_id && 
-                                        // <img className='claimed' src={item.guest.image_url} alt='user' />
-                                    <h1>{item.user_id}</h1>
+                                        <img className='claimed' src={item.guest.image_url} alt='user' />
+                                    // <h1>{item.user_id}</h1>
                                     }
                                     {item.user_id === user.id && 
                                     <p>this claimed by you </p>
