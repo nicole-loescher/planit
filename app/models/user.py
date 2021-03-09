@@ -104,11 +104,17 @@ class Item(db.Model):
   party = db.relationship('Party', lazy='joined', back_populates='items')
 
   def to_dict(self):
+
+    if self.guest:
+      content =  self.guest.to_dict()
+    else:
+      content = None
     return {
       'id': self.id,
       'name': self.name,
       'quantity': self.quantity,
       'user_id': self.user_id,
       'party_id': self.party_id,
-      'party': self.party.to_dict()
+      'party': self.party.to_dict(),
+      'guest': content
     }
