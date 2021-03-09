@@ -1,5 +1,4 @@
-from werkzeug.security import generate_password_hash
-from app.models import db, User
+from app.models import db, Party
 from faker import Faker
 
 # Adds a demo user, you can add other users here if you want
@@ -13,20 +12,13 @@ def seed_users():
         'https://myplanits.s3-us-west-1.amazonaws.com/profile.png',
         'https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png',
     ]
-    demo = User(first_name='Demo', 
-                last_name='User', 
-                email='demo@aa.io',
-                image_url='https://myplanits.s3-us-west-1.amazonaws.com/profile.png',
-                password='password')
-
-    db.session.add(demo)
     times = 0
     while times < 5:
-        newUser = User(
+        party = Party(
             first_name= faker.first_name(),
             last_name= faker.last_name(),
-            email= faker.email(),
-            image_url= images[times],
+            email= images[times],
+            image_url= faker.image_url(),
             password= (f'password{times}')
         ) 
         times = times + 1
