@@ -68,7 +68,7 @@ def sign_up():
     if form.validate_on_submit():
         
         if "image" not in request.files:
-            url = 'https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg'
+            url = 'https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png'
         else:
             image = request.files["image"]
             if not allowed_file(image.filename):

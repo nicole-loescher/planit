@@ -52,6 +52,21 @@ const OneParty = () => {
     const onRSVP = async (e) =>{
         e.preventDefault()
     }
+    console.log(host, '--------------')
+    let imageContent;
+    // let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
+    if(!host.image_url){
+        imageContent = 
+            <div>
+            {/* <div className='blank'>
+            {initials}
+            </div> */}
+            <img  className='onePlanit--img' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
+            </div>
+    }
+    if(host.image_url){
+        imageContent = <img className='onePlanit--img' alt='host of party' src={host.image_url} />
+    }
     let content2;
     if(host.id === user.id){
         content2 = (
@@ -77,8 +92,10 @@ const OneParty = () => {
                         <img src={party.image_url} alt='party' className='party_pic' />
                         <div>
                             <h3>The Shooting Star:</h3>
-                            <p> {host.image_url}
-                                {host.first_name}</p>
+                            <div className='onePlanit--holder'>
+                                {imageContent} 
+                                <p className='name-tag'>{host.first_name}</p>
+                            </div>
                         </div>
                 </div>
             </div> 
