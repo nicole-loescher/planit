@@ -11,7 +11,7 @@ const OneParty = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const [party, setParty] = useState('');
-    const items = useSelector(state => state.items.items[0])
+    const items = useSelector(state => Object.values(state.items))
     const host = party.host
     const [editForm, setEditForm] = useState(false)
     
