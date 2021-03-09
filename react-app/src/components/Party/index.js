@@ -81,6 +81,7 @@ const Party = ({edit, items}) => {
     const onEdit = async (e) => {
         e.preventDefault()
         const party = await dispatch(partyActions.updateParty(
+            edit.id,
             host_id, 
             name, 
             details, 
