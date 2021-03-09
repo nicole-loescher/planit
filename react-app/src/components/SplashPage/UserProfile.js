@@ -27,10 +27,24 @@ const UserProfile = ({user}) =>{
     if(!items ){
         return null
     }
+    let imageContent;
+    let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
+    if(!user.image_url){
+        imageContent = 
+            <div>
+            <div className='blank'>
+            {initials}
+            </div>
+            <img className='profile--pic' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
+            </div>
+    }
+    if(user.image_url){
+        imageContent = <img className='profile--pic' alt='profile' src={user.image_url} />
+    }
     return (
         <div className='home__info2'>
             <div>
-                <img className='profile--pic' alt='profile' src={user.image_url} />
+                {imageContent}
             </div>
             <div className='profile--welcome'>
                 <p className='profile--welcome'> Welcome back, {user.first_name}!</p>
@@ -51,7 +65,7 @@ const UserProfile = ({user}) =>{
                                         <p>@{party.time}</p>
                                     </div>
                                 </Link>
-                                <div>
+                                <div key={i+party.id}>
                                     <hr /> 
                                 </div>
                             </div>
@@ -76,7 +90,7 @@ const UserProfile = ({user}) =>{
                                     <p>@{item.party.time}</p>
                                     </div>
                                 </Link>
-                                    <div>
+                                    <div key={i+item.id}>
                                         <hr /> 
                                     </div>
                             </div>

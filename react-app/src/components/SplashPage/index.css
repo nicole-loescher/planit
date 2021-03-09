@@ -65,6 +65,10 @@
     left: 0;
     right: 0;
     text-align: center;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    z-index: 99;
 }
 .profile--welcome {
     margin: 1rem 1rem;
@@ -109,4 +113,18 @@
 .demo {
     text-align: center;
     justify-content: center;
+}
+.blank {
+    position: absolute; 
+    top: -10px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: 1000;
+    max-width: 90%;
+    font-size: 2.5rem;
+    z-index: 100;
+    color:black;
 }
