@@ -40,6 +40,7 @@ const Party = ({edit, items}) => {
         nameContent = ''
         detailsContent = 'Come join us for a party! Please bring an item from the list below!'
         starts_atContent = ''
+        imageContent = "https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg"
         timeContent = ''
         itemContent = { items: [''] }
     }
