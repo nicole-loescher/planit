@@ -61,7 +61,6 @@ const Party = ({edit, items}) => {
         e.preventDefault();
         const party = await dispatch(partyActions.create(host_id, name, details, starts_at, time, image_url, location))
         if(!party.errors){
-            console.log('no errors hereeeeee')
             const party_id = party.id
             const user_id = null
             state.items.map(async(name)=> await dispatch(itemActions.addOneItem(name, party_id, user_id)))
@@ -89,7 +88,7 @@ const Party = ({edit, items}) => {
             time, 
             image_url, 
             location))
-        
+        history.push('/')
     }
     const addItem = (e) =>{
         e.preventDefault();
@@ -220,14 +219,20 @@ const Party = ({edit, items}) => {
         )
     }
     if(count === 4){
-        content = (
-            <div className='planit__form--div'>
-                <h1 className='title'>Prepare to Launch</h1>
-                {errordiv}
-                <button className='button_secondary'>Submit</button>
-                <button className='button_primary' onClick={onPrev}>Previous</button>
-            </div>
-        )
+        if(edit){
+            content = <button onClick={onEdit} > submit changes </button>
+        }
+        else{
+
+            content = (
+                <div className='planit__form--div'>
+                    <h1 className='title'>Prepare to Launch</h1>
+                    {errordiv}
+                    <button className='button_secondary'>Submit</button>
+                    <button className='button_primary' onClick={onPrev}>Previous</button>
+                </div>
+            )
+        }
     }
     return(
         <div className='planit__form'>
