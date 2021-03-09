@@ -19,8 +19,25 @@ class Guest_List(db.Model):
       'user_id': self.user_id,
       'party_id': self.party_id,
       'rsvp': self.rsvp,
+      # 'friend': self.friend.to_dict()
       # 'party': self.party.to_dict(),
     }
+
+
+friends = db.Table(
+  'friends',
+  db.Column(
+    'user_id',
+    db.Integer, 
+    db.ForeignKey('users.id'),
+    ),
+  db.Column(
+    'friend_id',
+    db.Integer, 
+    db.ForeignKey('users.id'),
+    ) 
+)
+
 
 class User(db.Model, UserMixin):
   __tablename__ = 'users'
@@ -35,7 +52,8 @@ class User(db.Model, UserMixin):
   hosting = db.relationship('Party', lazy='joined', back_populates='host')
   # visiting = db.relationship('Party', lazy='joined', secondary='guest_list', back_populates='guests')
   items = db.relationship('Item', lazy='joined', back_populates='guest')
-
+  friends = db.relationship("User", secondary=friends, primaryjoin=(friends.c.user_id == id), secondaryjoin=(friends.c.friend_id ==id), backref=db.backref('friends_of', lazy='dynamic'), lazy='dynamic')
+  
   @property
   def password(self):
     return self.hashed_password
@@ -51,13 +69,19 @@ class User(db.Model, UserMixin):
 
 
   def to_dict(self):
+    # if self.friends:
+    #   content = self.friends.to_dict()
+    # else:
+    #   content = None
     return {
       "id": self.id,
       "first_name": self.first_name,
       "last_name": self.last_name,
       "image_url": self.image_url,
-      "email": self.email
+      "email": self.email,
+      # "friends": content
     }
+
 
 class Party(db.Model):
   __tablename__='parties'
