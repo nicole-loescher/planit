@@ -23,6 +23,7 @@ class Guest_List(db.Model):
       # 'party': self.party.to_dict(),
     }
 
+
 friends = db.Table(
   'friends',
   db.Column(
@@ -36,6 +37,8 @@ friends = db.Table(
     db.ForeignKey('users.id'),
     ) 
 )
+
+
 class User(db.Model, UserMixin):
   __tablename__ = 'users'
 
@@ -49,7 +52,7 @@ class User(db.Model, UserMixin):
   hosting = db.relationship('Party', lazy='joined', back_populates='host')
   # visiting = db.relationship('Party', lazy='joined', secondary='guest_list', back_populates='guests')
   items = db.relationship('Item', lazy='joined', back_populates='guest')
-  friends = db.relationship("User", secondary=friends, primaryjoin=(friends.c.user_id == id), secondaryjoin=(friends.c.friend_id ==id), lazy='dynamic')
+  friends = db.relationship("User", secondary=friends, primaryjoin=(friends.c.user_id == id), secondaryjoin=(friends.c.friend_id ==id), backref=db.backref('friends_of', lazy='dynamic'), lazy='dynamic')
   
   @property
   def password(self):

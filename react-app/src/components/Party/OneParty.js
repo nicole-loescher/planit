@@ -52,7 +52,7 @@ const OneParty = () => {
     const onRSVP = async (e) =>{
         e.preventDefault()
     }
-    console.log(host, '--------------')
+    
     let imageContent;
     // let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
     if(!host.image_url){

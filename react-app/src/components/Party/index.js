@@ -4,6 +4,7 @@ import * as partyActions from '../../store/party'
 import * as itemActions from '../../store/item'
 import './index.css'
 import { useHistory } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 const Party = ({edit, items}) => {
     const history = useHistory();
@@ -11,6 +12,8 @@ const Party = ({edit, items}) => {
     const host_id = user.id;
     const dispatch = useDispatch();
     const [count, setCount] = useState(1);
+    const [userList, setUserList] = useState('')
+    
     
     let content;
     let errordiv;
@@ -54,14 +57,18 @@ const Party = ({edit, items}) => {
     const [state, setState] = useState(itemContent);
     
     useEffect(async (e) => {
-        
+        async function fetchData() {
+            const response = await fetch(`/api/users/me/friends`);
+            const responseData = await response.json();
+        setUserList(responseData.users);
+        }
+        fetchData();
     },[count])
 
     const onSubmit = async (e) => {
         e.preventDefault();
         const party = await dispatch(partyActions.create(host_id, name, details, starts_at, time, image_url, location))
         if(!party.errors){
-            console.log('no errors hereeeeee')
             const party_id = party.id
             const user_id = null
             state.items.map(async(name)=> await dispatch(itemActions.addOneItem(name, party_id, user_id)))
@@ -187,6 +194,21 @@ const Party = ({edit, items}) => {
     if(count === 3){
         content = (
             <div className='planit__form--div'>
+                <h2 className='title'> invite your friends to the galaxy </h2>
+                {userList.map((user, i)=>{
+                    return (
+                    <div key={i}>
+                        <div><img className='onePlanit--img' src={user.image_url} />{user.first_name} {user.last_name}</div>
+                        <button>invite me</button>
+                    </div>
+                    )
+                })}
+            </div>
+        )
+    }
+    if(count === 4){
+        content = (
+            <div className='planit__form--div'>
                 <h2 className='title'>Choose a photo for your party</h2>
                 <div className='photo-div'>
                     <img src={image_url} alt='party' className='planit__img'></img>
@@ -219,7 +241,7 @@ const Party = ({edit, items}) => {
             </div>
         )
     }
-    if(count === 4){
+    if(count === 5){
         content = (
             <div className='planit__form--div'>
                 <h1 className='title'>Prepare to Launch</h1>
