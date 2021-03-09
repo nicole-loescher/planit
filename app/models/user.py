@@ -110,5 +110,6 @@ class Item(db.Model):
       'quantity': self.quantity,
       'user_id': self.user_id,
       'party_id': self.party_id,
-      'party': self.party.to_dict()
+      'party': self.party.to_dict(),
+      # 'guest': self.guest.to_dict()
     }
