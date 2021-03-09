@@ -11,7 +11,7 @@ const OneParty = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const [party, setParty] = useState('');
-    const items = useSelector(state => state.items.items[0])
+    const items = useSelector(state => Object.values(state.items))
     const host = party.host
     const [editForm, setEditForm] = useState(false)
     
@@ -20,6 +20,11 @@ const OneParty = () => {
         content = (
             <Party edit={party} items={items} />
         )
+    }
+    const bringItem = async (e) => {
+        e.preventDefault();
+        // console.log(user.id)
+        await dispatch(claimOneItem(e.target.value))
     }
     useEffect(async()=>{
         const newparty = await dispatch(getOneParty(id))
@@ -32,11 +37,6 @@ const OneParty = () => {
     }
     if(!host){
         return 'loading'
-    }
-    const bringItem = async (e) => {
-        e.preventDefault();
-        // console.log(user.id)
-        await dispatch(claimOneItem(e.target.value))
     }
     const onDelete = async (e) =>{
         e.preventDefault();
@@ -82,7 +82,7 @@ const OneParty = () => {
         )
     }
  
-
+    
     return (
         <div>
             {content}
@@ -125,8 +125,17 @@ const OneParty = () => {
                         {items.map((item, i)=>{
                             return ( 
                                 <div key={i}>
-                                    <button value={item.id} onClick={bringItem}>Bring me</button>
-                                    {item.name} 
+                                    {!item.user_id &&
+                                        <button value={item.id} onClick={bringItem}>Bring me</button>
+                                    }
+                                    {item.user_id && 
+                                        <img className='claimed' src={item.guest.image_url} alt='user' />
+                                    // <h1>{item.user_id}</h1>
+                                    }
+                                    {item.user_id === user.id && 
+                                    <p>this claimed by you </p>
+                                    }
+                                    {item.name} : {item.user_id}
                                 </div>
                                 )
                             })}
