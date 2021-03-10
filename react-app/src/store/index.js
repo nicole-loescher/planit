@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import authReducer from './auth'
 import itemsReducer from "./item";
 import partyReducer from "./party";
+import inviteReducer from "./guestList";
 
 const rootReducer = combineReducers({
     auth: authReducer,
     party: partyReducer,
     items: itemsReducer,
+    invites: inviteReducer
 });
 
 let enhancer;
