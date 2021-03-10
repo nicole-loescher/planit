@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User, Party, Item
+from flask_login import login_required, current_user
+from app.models import db, User, Party, Item
 
 user_routes = Blueprint('users', __name__)
 
@@ -9,6 +9,24 @@ user_routes = Blueprint('users', __name__)
 @login_required
 def users():
     users = User.query.all()
+    return {"users": [user.to_dict() for user in users]}
+
+
+@user_routes.route('/me/friends/<int:userid>', methods=['POST'])
+@login_required
+def add_friend(userid):
+    friend = User.query.get(userid)
+    current_user.friends.append(friend)
+    db.session.add(friend)
+    db.session.commit()
+    return {'message': 'success'}
+
+
+@user_routes.route('/me/friends')
+@login_required
+def friends():
+    users = current_user.friends
+    print(users, '------------')
     return {"users": [user.to_dict() for user in users]}
 
 

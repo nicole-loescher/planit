@@ -8,7 +8,6 @@ import * as itemActions from '../../store/item'
 const UserProfile = ({user}) =>{
     const [hosted, setHosted] = useState('')
     const [items, setItems] = useState('')
-    console.log(items, '-------')
     const dispatch = useDispatch()
 
     useEffect(async(e)=>{
@@ -80,7 +79,7 @@ const UserProfile = ({user}) =>{
                     <h1> Supplies you're bringing </h1>
                     {items.party_items.map((item, i)=>{
                         return (
-                            <div>
+                            <div key={item.id}>
                                 <Link key={i} to={`/planits/${item.party.id}`} className='party-tag'>
                                     <img src={item.party.image_url} className='profile__party-pic'/>
                                     <h2>{item.name}</h2>
@@ -99,6 +98,7 @@ const UserProfile = ({user}) =>{
                     <Link className='button_primary' to={`/user/${user.id}/items`}> View all my Items </Link>
                 </div>
             </div>
+            <Link to='/users' className='button_secondary'> Find my friends </Link>
         </div>
     )
 }

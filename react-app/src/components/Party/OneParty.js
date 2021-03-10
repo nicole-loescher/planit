@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import Party from '.';
 import { loadAllItems, claimOneItem } from '../../store/item';
 import {deleteParty, getOneParty} from '../../store/party'
+import { loadGuests } from '../../store/guestList'
 
 const OneParty = () => {
     const user = useSelector(state => state.auth.user)
@@ -14,11 +15,12 @@ const OneParty = () => {
     const items = useSelector(state => Object.values(state.items))
     const host = party.host
     const [editForm, setEditForm] = useState(false)
+    const [guests, setGuests] = useState('')
     
     let content
     if(editForm){
         content = (
-            <Party edit={party} items={items} />
+            <Party edit={party} items={items} guests={guests}/>
         )
     }
     const bringItem = async (e) => {
@@ -29,7 +31,9 @@ const OneParty = () => {
     useEffect(async()=>{
         const newparty = await dispatch(getOneParty(id))
         const allItems = await dispatch(loadAllItems(newparty.id))
+        const loadguestlist = await dispatch(loadGuests(newparty.id))
         setParty(newparty)
+        setGuests(loadguestlist)
     },[dispatch])
     
     if(!items){
@@ -52,7 +56,7 @@ const OneParty = () => {
     const onRSVP = async (e) =>{
         e.preventDefault()
     }
-    console.log(host, '--------------')
+    
     let imageContent;
     // let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
     if(!host.image_url){
