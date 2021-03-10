@@ -70,7 +70,7 @@ def planit_items(id):
     Creates items for a party.
     """
     form = ItemForm()
-    print(request.get_json())
+    # print(request.get_json())
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         item = Item(
@@ -91,6 +91,23 @@ def getItems(id):
     """
     items = Item.query.filter(Item.party_id == id).all()
     return {'party_items': [item.to_dict() for item in items]}
+
+
+@planit_routes.route('/<int:id>/guests', methods=['POST'])
+def invite(id):
+    print('..............hit................')
+    """
+    adds a guest to guest_list
+    """
+    data = request.get_json()
+    print('=======================', data)
+    guest = Guest_List(
+        party_id=data['party_id'],
+        user_id=data['user_id']
+    )
+    db.session.add(guest)
+    db.session.commit()
+    return {'party_invites': guest.to_dict()}
 
 
 @planit_routes.route('/<int:id>')
