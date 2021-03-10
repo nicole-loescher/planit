@@ -41,7 +41,7 @@ def host_planit():
 
 
 @planit_routes.route('/<int:id>', methods=['PUT'])
-def update_planit():
+def update_planit(id):
     """
     Updates a party.
     """
@@ -49,15 +49,16 @@ def update_planit():
     print(request.get_json())
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        party = Party(
-            name=form.data['name'],
-            details=form.data['details'],
-            location=form.data['location'],
-            image_url=form.data['image_url'],
-            host_id=form.data['host_id'],
-            time=form.data['time'],
-            starts_at=form.data['starts_at'], 
-        )
+        party = Party.query.get(id)
+        party.name=form.data['name'],
+        party.details=form.data['details'],
+        party.location=form.data['location'],
+        party.image_url=form.data['image_url'],
+        party.host_id=form.data['host_id'],
+        party.time=form.data['time'],
+        party.starts_at=form.data['starts_at'], 
+     
+        print(',,,,,,,,,,,,,,,,,,,,,', party)
         db.session.add(party)
         db.session.commit() 
         return party.to_dict()

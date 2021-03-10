@@ -89,8 +89,8 @@ const OneParty = () => {
     
     return (
         <div>
-        <div className='planit__page'>
             {content}
+        <div className='planit__page'>
             <div>
                 <div className='party__div--img'>
                         <img src={party.image_url} alt='party' className='party_pic' />
