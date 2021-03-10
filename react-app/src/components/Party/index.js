@@ -7,10 +7,9 @@ import './index.css'
 import { useHistory } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
-const Party = ({edit, items, guests}) => {
+const Party = ({ edit, items, guests }) => {
     const history = useHistory();
     const user = useSelector(state => state.auth.user);
-    const host_id = user.id;
     const dispatch = useDispatch();
     const [count, setCount] = useState(1);
     const [userList, setUserList] = useState('')
@@ -26,39 +25,47 @@ const Party = ({edit, items, guests}) => {
     let itemContent;
     let guestContent;
     
-    if(edit){
+    if(!user){
+        history.push('/')
+    }
+    let host_id
+    if(user){
+        host_id = user.id;
+    }
+    
+    if (edit) {
         nameContent = edit.name
         locationContent = edit.location
         detailsContent = edit.name
         imageContent = edit.image_url
         starts_atContent = edit.starts_at
         timeContent = edit.time
-        let itemList=[]
-        items.map(item=>{
+        let itemList = []
+        items.map(item => {
             itemList.push(item.name)
         })
-        itemContent = {items: itemList}
-        if(guests){
+        itemContent = { items: itemList }
+        if (guests) {
             console.log(guests)
-            let guestList=[]
-            guests.map(guest=>{
+            let guestList = []
+            guests.map(guest => {
                 guestList.push(guest.id)
             })
         }
-        itemContent = {items: itemList}
-        
+        itemContent = { items: itemList }
+
     }
-    if(!edit){
+    if (!edit) {
         nameContent = ''
         locationContent = ''
         detailsContent = 'Come join us for a party! Please bring an item from the list below!'
         starts_atContent = ''
         imageContent = "https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg"
         timeContent = ''
-        itemContent = {items: ['']} 
-        guestContent = {invites: []}
+        itemContent = { items: [''] }
+        guestContent = { invites: [] }
     }
-    
+
     const [name, setName] = useState(nameContent);
     const [details, setDetails] = useState(detailsContent);
     const [starts_at, setStarts_at] = useState(starts_atContent);
@@ -67,7 +74,7 @@ const Party = ({edit, items, guests}) => {
     const [image_url, setImage_url] = useState(imageContent);
     const [state, setState] = useState(itemContent);
     const [guestList, setGuestList] = useState(guestContent)
-    
+
     useEffect(async (e) => {
         async function fetchData() {
             const response = await fetch(`/api/users/me/friends`);
@@ -75,26 +82,26 @@ const Party = ({edit, items, guests}) => {
             setUserList(responseData.users);
         }
         fetchData();
-    },[count])
-    
+    }, [count])
+
     const onSubmit = async (e) => {
         e.preventDefault();
         const party = await dispatch(partyActions.create(host_id, name, details, starts_at, time, image_url, location))
-        if(!party.errors){
+        if (!party.errors) {
             const party_id = party.id
             const user_id = null
-            guestList.invites.map(async(user_id)=> await dispatch(inviteActions.inviteGuest(party_id, user_id))) 
-            state.items.map(async(name)=> await dispatch(itemActions.addOneItem(name, party_id, user_id)))
+            guestList.invites.map(async (user_id) => await dispatch(inviteActions.inviteGuest(party_id, user_id)))
+            state.items.map(async (name) => await dispatch(itemActions.addOneItem(name, party_id, user_id)))
             history.push('/')
         }
-        if(party.errors) {
+        if (party.errors) {
             return errordiv = (
                 <div>
                     <h3>Houston we have a problem: </h3>
                     {party.errors.map((error, i) => (
                         <div key={i}>{error}</div>
-                        ))}
-                        {console.log(party.errors)}
+                    ))}
+                    {console.log(party.errors)}
                 </div>
             )
         }
@@ -103,33 +110,33 @@ const Party = ({edit, items, guests}) => {
         e.preventDefault()
         const party = await dispatch(partyActions.updateParty(
             edit.id,
-            host_id, 
-            name, 
-            details, 
-            starts_at, 
-            time, 
-            image_url, 
+            host_id,
+            name,
+            details,
+            starts_at,
+            time,
+            image_url,
             location))
         history.push('/')
     }
     const onInvite = async (e, index) => {
         e.preventDefault()
         guestList.invites[index] = e.target.value
-        setGuestList({invites: [...guestList.invites]})
+        setGuestList({ invites: [...guestList.invites] })
     }
-    const addItem = (e) =>{
+    const addItem = (e) => {
         e.preventDefault();
-        setState({items: [...state.items, '']})
+        setState({ items: [...state.items, ''] })
     }
-    const handleChange = (e, index) =>{
+    const handleChange = (e, index) => {
         e.preventDefault();
         state.items[index] = e.target.value
-        setState({items: state.items})
+        setState({ items: state.items })
     }
-    const handleDelete = (e, index)=>{
+    const handleDelete = (e, index) => {
         e.preventDefault();
         state.items.splice(index, 1)
-        setState({items: state.items})
+        setState({ items: state.items })
     }
     const onNext = (e) => {
         e.preventDefault();
@@ -139,7 +146,7 @@ const Party = ({edit, items, guests}) => {
         e.preventDefault();
         setCount(count - 1)
     }
-    if(count === 1){
+    if (count === 1) {
         content = (
             <div className='planit__form--div'>
                 <h2 className='title'>Tell us about your PlanIt</h2>
@@ -185,42 +192,42 @@ const Party = ({edit, items, guests}) => {
             </div>
         )
     }
-    if(count === 2){
+    if (count === 2) {
         content = (
-            
-                <div className='planit__form--div'>
+
+            <div className='planit__form--div'>
                 <h2 className='title'>Tell your galaxy what to bring</h2>
-                    {state.items.map((item, index)=>{
-                        return (
-                            <div key={index}>
-                                <input 
-                                value={item }
-                                placeholder='enter item name' 
+                {state.items.map((item, index) => {
+                    return (
+                        <div key={index}>
+                            <input
+                                value={item}
+                                placeholder='enter item name'
                                 onChange={e => handleChange(e, index)}
-                                />
-                                <button onClick={e => handleDelete(e, index)}>Delete</button>
-                            </div>
-                        )
-                    })}
-                    <button className='button_secondary' onClick={e => addItem(e)}>Add items</button>
-                    <div className='button__div'>
-                        <button className='button_primary' onClick={onNext}>next</button>
-                        <button className='button_primary' onClick={onPrev}>Previous</button>
-                    </div>
+                            />
+                            <button onClick={e => handleDelete(e, index)}>Delete</button>
+                        </div>
+                    )
+                })}
+                <button className='button_secondary' onClick={e => addItem(e)}>Add items</button>
+                <div className='button__div'>
+                    <button className='button_primary' onClick={onNext}>next</button>
+                    <button className='button_primary' onClick={onPrev}>Previous</button>
                 </div>
+            </div>
         )
     }
-    if(count === 3){
+    if (count === 3) {
         content = (
             <div className='planit__form--div'>
                 <h2 className='title'> invite your friends to the galaxy </h2>
-                {userList.map((user, index)=>{
+                {userList.map((user, index) => {
                     return (
-                    <div key={index}>
-                        <div><img className='onePlanit--img' src={user.image_url} />{user.first_name} {user.last_name}</div>
-                        {console.log(user.id, '--------')}
-                        <button value={user.id} onClick={e => onInvite(e, index)}>invite me</button>
-                    </div>
+                        <div key={index}>
+                            <div><img className='onePlanit--img' src={user.image_url} />{user.first_name} {user.last_name}</div>
+                            {console.log(user.id, '--------')}
+                            <button value={user.id} onClick={e => onInvite(e, index)}>invite me</button>
+                        </div>
                     )
                 })}
                 <div className='button__div'>
@@ -230,7 +237,7 @@ const Party = ({edit, items, guests}) => {
             </div>
         )
     }
-    if(count === 4){
+    if (count === 4) {
         content = (
             <div className='planit__form--div'>
                 <h2 className='title'>Choose a photo for your party</h2>
@@ -238,7 +245,7 @@ const Party = ({edit, items, guests}) => {
                     <img src={image_url} alt='party' className='planit__img'></img>
                 </div>
                 <select
-                    value={image_url }
+                    value={image_url}
                     onChange={e => setImage_url(e.target.value)}
                 >
                     <option value='https://myplanits.s3-us-west-1.amazonaws.com/newyear.jpg'>New Year</option>
@@ -265,7 +272,7 @@ const Party = ({edit, items, guests}) => {
             </div>
         )
     }
-    if(count === 5){
+    if (count === 5) {
         content = (
             <div className='planit__form--div'>
                 <h1 className='title'>Prepare to Launch</h1>
@@ -276,12 +283,12 @@ const Party = ({edit, items, guests}) => {
         )
 
     }
-    return(
+    return (
         <div className='planit__form'>
             <h1 className='title'>Host your PlanIt</h1>
             <form onSubmit={onSubmit} className='planit__form'>
                 {content}
-            </form>  
+            </form>
         </div>
     )
 }
