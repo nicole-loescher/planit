@@ -95,12 +95,10 @@ def getItems(id):
 
 @planit_routes.route('/<int:id>/guests', methods=['POST'])
 def invite(id):
-    print('..............hit................')
     """
     adds a guest to guest_list
     """
     data = request.get_json()
-    print('=======================', data)
     guest = Guest_List(
         party_id=data['party_id'],
         user_id=data['user_id']
@@ -108,6 +106,16 @@ def invite(id):
     db.session.add(guest)
     db.session.commit()
     return {'party_invites': guest.to_dict()}
+
+
+@planit_routes.route('/<int:id>/guests')
+def get_guests(id):
+    """
+    gets all guests from the guest list
+    """
+    guests = Guest_List.query.filter(Guest_List.party_id == id).all()
+   
+    return {'guest_list': [guest.to_dict() for guest in guests]}
 
 
 @planit_routes.route('/<int:id>')
