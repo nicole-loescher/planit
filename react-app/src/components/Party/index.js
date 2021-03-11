@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
 
 const Party = ({ edit, items, guests }) => {
@@ -208,7 +209,7 @@ const Party = ({ edit, items, guests }) => {
                                 placeholder='enter item name'
                                 onChange={e => handleChange(e, index)}
                             />
-                            <IconButton aria-label="delete" onClick={handleDelete}>
+                            <IconButton aria-label="delete" onClick={e => handleDelete(e, index)}>
                                 <DeleteIcon />
                             </IconButton>
                            
@@ -218,7 +219,6 @@ const Party = ({ edit, items, guests }) => {
                 <IconButton aria-label='add' onClick={e => addItem(e)}>
                     <AddCircleOutlineIcon />
                 </IconButton>
-                {/* <button className='button_secondary' onClick={e => addItem(e)}>Add items</button> */}
                 <div className='button__div'>
                     <button className='button_primary' onClick={onNext}>next</button>
                     <button className='button_primary' onClick={onPrev}>Previous</button>
@@ -233,9 +233,19 @@ const Party = ({ edit, items, guests }) => {
                 {userList.map((user, index) => {
                     return (
                         <div key={index}>
-                            <div><img className='onePlanit--img' src={user.image_url} />{user.first_name} {user.last_name}</div>
-                            {console.log(user.id, '--------')}
-                            <button value={user.id} onClick={e => onInvite(e, index)}>invite me</button>
+                            <div>
+                                <img className='onePlanit--img' src={user.image_url} />
+                                {user.first_name} {user.last_name}
+                                {/* {guestList.invites.includes(user.id) ?
+                                    <IconButton aria-label='delete' value={user.id} onClick={e => onInvite(e, index)}>
+                                    <RemoveCircleOutlineIcon />
+                                    </IconButton> : */}
+                                    <IconButton aria-label='add' value={user.id} onClick={e => onInvite(e, index)}>
+                                        <AddCircleOutlineIcon />
+                                    </IconButton>
+                                
+                            </div>
+                            {/* <button value={user.id} onClick={e => onInvite(e, index)}>invite me</button> */}
                         </div>
                     )
                 })}

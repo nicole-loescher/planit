@@ -53,7 +53,7 @@ const inviteReducer = (state = {}, action) => {
         case LOAD: {
            const newInvites = {};
             action.payload.guest_list.forEach(guest => {
-                newInvites[guest.id] = guest;
+                newInvites[guest.user_id] = guest;
             })
             return {
                 // ...state,
