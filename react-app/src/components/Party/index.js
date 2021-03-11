@@ -46,14 +46,14 @@ const Party = ({ edit, items, guests }) => {
             itemList.push(item.name)
         })
         itemContent = { items: itemList }
+        let guestList = []
         if (guests) {
-            console.log(guests)
-            let guestList = []
             guests.guest_list.map(guest => {
                 guestList.push(guest.id)
             })
         }
-        itemContent = { items: itemList }
+        guestContent = { invites: guestList}
+        
 
     }
     if (!edit) {
