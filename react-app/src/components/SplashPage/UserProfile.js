@@ -42,7 +42,7 @@ const UserProfile = ({user}) =>{
     }
     return (
         <div className='home__info2'>
-            <div>
+            <div className='img-container'>
                 {imageContent}
             </div>
             <div className='profile--welcome'>
@@ -55,7 +55,7 @@ const UserProfile = ({user}) =>{
                     <h1> PlanIts hosted by you </h1>
                     {hosted.hosted_parties.map((party, i) => {
                        return (
-                           <div> 
+                           <div key ={party.id}> 
                                 <Link key={i} to={`/planits/${party.id}`} className='party-tag'>
                                     <img src={party.image_url} className='profile__party-pic'/>
                                     <h2>{party.name}</h2>

@@ -12,16 +12,24 @@ def seed_users():
         'https://myplanits.s3-us-west-1.amazonaws.com/planit-favicon.png',
         'https://myplanits.s3-us-west-1.amazonaws.com/profile.png',
         'https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png',
+        'https://myplanits.s3-us-west-1.amazonaws.com/default-profile.jpg',
+        'https://myplanits.s3-us-west-1.amazonaws.com/profile2.jpg',
+        'https://myplanits.s3-us-west-1.amazonaws.com/profile3.jpg',
+        'https://myplanits.s3-us-west-1.amazonaws.com/profile4.jpg',
+        'https://myplanits.s3-us-west-1.amazonaws.com/profile5.jpg',
+        'https://myplanits.s3-us-west-1.amazonaws.com/profile6.jpg',
+        'https://myplanits.s3-us-west-1.amazonaws.com/profile7.jpg',
+        'https://myplanits.s3-us-west-1.amazonaws.com/profile8.jpg',
     ]
     demo = User(first_name='Demo', 
                 last_name='User', 
                 email='demo@aa.io',
-                image_url='https://myplanits.s3-us-west-1.amazonaws.com/profile.png',
+                image_url='https://myplanits.s3-us-west-1.amazonaws.com/default-profile.jpg',
                 password='password')
 
     db.session.add(demo)
     times = 0
-    while times < 5:
+    while times < 13:
         newUser = User(
             first_name= faker.first_name(),
             last_name= faker.last_name(),
