@@ -17,7 +17,7 @@
     /* justify-content: center; */
     background-color: white;
     padding: 1rem 4rem;
-    min-height: 514px;
+    min-height: auto;
     max-height: auto;
     max-width: 850px;
     min-width: 400px;

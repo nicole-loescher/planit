@@ -5,6 +5,8 @@ import Party from '.';
 import { loadAllItems, claimOneItem } from '../../store/item';
 import {deleteParty, getOneParty} from '../../store/party'
 import { loadGuests } from '../../store/guestList'
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import IconButton from '@material-ui/core/IconButton';
 
 const OneParty = () => {
     const user = useSelector(state => state.auth.user)
@@ -129,15 +131,19 @@ const OneParty = () => {
                         {items.map((item, i)=>{
                             return ( 
                                 <div key={i}>
-                                    {!item.user_id &&
-                                        <button value={item.id} onClick={bringItem}>Bring me</button>
-                                    }
-                                    {item.user_id && 
+                                    {!item.user_id ?
+                                        <IconButton  value={item.id} onClick={e=> bringItem(e.target.value)}>
+                                            <AddCircleOutlineIcon />
+                                        </IconButton> :
                                         <img className='claimed' src={item.guest.image_url} alt='user' />
-                                    // <h1>{item.user_id}</h1>
+
+                                    // <button value={item.id} onClick={bringItem}>Bring me</button>
                                     }
-                                    {item.user_id === user.id && 
-                                    <p>this claimed by you </p>
+                                     {item.user_id && 
+                                    <h1>{item.user_id}</h1>
+                                    } 
+                                    {item.user_id === user.id &&  
+                                    <p>this claimed by you </p> 
                                     }
                                     {item.name} : {item.user_id}
                                 </div>
