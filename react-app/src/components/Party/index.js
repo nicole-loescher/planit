@@ -5,7 +5,8 @@ import * as itemActions from '../../store/item'
 import * as inviteActions from '../../store/guestList'
 import './index.css'
 import { useHistory } from 'react-router-dom';
-import { NavLink } from "react-router-dom";
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const Party = ({ edit, items, guests }) => {
     const history = useHistory();
@@ -48,7 +49,7 @@ const Party = ({ edit, items, guests }) => {
         if (guests) {
             console.log(guests)
             let guestList = []
-            guests.map(guest => {
+            guests.guest_list.map(guest => {
                 guestList.push(guest.id)
             })
         }
@@ -199,13 +200,16 @@ const Party = ({ edit, items, guests }) => {
                 <h2 className='title'>Tell your galaxy what to bring</h2>
                 {state.items.map((item, index) => {
                     return (
-                        <div key={index}>
+                        <div className='party_item--input' key={index}>
                             <input
                                 value={item}
                                 placeholder='enter item name'
                                 onChange={e => handleChange(e, index)}
                             />
-                            <button onClick={e => handleDelete(e, index)}>Delete</button>
+                            <IconButton aria-label="delete" onClick={handleDelete}>
+                                <DeleteIcon />
+                            </IconButton>
+                           
                         </div>
                     )
                 })}
@@ -267,8 +271,10 @@ const Party = ({ edit, items, guests }) => {
                         type='file'
                         onChange={e => setImage_url(e.target.value)}
                         /> */}
-                <button className='button_primary' onClick={onNext}>next</button>
-                <button className='button_primary' onClick={onPrev}>Previous</button>
+                <div className='button__div'>
+                    <button className='button_primary' onClick={onNext}>next</button>
+                    <button className='button_primary' onClick={onPrev}>Previous</button>
+                </div>
             </div>
         )
     }

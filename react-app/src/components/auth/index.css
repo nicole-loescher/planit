@@ -38,9 +38,9 @@ input {
     align-items:center;
 }
 label {
-    position: relative;
-    left: 5%;
-    font-size: 1.2rem;
+    /* position: relative;
+    left: 5%; */
+    font-size: 1.3rem;
 }
 a {
     display: flex;

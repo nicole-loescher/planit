@@ -105,19 +105,19 @@ const OneParty = () => {
             </div> 
             <div className='party__div'>
                 <h1 className='party__title'>{party.name}</h1>
-                <div>
-                    <p className='party__date'>{party.starts_at}</p>
-                    <p className='party__time'>start and end time here</p>
+                <div className='planit__info--div'>
+                    <p className='party__location'>{party.starts_at}</p>
+                    <p className='party__time'>{party.time}</p>
                     {/* <p>{party.time}</p> */}
                 </div>
-                <div>
+                    <div className='planit__info--div'>
                     <h3 className='party__location'>The Planit location:</h3>
-                    <p className='party__location'>{party.location}</p>
+                    <p className='party__time'>{party.location}</p>
                 
                 </div>
-                <div>
-                    <h3>A message from the shooting star:</h3>
-                    <p>{party.details}</p>
+                <div className='planit__info--div'>
+                    <h3 className='party__location'>A message from the shooting star:</h3>
+                    <p className='party__time'>{party.details}</p>
                 </div>
             </div>
                         {content2}

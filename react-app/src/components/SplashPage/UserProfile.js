@@ -10,12 +10,15 @@ const UserProfile = ({user}) =>{
     const [items, setItems] = useState('')
     const dispatch = useDispatch()
 
-    useEffect(async(e)=>{
-        const hosting = await dispatch(partyActions.loadParties(user.id))
-        const items = await dispatch(itemActions.loadMyItems(user.id))
-        
-        setHosted(hosting)
-        setItems(items)
+    useEffect(async (e) =>{
+        if(user){
+            const hosting = await dispatch(partyActions.loadParties(user.id))
+            const items = await dispatch(itemActions.loadMyItems(user.id))
+            
+            setHosted(hosting)
+            setItems(items)
+
+        }
     },[dispatch])
     if(!user ){
         return <h1>Loading...</h1>
