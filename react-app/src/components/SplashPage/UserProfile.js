@@ -70,7 +70,7 @@ const UserProfile = ({user}) =>{
                             </div>
                         )
                         })}
-                    <Link className='button_primary' to={`/user/${user.id}/planits`}> View all my PlanIts </Link>
+                    {/* <Link className='button_primary' to={`/user/${user.id}/planits`}> View all my PlanIts </Link> */}
                 </div>
                 {/* <div className='standard__form--div2'>
                     <h1> for visiting parties </h1>
@@ -95,7 +95,7 @@ const UserProfile = ({user}) =>{
                             </div>
                         )
                     })}
-                    <Link className='button_primary' to={`/user/${user.id}/items`}> View all my Items </Link>
+                    {/* <Link className='button_primary' to={`/user/${user.id}/items`}> View all my Items </Link> */}
                 </div>
             </div>
             <Link to='/users' className='button_secondary'> Find my friends </Link>

@@ -85,7 +85,8 @@
     margin: 2rem 2rem;
     background-color: white;
     padding: 2rem 4rem;
-    height: auto;
+    height: 40rem;
+    overflow: scroll;
     width: 35rem;
     text-align:center;
     box-shadow: 5px 5px 10px rgb( 0 0 0 / 25%);
