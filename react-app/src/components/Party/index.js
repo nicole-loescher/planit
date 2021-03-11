@@ -7,6 +7,8 @@ import './index.css'
 import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+
 
 const Party = ({ edit, items, guests }) => {
     const history = useHistory();
@@ -213,7 +215,10 @@ const Party = ({ edit, items, guests }) => {
                         </div>
                     )
                 })}
-                <button className='button_secondary' onClick={e => addItem(e)}>Add items</button>
+                <IconButton aria-label='add' onClick={e => addItem(e)}>
+                    <AddCircleOutlineIcon />
+                </IconButton>
+                {/* <button className='button_secondary' onClick={e => addItem(e)}>Add items</button> */}
                 <div className='button__div'>
                     <button className='button_primary' onClick={onNext}>next</button>
                     <button className='button_primary' onClick={onPrev}>Previous</button>
@@ -238,6 +243,7 @@ const Party = ({ edit, items, guests }) => {
                     <button className='button_primary' onClick={onNext}>next</button>
                     <button className='button_primary' onClick={onPrev}>Previous</button>
                 </div>
+                
             </div>
         )
     }
