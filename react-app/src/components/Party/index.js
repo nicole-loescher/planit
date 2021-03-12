@@ -5,7 +5,11 @@ import * as itemActions from '../../store/item'
 import * as inviteActions from '../../store/guestList'
 import './index.css'
 import { useHistory } from 'react-router-dom';
-import { NavLink } from "react-router-dom";
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+
 
 const Party = ({ edit, items, guests }) => {
     const history = useHistory();
@@ -45,14 +49,14 @@ const Party = ({ edit, items, guests }) => {
             itemList.push(item.name)
         })
         itemContent = { items: itemList }
+        let guestList = []
         if (guests) {
-            console.log(guests)
-            let guestList = []
-            guests.map(guest => {
+            guests.guest_list.map(guest => {
                 guestList.push(guest.id)
             })
         }
-        itemContent = { items: itemList }
+        guestContent = { invites: guestList}
+        
 
     }
     if (!edit) {
@@ -199,17 +203,22 @@ const Party = ({ edit, items, guests }) => {
                 <h2 className='title'>Tell your galaxy what to bring</h2>
                 {state.items.map((item, index) => {
                     return (
-                        <div key={index}>
+                        <div className='party_item--input' key={index}>
                             <input
                                 value={item}
                                 placeholder='enter item name'
                                 onChange={e => handleChange(e, index)}
                             />
-                            <button onClick={e => handleDelete(e, index)}>Delete</button>
+                            <IconButton aria-label="delete" onClick={e => handleDelete(e, index)}>
+                                <DeleteIcon />
+                            </IconButton>
+                           
                         </div>
                     )
                 })}
-                <button className='button_secondary' onClick={e => addItem(e)}>Add items</button>
+                <IconButton aria-label='add' onClick={e => addItem(e)}>
+                    <AddCircleOutlineIcon />
+                </IconButton>
                 <div className='button__div'>
                     <button className='button_primary' onClick={onNext}>next</button>
                     <button className='button_primary' onClick={onPrev}>Previous</button>
@@ -224,9 +233,19 @@ const Party = ({ edit, items, guests }) => {
                 {userList.map((user, index) => {
                     return (
                         <div key={index}>
-                            <div><img className='onePlanit--img' src={user.image_url} />{user.first_name} {user.last_name}</div>
-                            {console.log(user.id, '--------')}
-                            <button value={user.id} onClick={e => onInvite(e, index)}>invite me</button>
+                            <div>
+                                <img className='onePlanit--img' src={user.image_url} />
+                                {user.first_name} {user.last_name}
+                                {/* {guestList.invites.includes(user.id) ?
+                                    <IconButton aria-label='delete' value={user.id} onClick={e => onInvite(e, index)}>
+                                    <RemoveCircleOutlineIcon />
+                                    </IconButton> : */}
+                                    <IconButton aria-label='add' value={user.id} onClick={e => onInvite(e, index)}>
+                                        <AddCircleOutlineIcon />
+                                    </IconButton>
+                                
+                            </div>
+                            {/* <button value={user.id} onClick={e => onInvite(e, index)}>invite me</button> */}
                         </div>
                     )
                 })}
@@ -234,6 +253,7 @@ const Party = ({ edit, items, guests }) => {
                     <button className='button_primary' onClick={onNext}>next</button>
                     <button className='button_primary' onClick={onPrev}>Previous</button>
                 </div>
+                
             </div>
         )
     }
@@ -267,8 +287,10 @@ const Party = ({ edit, items, guests }) => {
                         type='file'
                         onChange={e => setImage_url(e.target.value)}
                         /> */}
-                <button className='button_primary' onClick={onNext}>next</button>
-                <button className='button_primary' onClick={onPrev}>Previous</button>
+                <div className='button__div'>
+                    <button className='button_primary' onClick={onNext}>next</button>
+                    <button className='button_primary' onClick={onPrev}>Previous</button>
+                </div>
             </div>
         )
     }

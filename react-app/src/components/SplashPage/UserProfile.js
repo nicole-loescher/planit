@@ -10,12 +10,15 @@ const UserProfile = ({user}) =>{
     const [items, setItems] = useState('')
     const dispatch = useDispatch()
 
-    useEffect(async(e)=>{
-        const hosting = await dispatch(partyActions.loadParties(user.id))
-        const items = await dispatch(itemActions.loadMyItems(user.id))
-        
-        setHosted(hosting)
-        setItems(items)
+    useEffect(async (e) =>{
+        if(user){
+            const hosting = await dispatch(partyActions.loadParties(user.id))
+            const items = await dispatch(itemActions.loadMyItems(user.id))
+            
+            setHosted(hosting)
+            setItems(items)
+
+        }
     },[dispatch])
     if(!user ){
         return <h1>Loading...</h1>
@@ -42,7 +45,7 @@ const UserProfile = ({user}) =>{
     }
     return (
         <div className='home__info2'>
-            <div>
+            <div className='img-container'>
                 {imageContent}
             </div>
             <div className='profile--welcome'>
@@ -55,7 +58,7 @@ const UserProfile = ({user}) =>{
                     <h1> PlanIts hosted by you </h1>
                     {hosted.hosted_parties.map((party, i) => {
                        return (
-                           <div> 
+                           <div key ={party.id}> 
                                 <Link key={i} to={`/planits/${party.id}`} className='party-tag'>
                                     <img src={party.image_url} className='profile__party-pic'/>
                                     <h2>{party.name}</h2>
@@ -70,7 +73,7 @@ const UserProfile = ({user}) =>{
                             </div>
                         )
                         })}
-                    <Link className='button_primary' to={`/user/${user.id}/planits`}> View all my PlanIts </Link>
+                    {/* <Link className='button_primary' to={`/user/${user.id}/planits`}> View all my PlanIts </Link> */}
                 </div>
                 {/* <div className='standard__form--div2'>
                     <h1> for visiting parties </h1>
@@ -95,7 +98,7 @@ const UserProfile = ({user}) =>{
                             </div>
                         )
                     })}
-                    <Link className='button_primary' to={`/user/${user.id}/items`}> View all my Items </Link>
+                    {/* <Link className='button_primary' to={`/user/${user.id}/items`}> View all my Items </Link> */}
                 </div>
             </div>
             <Link to='/users' className='button_secondary'> Find my friends </Link>

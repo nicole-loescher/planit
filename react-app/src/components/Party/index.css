@@ -14,20 +14,22 @@
 .planit__form--div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     background-color: white;
     padding: 1rem 4rem;
-    min-height: 514px;
+    min-height: auto;
     max-height: auto;
     max-width: 850px;
     min-width: 400px;
     border-radius: 2rem;
     margin: 0rem 4rem;
+    align-items:center;
     
 }
 .title {
+    box-sizing: border-box;
     float: center;
-    margin-bottom: 1rem;
+    margin: 1rem 0rem;
 }
 
 textarea {
@@ -65,29 +67,22 @@ textarea {
     margin: 1rem;
     padding: 2rem;
 }
-/* .party__div--img{
-    display: flex;
-    flex-direction: row;
-    align-self: start;
-} */
 .party__title {
     margin: 0 0;
-    font-size: 2rem;
-}
-.party__date {
-    font-size: 1rem;
-    /* position: relative; */
-    /* top: -30%; */
+    font-size: 3.5rem;
 }
 .party__time {
     font-size: 1rem;
-    /* position: relative; */
-    /* top: -60%; */
+    box-sizing: border-box;
+    height: 4rem;
+ 
 }
 .party__location {
-    font-size: 1.4rem;
-    /* position: relative;
-    top: -180%; */
+    font-size: 2rem;
+    box-sizing: border-box;
+    height: .5rem;
+    font-weight: 900;
+ 
 }
 .party__form--div {
     display: flex;
@@ -108,7 +103,7 @@ textarea {
     display:flex;
     flex-direction: row;
     padding: 2rem;
-    justify-content: space-between;
+    justify-content: space-around;
 
 }
 .onePlanit--img {
@@ -142,4 +137,19 @@ textarea {
     border-radius: 100%;
     width: 2rem;
     height: 2rem;
+    outline:none;
+}
+.planit__info--div {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: -1rem 0rem;
+    padding: -1rem 0rem;
+}
+.party_item--input {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-self: center;
 }

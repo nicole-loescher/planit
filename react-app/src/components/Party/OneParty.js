@@ -5,6 +5,8 @@ import Party from '.';
 import { loadAllItems, claimOneItem } from '../../store/item';
 import {deleteParty, getOneParty} from '../../store/party'
 import { loadGuests } from '../../store/guestList'
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import IconButton from '@material-ui/core/IconButton';
 
 const OneParty = () => {
     const user = useSelector(state => state.auth.user)
@@ -26,7 +28,7 @@ const OneParty = () => {
     const bringItem = async (e) => {
         e.preventDefault();
         // console.log(user.id)
-        await dispatch(claimOneItem(e.target.value))
+        await dispatch(claimOneItem(e.currentTarget.value))
     }
     useEffect(async()=>{
         const newparty = await dispatch(getOneParty(id))
@@ -105,19 +107,19 @@ const OneParty = () => {
             </div> 
             <div className='party__div'>
                 <h1 className='party__title'>{party.name}</h1>
-                <div>
-                    <p className='party__date'>{party.starts_at}</p>
-                    <p className='party__time'>start and end time here</p>
+                <div className='planit__info--div'>
+                    <p className='party__location'>{party.starts_at}</p>
+                    <p className='party__time'>{party.time}</p>
                     {/* <p>{party.time}</p> */}
                 </div>
-                <div>
+                    <div className='planit__info--div'>
                     <h3 className='party__location'>The Planit location:</h3>
-                    <p className='party__location'>{party.location}</p>
+                    <p className='party__time'>{party.location}</p>
                 
                 </div>
-                <div>
-                    <h3>A message from the shooting star:</h3>
-                    <p>{party.details}</p>
+                <div className='planit__info--div'>
+                    <h3 className='party__location'>A message from the shooting star:</h3>
+                    <p className='party__time'>{party.details}</p>
                 </div>
             </div>
                         {content2}
@@ -130,16 +132,26 @@ const OneParty = () => {
                             return ( 
                                 <div key={i}>
                                     {!item.user_id &&
-                                        <button value={item.id} onClick={bringItem}>Bring me</button>
+                                        <IconButton  value={item.id} onClick={bringItem}>
+                                            <AddCircleOutlineIcon />
+                                        </IconButton> 
                                     }
-                                    {item.user_id && 
-                                        <img className='claimed' src={item.guest.image_url} alt='user' />
-                                    // <h1>{item.user_id}</h1>
-                                    }
-                                    {item.user_id === user.id && 
-                                    <p>this claimed by you </p>
+                                    {item.user_id &&
+                                        <button style={{
+                                            backgroundImage: `url("${item.guest.image_url}")`,
+                                            borderRadius: '100%',
+                                            width: '2rem',
+                                            height: '2rem',
+                                            outline: 'none',
+                                            backgroundSize: 'cover'
+                                        }}>
+                                        {/* <img className='claimed' src={item.guest.image_url} alt='user' /> */}
+                                    </button>
                                     }
                                     {item.name} : {item.user_id}
+                                    {/* {item.user_id === user.id &&  
+                                    <p>this claimed by you </p> 
+                                    } */}
                                 </div>
                                 )
                             })}
