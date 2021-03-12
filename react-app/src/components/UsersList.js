@@ -25,6 +25,7 @@ function UsersList() {
   }, []);
 
   const userComponents = users.map((user) => {
+    console.log(user.friends)
     return (
       <div  className='friends--content' key={user.id}>
         <div style={{display:'flex', flexDirection: 'column'}}>
@@ -34,6 +35,7 @@ function UsersList() {
               {user.first_name} {user.last_name}
             </div>
           </NavLink>
+          
           <button className='button_primary' onClick={addFriend} value={user.id}> add friend</button>
         </div>
       </div>
