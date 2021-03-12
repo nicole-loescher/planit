@@ -39,7 +39,7 @@ export const updateParty = (id, host_id, name, details, starts_at, time, image_u
             location,
         }),
     })
-    const party = response.json()
+    const party = await response.json()
     dispatch(oneParty(party))
     return party;
 }

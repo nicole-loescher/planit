@@ -1,9 +1,16 @@
-const ADD_INVITE = 'invite/addInvite';
+const ADD = 'invite/add';
+const LOAD = 'invite/load';
 
-const addInvite = (invite) => {
+const add = (invite) => {
     return {
-        type: ADD_INVITE,
+        type: ADD,
         payload: invite,
+    };
+};
+const load = (guests) => {
+    return {
+        type: LOAD,
+        payload: guests,
     };
 };
 
@@ -22,17 +29,37 @@ export const inviteGuest = (party_id, user_id) => async dispatch => {
         })
     });
     const invite = await response.json()
-    dispatch(addInvite(invite))
+    dispatch(add(invite))
     return invite
+}
+
+export const loadGuests = (party_id) => async dispatch => {
+    const response = await fetch(`/api/planits/${party_id}/guests`,{
+        method:'GET'
+    })
+    const guests = await response.json();
+    dispatch(load(guests));
+    return guests;
 }
 
 const inviteReducer = (state = {}, action) => {
     switch (action.type) {
-        case ADD_INVITE: {
+        case ADD: {
             return {
                 ...state,
                 [action.payload.id]: action.payload,
             };
+        }
+        case LOAD: {
+           const newInvites = {};
+            action.payload.guest_list.forEach(guest => {
+                newInvites[guest.id] = guest;
+            })
+            return {
+                // ...state,
+                ...newInvites,
+                // items: [action.payload.party_items]
+            }
         }
         default:
             return state;
