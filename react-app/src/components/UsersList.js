@@ -26,18 +26,26 @@ function UsersList() {
 
   const userComponents = users.map((user) => {
     return (
-      <li key={user.id}>
-        <NavLink to={`/users/${user.id}`}>{user.first_name} {user.last_name}</NavLink>
-        {console.log(user)}
-        <button onClick={addFriend} value={user.id}> add friend</button>
-      </li>
+      <div  className='friends--content' key={user.id}>
+        <div style={{display:'flex', flexDirection: 'column'}}>
+          <NavLink style={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }} to={`/users/${user.id}`}>
+            <img src={`${user.image_url}`} alt='user' className='friends--pic' />
+            <div>
+              {user.first_name} {user.last_name}
+            </div>
+          </NavLink>
+          <button className='button_primary' onClick={addFriend} value={user.id}> add friend</button>
+        </div>
+      </div>
     );
   });
 
   return (
     <>
-      <h1>User List: </h1>
-      <ul>{userComponents}</ul>
+      <h1 style={{textAlign:'center'}}>Add your friends to your Galaxy!! </h1>
+      <div className='friends--container'>
+        {userComponents}
+      </div>
     </>
   );
 }
