@@ -74,3 +74,24 @@ a {
     justify-content: center;
     color: black;
 }
+.friends--container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content:space-evenly; 
+    align-items: space-between;
+    padding: 3rem;
+    margin: 1rem;
+}
+.friends--pic {
+    border-radius: 100%;
+    width: 8rem;
+    height: 8rem;
+    padding: 1rem;
+}
+.friends--content {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
