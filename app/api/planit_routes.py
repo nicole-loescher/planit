@@ -59,7 +59,7 @@ def update_planit(id):
         party.starts_at=form.data['starts_at'], 
      
         print(',,,,,,,,,,,,,,,,,,,,,', party)
-        db.session.add(party)
+        # db.session.add(party)
         db.session.commit() 
         return party.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
