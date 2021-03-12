@@ -143,12 +143,13 @@ const OneParty = () => {
                                             width: '2rem',
                                             height: '2rem',
                                             outline: 'none',
-                                            backgroundSize: 'cover'
+                                            backgroundSize: 'cover',
+                                            margin: '1rem'
                                         }}>
                                         {/* <img className='claimed' src={item.guest.image_url} alt='user' /> */}
                                     </button>
                                     }
-                                    {item.name} : {item.user_id}
+                                    {item.name}
                                     {/* {item.user_id === user.id &&  
                                     <p>this claimed by you </p> 
                                     } */}
