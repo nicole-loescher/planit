@@ -37,6 +37,20 @@ const Party = ({ edit, items, guests }) => {
         host_id = user.id;
     }
     
+    let submitContent;
+    const onEdit = async (e) => {
+        e.preventDefault()
+        const party = await dispatch(partyActions.updateParty(
+            edit.id,
+            host_id,
+            name,
+            details,
+            starts_at,
+            time,
+            image_url,
+            location))
+        history.push('/')
+    }
     if (edit) {
         nameContent = edit.name
         locationContent = edit.location
@@ -56,8 +70,9 @@ const Party = ({ edit, items, guests }) => {
             })
         }
         guestContent = { invites: guestList}
-        
-
+        submitContent = (
+            <button onClick={onEdit} >Edit me</button>
+            ) 
     }
     if (!edit) {
         nameContent = ''
@@ -68,8 +83,10 @@ const Party = ({ edit, items, guests }) => {
         timeContent = ''
         itemContent = { items: [''] }
         guestContent = { invites: [] }
-    }
-
+        submitContent = (
+            <button className='button_secondary'>Submit</button>
+        )
+        }
     const [name, setName] = useState(nameContent);
     const [details, setDetails] = useState(detailsContent);
     const [starts_at, setStarts_at] = useState(starts_atContent);
@@ -109,19 +126,6 @@ const Party = ({ edit, items, guests }) => {
                 </div>
             )
         }
-    }
-    const onEdit = async (e) => {
-        e.preventDefault()
-        const party = await dispatch(partyActions.updateParty(
-            edit.id,
-            host_id,
-            name,
-            details,
-            starts_at,
-            time,
-            image_url,
-            location))
-        history.push('/')
     }
     const onInvite = async (e, index) => {
         e.preventDefault()
@@ -299,7 +303,7 @@ const Party = ({ edit, items, guests }) => {
             <div className='planit__form--div'>
                 <h1 className='title'>Prepare to Launch</h1>
                 {errordiv}
-                <button className='button_secondary'>Submit</button>
+                {submitContent}
                 <button className='button_primary' onClick={onPrev}>Previous</button>
             </div>
         )
@@ -314,4 +318,5 @@ const Party = ({ edit, items, guests }) => {
         </div>
     )
 }
+
 export default Party;
