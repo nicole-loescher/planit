@@ -137,6 +137,7 @@ textarea {
     border-radius: 100%;
     width: 2rem;
     height: 2rem;
+    outline:none;
 }
 .planit__info--div {
     display: flex;

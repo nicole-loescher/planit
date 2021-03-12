@@ -28,7 +28,7 @@ const OneParty = () => {
     const bringItem = async (e) => {
         e.preventDefault();
         // console.log(user.id)
-        await dispatch(claimOneItem(e.target.value))
+        await dispatch(claimOneItem(e.currentTarget.value))
     }
     useEffect(async()=>{
         const newparty = await dispatch(getOneParty(id))
@@ -131,21 +131,27 @@ const OneParty = () => {
                         {items.map((item, i)=>{
                             return ( 
                                 <div key={i}>
-                                    {!item.user_id ?
-                                        <IconButton  value={item.id} onClick={e=> bringItem(e.target.value)}>
+                                    {!item.user_id &&
+                                        <IconButton  value={item.id} onClick={bringItem}>
                                             <AddCircleOutlineIcon />
-                                        </IconButton> :
-                                        <img className='claimed' src={item.guest.image_url} alt='user' />
-
-                                    // <button value={item.id} onClick={bringItem}>Bring me</button>
+                                        </IconButton> 
                                     }
-                                     {item.user_id && 
-                                    <h1>{item.user_id}</h1>
-                                    } 
-                                    {item.user_id === user.id &&  
-                                    <p>this claimed by you </p> 
+                                    {item.user_id &&
+                                        <button style={{
+                                            backgroundImage: `url("${item.guest.image_url}")`,
+                                            borderRadius: '100%',
+                                            width: '2rem',
+                                            height: '2rem',
+                                            outline: 'none',
+                                            backgroundSize: 'cover'
+                                        }}>
+                                        {/* <img className='claimed' src={item.guest.image_url} alt='user' /> */}
+                                    </button>
                                     }
                                     {item.name} : {item.user_id}
+                                    {/* {item.user_id === user.id &&  
+                                    <p>this claimed by you </p> 
+                                    } */}
                                 </div>
                                 )
                             })}
