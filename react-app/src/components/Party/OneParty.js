@@ -20,11 +20,6 @@ const OneParty = () => {
     const [guests, setGuests] = useState('')
     
     let content
-    if(editForm){
-        content = (
-            <Party edit={party} items={items} guests={guests}/>
-        )
-    }
     const bringItem = async (e) => {
         e.preventDefault();
         // console.log(user.id)
@@ -51,7 +46,6 @@ const OneParty = () => {
     }
     const onEdit = async (e) =>{
         e.preventDefault()
-        console.log('working on edit functionality')
         setEditForm(true)
         window.scrollTo(0, 0)
     }
@@ -63,10 +57,10 @@ const OneParty = () => {
     // let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
     if(!host.image_url){
         imageContent = 
-            <div>
+        <div>
             {/* <div className='blank'>
             {initials}
-            </div> */}
+        </div> */}
             <img  className='onePlanit--img' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
             </div>
     }
@@ -85,80 +79,89 @@ const OneParty = () => {
     if(host.id !== user.id){
         content2 = (
             <button className='button_secondary' onClick={onRSVP}>RSVP</button>
-        )
-    }
- 
-    
-    return (
-        <div>
-            {content}
-        <div className='planit__page'>
-            <div>
-                <div className='party__div--img'>
-                        <img src={party.image_url} alt='party' className='party_pic' />
-                        <div>
-                            <h3>The Shooting Star:</h3>
+            )
+        }
+        
+        
+        if(editForm){
+            content = (
+                <Party edit={party} items={items} guests={guests}/>
+            )
+        }
+        if(!editForm){
+            content = (
+                <div>
+                <div className='planit__page'>
+                    <div>
+                        <div className='party__div--img'>
+                            <img src={party.image_url} alt='party' className='party_pic' />
+                            <div>
+                                <h3>The Shooting Star:</h3>
                             <div className='onePlanit--holder'>
                                 {imageContent} 
                                 <p className='name-tag'>{host.first_name}</p>
                             </div>
+                            </div>
                         </div>
-                </div>
-            </div> 
-            <div className='party__div'>
-                <h1 className='party__title'>{party.name}</h1>
-                <div className='planit__info--div'>
-                    <p className='party__location'>{party.starts_at}</p>
-                    <p className='party__time'>{party.time}</p>
-                    {/* <p>{party.time}</p> */}
-                </div>
-                    <div className='planit__info--div'>
-                    <h3 className='party__location'>The Planit location:</h3>
-                    <p className='party__time'>{party.location}</p>
-                
-                </div>
-                <div className='planit__info--div'>
-                    <h3 className='party__location'>A message from the shooting star:</h3>
-                    <p className='party__time'>{party.details}</p>
-                </div>
-            </div>
-                        {content2}
-        </div>
-                <div className='party__div--items'>
-                    <div>
-                        <h1>Supplies needed for the PlanIt:</h1>
-                        <p>Sign up by clicking an item below!</p>
-                        {items.map((item, i)=>{
-                            return ( 
-                                <div key={i}>
-                                    {!item.user_id &&
-                                        <IconButton  value={item.id} onClick={bringItem}>
-                                            <AddCircleOutlineIcon />
-                                        </IconButton> 
-                                    }
-                                    {item.user_id &&
-                                        <button style={{
-                                            backgroundImage: `url("${item.guest.image_url}")`,
-                                            borderRadius: '100%',
-                                            width: '2rem',
-                                            height: '2rem',
-                                            outline: 'none',
-                                            backgroundSize: 'cover',
-                                            margin: '1rem'
-                                        }}>
-                                        {/* <img className='claimed' src={item.guest.image_url} alt='user' /> */}
-                                    </button>
-                                    }
-                                    {item.name}
-                                    {/* {item.user_id === user.id &&  
-                                    <p>this claimed by you </p> 
-                                    } */}
-                                </div>
-                                )
-                            })}
+                    </div> 
+                    <div className='party__div'>
+                        <h1 className='party__title'>{party.name}</h1>
+                        <div className='planit__info--div'>
+                            <p className='party__location'>{party.starts_at}</p>
+                            <p className='party__time'>{party.time}</p>
+                    </div>
+                        <div className='planit__info--div'>
+                            <h3 className='party__location'>The Planit location:</h3>
+                            <p className='party__time'>{party.location}</p>
+                        </div>
+                        <div className='planit__info--div'>
+                            <h3 className='party__location'>A message from the shooting star:</h3>
+                            <p className='party__time'>{party.details}</p>
+                        </div>
+                    </div>
+                            {content2}
+                    </div>
+                    <div className='party__div--items'>
+                        <div>
+                            <h1>Supplies needed for the PlanIt:</h1>
+                            <p>Sign up by clicking an item below!</p>
+                            {items.map((item, i)=>{
+                                return ( 
+                                    <div key={i}>
+                                        {!item.user_id &&
+                                            <IconButton  value={item.id} onClick={bringItem}>
+                                                <AddCircleOutlineIcon />
+                                            </IconButton> 
+                                        }
+                                        {item.user_id &&
+                                            <button style={{
+                                                backgroundImage: `url("${item.guest.image_url}")`,
+                                                borderRadius: '100%',
+                                                width: '2rem',
+                                                height: '2rem',
+                                                outline: 'none',
+                                                backgroundSize: 'cover',
+                                                margin: '1rem'
+                                            }}>
+                                            {/* <img className='claimed' src={item.guest.image_url} alt='user' /> */}
+                                        </button>
+                                        }
+                                        {item.name}
+                                        {/* {item.user_id === user.id &&  
+                                        <p>this claimed by you </p> 
+                                        } */}
+                                    </div>
+                                    )
+                                })}
+                        </div>
                     </div>
                 </div>
-                </div>
+            )
+        }
+        return (
+            <div>
+                {content}
+            </div>
     )
 }
 export default OneParty;

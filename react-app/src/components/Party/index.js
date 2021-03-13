@@ -85,7 +85,7 @@ const Party = ({ edit, items, guests }) => {
         guestContent = { invites: [] }
         submitContent = (
             <button className='button_secondary'>Submit</button>
-        )
+            )
         }
     const [name, setName] = useState(nameContent);
     const [details, setDetails] = useState(detailsContent);
@@ -148,10 +148,12 @@ const Party = ({ edit, items, guests }) => {
     }
     const onNext = (e) => {
         e.preventDefault();
+        window.scrollTo(0, 250)
         setCount(count + 1)
     }
     const onPrev = (e) => {
         e.preventDefault();
+        window.scrollTo(0, 250)
         setCount(count - 1)
     }
     if (count === 1) {
