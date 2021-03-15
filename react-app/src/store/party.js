@@ -98,20 +98,20 @@ export const create = ( host_id, name, details, starts_at, time, image_url, loca
 }
 
 
-const partyReducer = (state = { parties: {} }, action) => {
+const partyReducer = (state = { }, action) => {
     let newState;
     switch (action.type) {
         case LOAD_PARTY:
             newState = Object.assign({}, state);
-            newState.party = action.payload;
+            newState = action.payload;
             return newState;
         case ONE_PARTY:
             newState = Object.assign({}, state);
-            newState.party = action.payload;
+            newState = action.payload;
             return newState;
         case REMOVE_PARTY:
             newState = Object.assign({}, state);
-            newState.party = null;
+            newState = null;
             return newState;
         default:
             return state;

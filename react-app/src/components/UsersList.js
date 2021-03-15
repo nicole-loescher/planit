@@ -34,8 +34,7 @@ function UsersList() {
             <div>
               {user.first_name} {user.last_name}
             </div>
-          </NavLink>
-          
+          </NavLink>       
           <button className='button_primary' onClick={addFriend} value={user.id}> add friend</button>
         </div>
       </div>

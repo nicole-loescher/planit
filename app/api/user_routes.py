@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from app.models import db, User, Party, Item
+from app.models import db, User, Party, Item, Guest_List
 
 user_routes = Blueprint('users', __name__)
 
@@ -43,8 +43,8 @@ def get_parties(id):
     Gets parties filtered by user.
     """
     hosted = Party.query.filter(Party.host_id == id).order_by(Party.starts_at.asc()).all()
-    
-    return {'hosted_parties': [party.to_dict() for party in hosted]}
+    visiting = Guest_List.query.filter(Guest_List.user_id == id).all()
+    return {'hosted_parties': [party.to_dict() for party in hosted], 'visiting_parties': [party.to_dict() for party in visiting]}
 
 
 @user_routes.route('/<int:id>/items')

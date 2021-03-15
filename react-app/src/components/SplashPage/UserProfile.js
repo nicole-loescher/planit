@@ -14,7 +14,7 @@ const UserProfile = ({user}) =>{
         if(user){
             const hosting = await dispatch(partyActions.loadParties(user.id))
             const items = await dispatch(itemActions.loadMyItems(user.id))
-            
+            // const visiting = await dispatch(partyActions.loadParties(user.id))
             setHosted(hosting)
             setItems(items)
 
@@ -65,6 +65,28 @@ const UserProfile = ({user}) =>{
                                     <div>
                                         <p>{party.starts_at}</p>
                                         <p>@{party.time}</p>
+                                    </div>
+                                </Link>
+                                <div key={i+party.id}>
+                                    <hr /> 
+                                </div>
+                            </div>
+                        )
+                        })}
+                    {/* <Link className='button_primary' to={`/user/${user.id}/planits`}> View all my PlanIts </Link> */}
+                </div>
+                <div className='standard__form--div2'>
+                    <h1> PlanIts to visit </h1>
+                    {hosted.visiting_parties.map((party, i) => {
+                        console.log(party, '===========')
+                       return (
+                           <div key ={party.id}> 
+                                <Link key={i} to={`/planits/${party.party.id}`} className='party-tag'>
+                                    <img src={party.party.image_url} className='profile__party-pic'/>
+                                    <h2>{party.party.name}</h2>
+                                    <div>
+                                        <p>{party.party.starts_at}</p>
+                                        <p>@{party.party.time}</p>
                                     </div>
                                 </Link>
                                 <div key={i+party.id}>

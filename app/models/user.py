@@ -11,7 +11,7 @@ class Guest_List(db.Model):
   party_id = db.Column(db.Integer, db.ForeignKey('parties.id'))
   rsvp = db.Column(db.Boolean)
 
-  # party = db.relationship('Party', lazy='joined', back_populates='guests')
+  party = db.relationship('Party', lazy='joined', back_populates='guests')
 
   def to_dict(self):
     return {
@@ -20,7 +20,7 @@ class Guest_List(db.Model):
       'party_id': self.party_id,
       'rsvp': self.rsvp,
       # 'friend': self.friend.to_dict()
-      # 'party': self.party.to_dict(),
+      'party': self.party.to_dict(),
     }
 
 
@@ -98,7 +98,7 @@ class Party(db.Model):
   updated_at = db.Column(db.DateTime())
 
   host = db.relationship('User', lazy='joined', back_populates='hosting')
-  # guests = db.relationship('User', lazy='joined', secondary='guest_list', back_populates='visiting')
+  guests = db.relationship('Guest_List', back_populates='party')
   items = db.relationship('Item', lazy='joined', back_populates='party', cascade='all, delete')
 
   def to_dict(self):
