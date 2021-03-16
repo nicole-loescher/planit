@@ -71,7 +71,7 @@ const Party = ({ edit, items, guests }) => {
         }
         guestContent = { invites: guestList}
         submitContent = (
-            <button onClick={onEdit} >Edit me</button>
+            <button onClick={onEdit} className='button_secondary'>Edit me</button>
             ) 
     }
     if (!edit) {
@@ -111,7 +111,6 @@ const Party = ({ edit, items, guests }) => {
         if (!party.errors) {
             const party_id = party.id
             const user_id = null
-            console.log(guestList.invites)
             guestList.invites.map(async (user_id) => {
                 if(user_id){             
                     return await dispatch(inviteActions.inviteGuest(party_id, user_id))
@@ -121,13 +120,14 @@ const Party = ({ edit, items, guests }) => {
             history.push('/')
         }
         if (party.errors) {
-            return errordiv = (
+            errordiv = (
                 <div>
                     <h3>Houston we have a problem: </h3>
-                    {party.errors.map((error, i) => (
+                    {party.errors.map((error, i) => {
+                        return (
                         <div key={i}>{error}</div>
-                    ))}
-                    {console.log(party.errors)}
+                        )
+                    })}
                 </div>
             )
         }

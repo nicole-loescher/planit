@@ -42,6 +42,7 @@ const OneParty = () => {
     const onDelete = async (e) =>{
         e.preventDefault();
         dispatch(deleteParty(party.id))
+        history.push('/')
         
     }
     const onEdit = async (e) =>{
