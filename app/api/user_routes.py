@@ -54,3 +54,14 @@ def get_items(id):
     items = Item.query.filter(Item.user_id == id).all()
     
     return {'party_items': [item.to_dict() for item in items]}
+
+
+@user_routes.route('/<int:id>/items/<int:itemId>', methods=['PUT'])
+def remove_claim(id, itemId):
+    """
+    Removes an item from being claimed by a user.
+    """
+    item = Item.query.get(itemId)
+    item.user_id = None
+    db.session.commit()
+    return item.to_dict()
