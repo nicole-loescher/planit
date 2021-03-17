@@ -205,8 +205,7 @@ const Party = ({ edit, items, guests }) => {
                 <label>What time does it start?</label>
                 <input
                     name='time'
-                    type='text'
-                    placeholder='What time is your PlanIt?'
+                    type='time'
                     value={time}
                     onChange={e => setTime(e.target.value)}
                 />

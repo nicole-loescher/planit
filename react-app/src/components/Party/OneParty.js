@@ -7,6 +7,7 @@ import {deleteParty, getOneParty} from '../../store/party'
 import { loadGuests } from '../../store/guestList'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from '@material-ui/core/IconButton';
+import {realDate, realTime} from '../../services/utils';
 
 const OneParty = () => {
     const user = useSelector(state => state.auth.user)
@@ -108,8 +109,8 @@ const OneParty = () => {
                     <div className='party__div'>
                         <h1 className='party__title'>{party.name}</h1>
                         <div className='planit__info--div'>
-                            <p className='party__location'>{party.starts_at}</p>
-                            <p className='party__time'>{party.time}</p>
+                            <p className='party__location'>{realDate(party.starts_at)}</p>
+                            <p className='party__time'>{realTime(party.time)}</p>
                     </div>
                         <div className='planit__info--div'>
                             <h3 className='party__location'>The Planit location:</h3>

@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { Link} from 'react-router-dom';
 import * as partyActions from '../../store/party'
 import * as itemActions from '../../store/item'
+import { realDate, realTime } from '../../services/utils';
+
 const UserProfile = ({user}) =>{
     const [hosted, setHosted] = useState('')
     const [items, setItems] = useState('')
@@ -51,6 +53,7 @@ const UserProfile = ({user}) =>{
             <div className='profile--welcome'>
                 <p className='profile--welcome'> Welcome back, {user.first_name}!</p>
                 <Link to='/planits/create' className='button_primary'>Host a PlanIt</Link>
+                <Link to='/users' className='button_secondary'> Find my friends </Link>
             </div>    
             
             <div className='standard__form--container'>
@@ -63,8 +66,8 @@ const UserProfile = ({user}) =>{
                                     <img src={party.image_url} className='profile__party-pic'/>
                                     <h2>{party.name}</h2>
                                     <div>
-                                        <p>{party.starts_at}</p>
-                                        <p>@{party.time}</p>
+                                        <p>{realDate(party.starts_at)}</p>
+                                        <p>{realTime(party.time)}</p>
                                     </div>
                                 </Link>
                                 <div key={i+party.id}>
@@ -85,8 +88,8 @@ const UserProfile = ({user}) =>{
                                     <img src={party.party.image_url} className='profile__party-pic'/>
                                     <h2>{party.party.name}</h2>
                                     <div>
-                                        <p>{party.party.starts_at}</p>
-                                        <p>@{party.party.time}</p>
+                                       <p>{realDate(party.party.starts_at)}</p>
+                                        <p>{realTime(party.party.time)}</p>
                                     </div>
                                 </Link>
                                 <div key={i+party.id}>
@@ -110,8 +113,8 @@ const UserProfile = ({user}) =>{
                                     <h2>{item.name}</h2>
                                     <div>
                                     <p>{item.party.name}</p>
-                                    <p>{item.party.starts_at}</p>
-                                    <p>@{item.party.time}</p>
+                                    <p>{realDate(item.party.starts_at)}</p>
+                                    <p>{realTime(item.party.time)}</p>
                                     </div>
                                 </Link>
                                     <div key={i+item.id}>
@@ -123,7 +126,6 @@ const UserProfile = ({user}) =>{
                     {/* <Link className='button_primary' to={`/user/${user.id}/items`}> View all my Items </Link> */}
                 </div>
             </div>
-            <Link to='/users' className='button_secondary'> Find my friends </Link>
         </div>
     )
 }
