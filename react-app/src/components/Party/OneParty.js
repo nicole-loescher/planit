@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import Party from '.';
-import { loadAllItems, claimOneItem } from '../../store/item';
+import { loadAllItems, claimOneItem, unclaimOneItem } from '../../store/item';
 import {deleteParty, getOneParty} from '../../store/party'
 import { loadGuests } from '../../store/guestList'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -25,6 +25,10 @@ const OneParty = () => {
         e.preventDefault();
         // console.log(user.id)
         await dispatch(claimOneItem(e.currentTarget.value))
+    }
+    const cancelBring = async (e) => {
+        e.preventDefault();
+        await dispatch(unclaimOneItem(party.id, e.target.value))
     }
     useEffect(async()=>{
         const newparty = await dispatch(getOneParty(id))
@@ -130,13 +134,9 @@ const OneParty = () => {
                             {items.map((item, i)=>{
                                 return ( 
                                     <div key={i}>
-                                        {!item.user_id &&
-                                            <IconButton  value={item.id} onClick={bringItem}>
-                                                <AddCircleOutlineIcon />
-                                            </IconButton> 
-                                        }
-                                        {item.user_id &&
-                                            <button style={{
+                                        {item.user_id ?
+                                            item.user_id === user.id ?
+                                            <button value={item.id} style={{
                                                 backgroundImage: `url("${item.guest.image_url}")`,
                                                 borderRadius: '100%',
                                                 width: '2rem',
@@ -144,9 +144,21 @@ const OneParty = () => {
                                                 outline: 'none',
                                                 backgroundSize: 'cover',
                                                 margin: '1rem'
-                                            }}>
-                                            {/* <img className='claimed' src={item.guest.image_url} alt='user' /> */}
-                                        </button>
+                                            }} onClick={cancelBring}> :
+                                        </button> :
+                                                <button style={{
+                                                    backgroundImage: `url("${item.guest.image_url}")`,
+                                                    borderRadius: '100%',
+                                                    width: '2rem',
+                                                    height: '2rem',
+                                                    outline: 'none',
+                                                    backgroundSize: 'cover',
+                                                    margin: '1rem'
+                                                }} disabled> 
+                                                </button>:
+                                            <IconButton value={item.id} onClick={bringItem}>
+                                                <AddCircleOutlineIcon />
+                                            </IconButton>
                                         }
                                         {item.name}
                                         {/* {item.user_id === user.id &&  

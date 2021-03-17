@@ -37,6 +37,15 @@ export const claimOneItem = (id) => async dispatch => {
     
 }
 
+export const unclaimOneItem = (id, itemId) => async dispatch => {
+    const response = await fetch(`/api/users/${id}/items/${itemId}`, {
+        method: 'PUT',
+    })
+    const item = await response.json();
+    dispatch(addItem(item))
+    
+}
+
 export const deleteItem = (id) => async dispatch => {
     const response = await fetch(`/api/planits/${id}/items`, {
         method: 'DELETE',
