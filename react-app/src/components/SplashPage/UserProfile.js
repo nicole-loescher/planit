@@ -51,6 +51,7 @@ const UserProfile = ({user}) =>{
             <div className='profile--welcome'>
                 <p className='profile--welcome'> Welcome back, {user.first_name}!</p>
                 <Link to='/planits/create' className='button_primary'>Host a PlanIt</Link>
+                <Link to='/users' className='button_secondary'> Find my friends </Link>
             </div>    
             
             <div className='standard__form--container'>
@@ -123,7 +124,6 @@ const UserProfile = ({user}) =>{
                     {/* <Link className='button_primary' to={`/user/${user.id}/items`}> View all my Items </Link> */}
                 </div>
             </div>
-            <Link to='/users' className='button_secondary'> Find my friends </Link>
         </div>
     )
 }

@@ -19,6 +19,24 @@ const OneParty = () => {
     const [editForm, setEditForm] = useState(false)
     const [guests, setGuests] = useState('')
     
+    const realTime = (time) =>{
+        if(time){
+            let newTime = time.split(':')
+            let end;
+            let hour = Number(newTime[0])
+            if(hour > 12){
+                hour -= 12
+                end = 'PM'
+            }
+            return `${hour}:${newTime[1]} ${end}` 
+        }
+    }
+    const realDate = (date) => {
+        let newDate = date.split('-')
+        const months = ['JAN', 'FEB', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUG', 'SEPT', 'OCT', 'NOV', 'DEC']
+        newDate[1] = months[Number(newDate[1]) - 1]
+        return `${newDate[1]} ${newDate[2]}, ${newDate[0]}`
+    }
     let content
     const bringItem = async (e) => {
         e.preventDefault();
@@ -108,8 +126,8 @@ const OneParty = () => {
                     <div className='party__div'>
                         <h1 className='party__title'>{party.name}</h1>
                         <div className='planit__info--div'>
-                            <p className='party__location'>{party.starts_at}</p>
-                            <p className='party__time'>{party.time}</p>
+                            <p className='party__location'>{realDate(party.starts_at)}</p>
+                            <p className='party__time'>{realTime(party.time)}</p>
                     </div>
                         <div className='planit__info--div'>
                             <h3 className='party__location'>The Planit location:</h3>
