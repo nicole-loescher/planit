@@ -62,5 +62,6 @@ def remove_claim(id, itemId):
     Removes an item from being claimed by a user.
     """
     item = Item.query.get(itemId)
-    item.user_id = ''
+    item.user_id = None
+    db.session.commit()
     return item.to_dict()
