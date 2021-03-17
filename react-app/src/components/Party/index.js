@@ -49,6 +49,12 @@ const Party = ({ edit, items, guests }) => {
             time,
             image_url,
             location))
+        guestList.invites.map(async (user_id) => {
+            if (user_id) {
+                console.log(user_id, '-------------')
+                await dispatch(inviteActions.inviteGuest(party.id, user_id))
+            }
+        })
         history.push('/')
     }
     if (edit) {
@@ -63,13 +69,15 @@ const Party = ({ edit, items, guests }) => {
             itemList.push(item.name)
         })
         itemContent = { items: itemList }
-        let guestList = []
+        let guest_List = []
         if (guests) {
+            console.log(guests)
             guests.guest_list.map(guest => {
-                guestList.push(guest.id)
+                guest_List.push(guest.id)
             })
+            console.log(guest_List)
         }
-        guestContent = { invites: guestList}
+        guestContent = { invites: guest_List}
         submitContent = (
             <button onClick={onEdit} className='button_secondary'>Edit me</button>
             ) 
@@ -112,8 +120,9 @@ const Party = ({ edit, items, guests }) => {
             const party_id = party.id
             const user_id = null
             guestList.invites.map(async (user_id) => {
-                if(user_id){             
-                    return await dispatch(inviteActions.inviteGuest(party_id, user_id))
+                if(user_id){ 
+                    console.log(user_id, '++++++++++++')            
+                    await dispatch(inviteActions.inviteGuest(party_id, user_id))
                 }
             })
             state.items.map(async (name) => await dispatch(itemActions.addOneItem(name, party_id, user_id)))
@@ -134,9 +143,14 @@ const Party = ({ edit, items, guests }) => {
     }
     const onInvite = async (e, index) => {
         e.preventDefault()
-        guestList.invites[index] = e.target.value
+        guestList.invites[index] = e.currentTarget.value
         setGuestList({ invites: [...guestList.invites] })
     }
+    const removeInvite = async (e, index) => {
+        e.preventDefault()
+        guestList.invites.splice(index, 1)
+        setGuestList({ invites: guestList.invites })
+    } 
     const addItem = (e) => {
         e.preventDefault();
         setState({ items: [...state.items, ''] })
@@ -247,14 +261,15 @@ const Party = ({ edit, items, guests }) => {
                             <div>
                                 <img className='onePlanit--img' src={user.image_url} />
                                 {user.first_name} {user.last_name}
-                                {/* {guestList.invites.includes(user.id) ?
-                                    <IconButton aria-label='delete' value={user.id} onClick={e => onInvite(e, index)}>
-                                    <RemoveCircleOutlineIcon />
-                                    </IconButton> : */}
-                                    <IconButton aria-label='add' value={user.id} onClick={e => onInvite(e, index)}>
+                                {console.log(guestList)}
+                                {guestList.invites.includes(user.id) ?
+                                    <IconButton className='mdc-icon-button' aria-label='delete' value={user.id} onClick={e => removeInvite(e, index)}>
+                                        <RemoveCircleOutlineIcon />
+                                    </IconButton> :
+                                    <IconButton className='mdc-icon-button' aria-label='add' value={user.id} onClick={e => onInvite(e, index)}>
                                         <AddCircleOutlineIcon />
                                     </IconButton>
-                                
+                                }
                             </div>
                             {/* <button value={user.id} onClick={e => onInvite(e, index)}>invite me</button> */}
                         </div>

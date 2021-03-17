@@ -26,7 +26,6 @@ def add_friend(userid):
 @login_required
 def friends():
     users = current_user.friends
-    print(users, '------------')
     return {"users": [user.to_dict() for user in users]}
 
 
