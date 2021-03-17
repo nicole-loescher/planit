@@ -31,19 +31,40 @@ const UserProfile = ({user}) =>{
     if(!items ){
         return null
     }
+    const updatePhoto = async (e) => {
+        e.preventDefault()
+
+    }
     let imageContent;
     let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
-    if(!user.image_url){
-        imageContent = 
-            <div>
-            <div className='blank'>
-            {initials}
-            </div>
-            <img className='profile--pic' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
-            </div>
-    }
+    // if(!user.image_url){
+    //     imageContent = 
+    //         <div>
+    //         <div className='blank'>
+    //         {initials}
+    //         </div>
+    //         <img className='profile--pic' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
+    //         </div>
+    // }
     if(user.image_url){
-        imageContent = <img className='profile--pic' alt='profile' src={user.image_url} />
+        imageContent = 
+            <label htmlFor='photoUpload'> 
+                <span
+                // style={{
+                  //     backgroundImage: `url("${user.image_url}")`,
+                  //     borderRadius: '100%',
+                  //     width: '8rem',
+                  //     height: '8rem',
+                  //     outline: 'none',
+                  //     backgroundSize: 'cover',
+                  //     margin: '1rem',
+                  // }} 
+                  aria-hidden="true"
+                  />
+                  <img className='profile--pic' alt='profile' src={user.image_url} />
+                <input type='file' id='photoUpload'style={{display: 'none'}} />
+            </label>
+        {/* imageContent = <img className='profile--pic' alt='profile' src={user.image_url} /> */}
     }
     return (
         <div className='home__info2'>
