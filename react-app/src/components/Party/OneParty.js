@@ -7,6 +7,7 @@ import {deleteParty, getOneParty} from '../../store/party'
 import { loadGuests } from '../../store/guestList'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from '@material-ui/core/IconButton';
+import {realDate, realTime} from '../../services/utils';
 
 const OneParty = () => {
     const user = useSelector(state => state.auth.user)
@@ -19,24 +20,6 @@ const OneParty = () => {
     const [editForm, setEditForm] = useState(false)
     const [guests, setGuests] = useState('')
     
-    const realTime = (time) =>{
-        if(time){
-            let newTime = time.split(':')
-            let end;
-            let hour = Number(newTime[0])
-            if(hour > 12){
-                hour -= 12
-                end = 'PM'
-            }
-            return `${hour}:${newTime[1]} ${end}` 
-        }
-    }
-    const realDate = (date) => {
-        let newDate = date.split('-')
-        const months = ['JAN', 'FEB', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUG', 'SEPT', 'OCT', 'NOV', 'DEC']
-        newDate[1] = months[Number(newDate[1]) - 1]
-        return `${newDate[1]} ${newDate[2]}, ${newDate[0]}`
-    }
     let content
     const bringItem = async (e) => {
         e.preventDefault();
