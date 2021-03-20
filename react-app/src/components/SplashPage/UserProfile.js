@@ -6,11 +6,13 @@ import { Link} from 'react-router-dom';
 import * as partyActions from '../../store/party'
 import * as itemActions from '../../store/item'
 import { realDate, realTime } from '../../services/utils';
+import * as authActions from '../../store/auth'
 
 const UserProfile = ({user}) =>{
     const [hosted, setHosted] = useState('')
     const [items, setItems] = useState('')
     const dispatch = useDispatch()
+    const [image, setImage] = useState('')
 
     useEffect(async (e) =>{
         if(user){
@@ -33,17 +35,45 @@ const UserProfile = ({user}) =>{
     }
     let imageContent;
     let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
-    if(!user.image_url){
-        imageContent = 
-            <div>
-            <div className='blank'>
-            {initials}
-            </div>
-            <img className='profile--pic' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
-            </div>
-    }
+    // if(!user.image_url){
+    //     imageContent = 
+    //         <div>
+    //         <div className='blank'>
+    //         {initials}
+    //         </div>
+    //         <img className='profile--pic' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
+    //         </div>
+    // }
+    // const submitPhoto = async(e) =>{
+    //     e.preventDefault()
+    //     setImage(e.target.files[0])
+    //     await dispatch(authActions.updatePhoto(user.id, image))
+    //     console.log(image)
+    // }
+    const updateImage = async(e) => {
+        e.preventDefault()
+        // setImage(e.target.files[0])
+        await dispatch(authActions.updatePhoto(user.id, e.target.files[0]))
+    };
     if(user.image_url){
-        imageContent = <img className='profile--pic' alt='profile' src={user.image_url} />
+        imageContent = 
+            <label htmlFor='photoUpload'> 
+                <span
+                // style={{
+                  //     backgroundImage: `url("${user.image_url}")`,
+                  //     borderRadius: '100%',
+                  //     width: '8rem',
+                  //     height: '8rem',
+                  //     outline: 'none',
+                  //     backgroundSize: 'cover',
+                  //     margin: '1rem',
+                  // }} 
+                  aria-hidden="true"
+                  />
+                  <img className='profile--pic' alt='profile' src={user.image_url} />
+                <input type='file' id='photoUpload'style={{display: 'none'}} onChange={updateImage} />
+            </label>
+        {/* imageContent = <img className='profile--pic' alt='profile' src={user.image_url} /> */}
     }
     return (
         <div className='home__info2'>

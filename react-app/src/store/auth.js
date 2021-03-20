@@ -13,7 +13,23 @@ const removeUser = () => {
         type: REMOVE_USER,
     };
 };
-
+export const updatePhoto = (id, image) => async dispatch => {
+    let form = new FormData();
+    form.append('image', image)
+    if(!form){
+        return 'loading'
+    }
+    if(form){
+        const response = await fetch(`api/users/${id}`, {
+            method: 'PUT',
+            body: form,  
+        });
+        console.log(form)
+        const user = await response.json()
+        dispatch(setUser(user))
+        return user;
+    }
+}
 export const signUp = (first_name, last_name, image, email, password) => async dispatch =>{
     const form = new FormData();
     form.append('first_name', first_name)
