@@ -9,9 +9,8 @@ function UsersList() {
     e.preventDefault();
     const response = await fetch(`/api/users/me/friends/${e.target.value}`, {method: 'POST'});
     const friend = await response.json();
-    console.log(friend)
   }
-  console.log(current_user)
+ 
   // let buttonContent;
   // if()
 
@@ -25,7 +24,7 @@ function UsersList() {
   }, []);
 
   const userComponents = users.map((user) => {
-    console.log(user.friends)
+    console.log(user)
     return (
       <div  className='friends--content' key={user.id}>
         <div style={{display:'flex', flexDirection: 'column'}}>
