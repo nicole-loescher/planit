@@ -24,7 +24,6 @@ export const updatePhoto = (id, image) => async dispatch => {
             method: 'PUT',
             body: form,  
         });
-        console.log(form)
         const user = await response.json()
         dispatch(setUser(user))
         return user;
@@ -37,6 +36,7 @@ export const signUp = (first_name, last_name, image, email, password) => async d
     form.append('image', image)
     form.append('email', email)
     form.append('password', password)
+     
     const response = await fetch("/api/auth/signup", {
         method: "POST",
         body: form,

@@ -42,9 +42,8 @@ def user(id):
 @login_required
 def pic(id):
     user = User.query.get(id)
-    data = request.get_json()
-    print(data, '......................data...........')
-    if "image" not in data.files:
+
+    if "image" not in request.files:
             url = ''
     else:
         image = request.files["image"]
