@@ -12,7 +12,7 @@ class Guest_List(db.Model):
   rsvp = db.Column(db.Boolean)
 
   party = db.relationship('Party', lazy='joined', back_populates='guests')
-
+  guest = db.relationship('User', lazy='joined', back_populates='')
   def to_dict(self):
     return {
       'id': self.id,
@@ -21,6 +21,7 @@ class Guest_List(db.Model):
       'rsvp': self.rsvp,
       # 'friend': self.friend.to_dict()
       'party': self.party.to_dict(),
+      'guest': self.guest.to_dict()
     }
 
 
@@ -50,7 +51,7 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(255), nullable = False)
 
   hosting = db.relationship('Party', lazy='joined', back_populates='host')
-  # visiting = db.relationship('Party', lazy='joined', secondary='guest_list', back_populates='guests')
+  visiting = db.relationship('Guest_List', back_populates='guest')
   items = db.relationship('Item', lazy='joined', back_populates='guest')
   friends = db.relationship("User", secondary=friends, primaryjoin=(friends.c.user_id == id), secondaryjoin=(friends.c.friend_id ==id), backref=db.backref('friends_of', lazy='dynamic'), lazy='dynamic')
   
