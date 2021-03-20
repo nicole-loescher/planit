@@ -135,6 +135,7 @@ textarea {
 }
 .claimed {
     border-radius: 100%;
+    object-fit: cover;
     width: 2rem;
     height: 2rem;
     outline:none;
