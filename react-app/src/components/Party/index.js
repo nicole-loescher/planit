@@ -11,12 +11,13 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 
 
-const Party = ({ edit, items, guests }) => {
+const Party = ({ edit, guests }) => {
     const history = useHistory();
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
     const [count, setCount] = useState(1);
     const [userList, setUserList] = useState('')
+    const items = useSelector(state => Object.values(state.items))
     
     let content;
     let errordiv;
@@ -51,8 +52,11 @@ const Party = ({ edit, items, guests }) => {
             location))
         guestList.invites.map(async (user_id) => {
             if (user_id) {
-                console.log(user_id, '-------------')
                 await dispatch(inviteActions.inviteGuest(party.id, user_id))
+            }
+        })
+        itemList.items.map(async (item)=>{
+            if(item.id){
             }
         })
         history.push('/')
@@ -64,18 +68,16 @@ const Party = ({ edit, items, guests }) => {
         imageContent = edit.image_url
         starts_atContent = edit.starts_at
         timeContent = edit.time
-        let itemList = []
+        let item_List = []
         items.map(item => {
-            itemList.push(item.name)
+            item_List.push({item: item})
         })
-        itemContent = { items: itemList }
+        itemContent = { items: item_List }
         let guest_List = []
         if (guests) {
-            console.log(guests)
             guests.guest_list.map(guest => {
                 guest_List.push(guest.id)
             })
-            console.log(guest_List)
         }
         guestContent = { invites: guest_List}
         submitContent = (
@@ -103,6 +105,7 @@ const Party = ({ edit, items, guests }) => {
     const [image_url, setImage_url] = useState(imageContent);
     const [state, setState] = useState(itemContent);
     const [guestList, setGuestList] = useState(guestContent)
+    const [itemList, setItemList] = useState(guestContent)
 
     useEffect(async (e) => {
         async function fetchData() {
@@ -120,8 +123,7 @@ const Party = ({ edit, items, guests }) => {
             const party_id = party.id
             const user_id = null
             guestList.invites.map(async (user_id) => {
-                if(user_id){ 
-                    console.log(user_id, '++++++++++++')            
+                if(user_id){            
                     await dispatch(inviteActions.inviteGuest(party_id, user_id))
                 }
             })
@@ -154,11 +156,14 @@ const Party = ({ edit, items, guests }) => {
     const addItem = (e) => {
         e.preventDefault();
         setState({ items: [...state.items, ''] })
+        
     }
     const handleChange = (e, index) => {
         e.preventDefault();
         state.items[index] = e.target.value
         setState({ items: state.items })
+        itemList.items[index] = e.target.value
+        setItemList({ items: [...itemList] })
     }
     const handleDelete = (e, index) => {
         e.preventDefault();

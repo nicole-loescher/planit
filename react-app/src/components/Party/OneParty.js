@@ -36,13 +36,33 @@ const OneParty = () => {
         const loadguestlist = await dispatch(loadGuests(newparty.id))
         setParty(newparty)
         setGuests(loadguestlist)
+     
     },[dispatch])
     
     if(!items){
         return null
     }
+    let guestContent;
     if(!host){
+        guestContent = null
         return 'loading'
+    }
+    if(!guests){
+        return 'loading'
+    }
+    if(guests){
+        guestContent = (
+            <div>
+                {guests.guest_list.map(guest => {
+                    return (
+                        <div key={guest.id}>
+                            {guest.guest.first_name}
+                        </div>
+                    )
+                })}
+            </div>
+        )
+        console.log(guests)
     }
     const onDelete = async (e) =>{
         e.preventDefault();
@@ -57,19 +77,20 @@ const OneParty = () => {
     }
     const onRSVP = async (e) =>{
         e.preventDefault()
+
     }
     
     let imageContent;
     // let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
-    if(!host.image_url){
-        imageContent = 
-        <div>
-            {/* <div className='blank'>
-            {initials}
-        </div> */}
-            <img  className='onePlanit--img' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
-            </div>
-    }
+    // if(!host.image_url){
+    //     imageContent = 
+    //     <div>
+    //         {/* <div className='blank'>
+    //         {initials}
+    //     </div> */}
+    //         <img  className='onePlanit--img' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
+    //         </div>
+    // }
     if(host.image_url){
         imageContent = <img className='onePlanit--img' alt='host of party' src={host.image_url} />
     }
@@ -168,6 +189,7 @@ const OneParty = () => {
                                     )
                                 })}
                         </div>
+                        {guestContent}
                     </div>
                 </div>
             )
