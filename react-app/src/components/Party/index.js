@@ -76,7 +76,7 @@ const Party = ({ edit, guests }) => {
         let guest_List = []
         if (guests) {
             guests.guest_list.map(guest => {
-                guest_List.push(guest.id)
+                guest_List.push(guest.user_id)
             })
         }
         guestContent = { invites: guest_List}
@@ -105,7 +105,7 @@ const Party = ({ edit, guests }) => {
     const [image_url, setImage_url] = useState(imageContent);
     const [state, setState] = useState(itemContent);
     const [guestList, setGuestList] = useState(guestContent)
-    const [itemList, setItemList] = useState(guestContent)
+    const [itemList, setItemList] = useState(itemContent)
 
     useEffect(async (e) => {
         async function fetchData() {
@@ -143,12 +143,12 @@ const Party = ({ edit, guests }) => {
     }
     const onInvite = async (e) => {
         e.preventDefault()
-        guestList.invites.push(e.currentTarget.value)
+        guestList.invites.push(Number(e.currentTarget.value))
         setGuestList({ invites: [...guestList.invites] })
     }
     const removeInvite = async (e) => {
         e.preventDefault()
-        let index = guestList.invites.indexOf(e.currentTarget.value)
+        let index = guestList.invites.indexOf(Number(e.currentTarget.value))
         guestList.invites.splice(index, 1)
         setGuestList({ invites: guestList.invites })
     } 
@@ -161,11 +161,14 @@ const Party = ({ edit, guests }) => {
         e.preventDefault();
         state.items[index] = e.target.value
         setState({ items: state.items })
+        console.log(itemList)
         itemList.items[index] = e.target.value
-        setItemList({ items: [...itemList] })
+        setItemList({ items: [...itemList.items] })
     }
-    const handleDelete = (e, index) => {
+    const handleDelete = (e) => {
         e.preventDefault();
+        let index = state.items.indexOf(e.currentTarget.value)
+        console.log(index, '........', e.target.value, '......', e.currentTarget.value)
         state.items.splice(index, 1)
         setState({ items: state.items })
     }
@@ -265,7 +268,7 @@ const Party = ({ edit, guests }) => {
                                 <img className='onePlanit--img' src={user.image_url} />
                                 {user.first_name} {user.last_name}
                                 {console.log(guestList)}
-                                {guestList.invites.includes(`${user.id}`) ?
+                                {guestList.invites.includes(user.id) ?
                                     <IconButton className='mdc-icon-button' aria-label='delete' value={user.id} onClick={e => removeInvite(e, index)}>
                                         <RemoveCircleOutlineIcon />
                                     </IconButton> :
