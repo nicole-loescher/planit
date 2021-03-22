@@ -70,7 +70,7 @@
 }
 .profile--welcome {
     margin: 1rem 1rem;
-    font-size: 1.7em;
+    font-size: 1.4em;
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -82,14 +82,21 @@
     /* align-items: flex-start; */
     box-sizing: border-box;
     border-radius: 2rem;
-    margin: 2rem 2rem;
+    margin: 1rem 1rem;
     background-color: white;
-    padding: 2rem 4rem;
-    height: 40rem;
+    padding: 2rem;
+    height: 37rem;
     overflow: scroll;
-    width: 30rem;
+    /* width: 60%; */
+    flex-basis: 45%;
     text-align:center;
     box-shadow: 5px 5px 10px rgb( 0 0 0 / 25%);
+}
+@media all and (max-width: 800px){
+    .standard__form--div2{
+        flex-basis: 100%;
+        min-width: 40%;
+    }
 }
 .standard__form--container {
     display: flex;
@@ -98,13 +105,15 @@
     justify-content: space-evenly;
 }
 .profile__party-pic {
-    max-width: 6rem;
+    max-width: 8rem;
+    max-height: 10rem;
     padding: 2px;
+    border-radius: 1rem;
 }
 .party-tag {
     padding: 1rem;
     border-radius: 1rem;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin: 1rem .3rem;
     align-items: flex-start;
     box-shadow: 5px 5px 10px rgb( 0 0 0 / 25%);
