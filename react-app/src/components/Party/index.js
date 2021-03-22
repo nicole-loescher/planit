@@ -122,10 +122,8 @@ const Party = ({ edit, guests }) => {
         if (!party.errors) {
             const party_id = party.id
             const user_id = null
-            guestList.invites.map(async (user_id) => {
-                if(user_id){            
+            guestList.invites.map(async (user_id) => {          
                     await dispatch(inviteActions.inviteGuest(party_id, user_id))
-                }
             })
             state.items.map(async (name) => await dispatch(itemActions.addOneItem(name, party_id, user_id)))
             history.push('/')
