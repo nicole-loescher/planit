@@ -17,7 +17,9 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await dispatch(authActions.signUp(first_name, last_name, image, email, password));
+      let lowEmail = email.toLowerCase()
+      console.log(lowEmail)
+      const user = await dispatch(authActions.signUp(first_name, last_name, image, lowEmail, password));
       if (!user.errors) {
         setAuthenticated(true);
       } else {

@@ -54,8 +54,9 @@
     border-radius: 100%;
     max-width: 8rem;
     max-height: 8rem;
-    width: 100%;
-    height: 100%;
+    object-fit: cover;
+    width: 90%;
+    height: 90%;
     position: absolute;
     top: -70px;
     margin-left: auto;
@@ -135,4 +136,11 @@
     font-size: 2.5rem;
     z-index: 100;
     color:black;
+}
+img-container {
+    /* height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    z-index: -100;
+    background-color: transparent; */
 }

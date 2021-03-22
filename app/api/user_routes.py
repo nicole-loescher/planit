@@ -1,6 +1,8 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, User, Party, Item, Guest_List
+from app.aws import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 user_routes = Blueprint('users', __name__)
 
@@ -33,6 +35,28 @@ def friends():
 @login_required
 def user(id):
     user = User.query.get(id)
+    return user.to_dict()
+
+
+@user_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def pic(id):
+    user = User.query.get(id)
+
+    if "image" not in request.files:
+            url = ''
+    else:
+        image = request.files["image"]
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            upload['url'] = ''
+        url = upload['url']
+
+    user.image_url = url
+    db.session.commit()
     return user.to_dict()
 
 

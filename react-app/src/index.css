@@ -93,6 +93,7 @@ a {
 }
 .friends--pic {
     border-radius: 100%;
+    object-fit: cover;
     width: 8rem;
     height: 8rem;
     padding: 1rem;
