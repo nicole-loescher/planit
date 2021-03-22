@@ -91,13 +91,15 @@ const UserProfile = ({user}) =>{
                     <h1> PlanIts hosted by you </h1>
                     {hosted.hosted_parties.map((party, i) => {
                        return (
-                           <div key ={party.id}> 
-                                <Link key={i} to={`/planits/${party.id}`} className='party-tag'>
-                                    <img src={party.image_url} className='profile__party-pic'/>
-                                    <h2>{party.name}</h2>
-                                    <div>
-                                        <p>{realDate(party.starts_at)}</p>
-                                        <p>{realTime(party.time)}</p>
+                           <div key={party.id} >
+                               <Link key={i} to={`/planits/${party.id}`} className='party-tag' style={{ padding: '1rem', display: 'flex', flexDirection: 'row' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'row'}}>
+                                        <img src={party.image_url} className='profile__party-pic'/>
+                                        <div style={{padding: '0rem 1rem'}}>
+                                            <h2 style={{ textTransform: 'capitalize'}}>{party.name}</h2>
+                                            <p>{realDate(party.starts_at)}</p>
+                                            <p style={{margin: '2rem'}}>{realTime(party.time)}</p>
+                                        </div>
                                     </div>
                                 </Link>
                                 <div key={i+party.id}>
