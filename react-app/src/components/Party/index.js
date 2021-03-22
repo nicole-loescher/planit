@@ -143,13 +143,14 @@ const Party = ({ edit, guests }) => {
             )
         }
     }
-    const onInvite = async (e, index) => {
+    const onInvite = async (e) => {
         e.preventDefault()
-        guestList.invites[index] = e.currentTarget.value
+        guestList.invites.push(e.currentTarget.value)
         setGuestList({ invites: [...guestList.invites] })
     }
-    const removeInvite = async (e, index) => {
+    const removeInvite = async (e) => {
         e.preventDefault()
+        let index = guestList.invites.indexOf(e.currentTarget.value)
         guestList.invites.splice(index, 1)
         setGuestList({ invites: guestList.invites })
     } 
@@ -266,7 +267,7 @@ const Party = ({ edit, guests }) => {
                                 <img className='onePlanit--img' src={user.image_url} />
                                 {user.first_name} {user.last_name}
                                 {console.log(guestList)}
-                                {guestList.invites.includes(user.id) ?
+                                {guestList.invites.includes(`${user.id}`) ?
                                     <IconButton className='mdc-icon-button' aria-label='delete' value={user.id} onClick={e => removeInvite(e, index)}>
                                         <RemoveCircleOutlineIcon />
                                     </IconButton> :
