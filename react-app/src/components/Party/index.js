@@ -70,8 +70,10 @@ const Party = ({ edit, guests }) => {
         timeContent = edit.time
         let item_List = []
         items.map(item => {
-            item_List.push({item: item})
+            console.log(item)
+            item_List.push({item: item.name})
         })
+        console.log(item_List)
         itemContent = { items: item_List }
         let guest_List = []
         if (guests) {
@@ -103,7 +105,7 @@ const Party = ({ edit, guests }) => {
     const [location, setLocation] = useState(locationContent);
     const [time, setTime] = useState(timeContent);
     const [image_url, setImage_url] = useState(imageContent);
-    const [state, setState] = useState(itemContent);
+    // const [state, setState] = useState(itemContent);
     const [guestList, setGuestList] = useState(guestContent)
     const [itemList, setItemList] = useState(itemContent)
 
@@ -125,7 +127,7 @@ const Party = ({ edit, guests }) => {
             guestList.invites.map(async (user_id) => {          
                     await dispatch(inviteActions.inviteGuest(party_id, user_id))
             })
-            state.items.map(async (name) => await dispatch(itemActions.addOneItem(name, party_id, user_id)))
+            itemList.items.map(async (name) => await dispatch(itemActions.addOneItem(name, party_id, user_id)))
             history.push('/')
         }
         if (party.errors) {
@@ -154,23 +156,28 @@ const Party = ({ edit, guests }) => {
     } 
     const addItem = (e) => {
         e.preventDefault();
-        setState({ items: [...state.items, ''] })
+        setItemList({ items: [...itemList.items, ''] })
         
     }
     const handleChange = (e, index) => {
         e.preventDefault();
-        state.items[index] = e.target.value
-        setState({ items: state.items })
-        console.log(itemList)
+        // state.items[index] = e.target.value
+        // setState({ items: state.items })
+        // console.log(itemList)
         itemList.items[index] = e.target.value
         setItemList({ items: [...itemList.items] })
     }
     const handleDelete = (e) => {
         e.preventDefault();
-        let index = state.items.indexOf(e.currentTarget.value)
+        const valArr = itemList.items.map(item =>{
+            // console.log(item)
+            return item.item.name
+        })
+        // console.log(itemList.items.Object.values(item))
+        let index = valArr.indexOf(e.currentTarget.value)
         console.log(index, '........', e.target.value, '......', e.currentTarget.value)
-        state.items.splice(index, 1)
-        setState({ items: state.items })
+        itemList.items.splice(index, 1)
+        setItemList({ items: itemList.items })
     }
     const onNext = (e) => {
         e.preventDefault();
@@ -232,15 +239,16 @@ const Party = ({ edit, guests }) => {
 
             <div className='planit__form--div'>
                 <h2 className='title'>Tell your galaxy what to bring</h2>
-                {state.items.map((item, index) => {
+                {edit && itemList.items.map((item, index) => {
+                    {console.log(item, '======')}
                     return (
                         <div className='party_item--input' key={index}>
                             <input
-                                value={item}
+                                value={item.item}
                                 placeholder='enter item name'
                                 onChange={e => handleChange(e, index)}
                             />
-                            <IconButton aria-label="delete" onClick={e => handleDelete(e, index)}>
+                            <IconButton aria-label="delete" value={item.item} onClick={e => handleDelete(e)}>
                                 <DeleteIcon />
                             </IconButton>
                            
