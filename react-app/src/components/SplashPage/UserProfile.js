@@ -18,7 +18,6 @@ const UserProfile = ({user}) =>{
         if(user){
             const hosting = await dispatch(partyActions.loadParties(user.id))
             const items = await dispatch(itemActions.loadMyItems(user.id))
-            // const visiting = await dispatch(partyActions.loadParties(user.id))
             setHosted(hosting)
             setItems(items)
 
@@ -52,7 +51,6 @@ const UserProfile = ({user}) =>{
     // }
     const updateImage = async(e) => {
         e.preventDefault()
-        // setImage(e.target.files[0])
         await dispatch(authActions.updatePhoto(user.id, e.target.files[0]))
     };
     if(user.image_url){

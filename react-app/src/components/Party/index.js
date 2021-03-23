@@ -11,6 +11,9 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { enGB } from 'date-fns/locale'
+import { DatePicker } from 'react-nice-dates'
+import 'react-nice-dates/build/style.css'
 
 
 const Party = ({ edit, guests }) => {
@@ -20,6 +23,8 @@ const Party = ({ edit, guests }) => {
     const [count, setCount] = useState(1);
     const [userList, setUserList] = useState('')
     const items = useSelector(state => Object.values(state.items))
+    const [myImage, setMyImage] = useState(false)
+    const [date, setDate] = useState()
     
     let content;
     let errordiv;
@@ -91,7 +96,7 @@ const Party = ({ edit, guests }) => {
         locationContent = ''
         detailsContent = 'Come join us for a party! Please bring an item from the list below!'
         starts_atContent = ''
-        imageContent = "https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg"
+        imageContent = "https://myplanits.s3-us-west-1.amazonaws.com/birthday.jpg"
         timeContent = ''
         itemContent = { items: [''] }
         guestContent = { invites: [] }
@@ -181,6 +186,12 @@ const Party = ({ edit, guests }) => {
         window.scrollTo(0, 250)
         setCount(count - 1)
     }
+    const updateImage = async (e) => {
+        e.preventDefault()
+        let pic = await dispatch(partyActions.uploadPhoto(e.target.files[0]))
+        setImage_url(pic.url)
+        setMyImage(true)
+    };
     if (count === 1) {
         content = (
             <div className='planit__form--div'>
@@ -202,12 +213,23 @@ const Party = ({ edit, guests }) => {
                     onChange={e => setLocation(e.target.value)}
                 />
                 <label>What day is the PlanIt?</label>
-                <input
+                    <DatePicker date={date} onDateChange={setDate}locale={enGB}>
+                        {({ inputProps, focused }) => (
+                            <input
+                                style={{width: '23rem' }}
+                                value={starts_at}
+                                onChange={e => setStarts_at(e.target.value)}
+                                className={'input' + (focused ? ' -focused' : '')}
+                                {...inputProps}
+                            />
+                        )}
+                </DatePicker>
+                {/* <input
                     name='starts_at'
                     type='date'
                     value={starts_at}
                     onChange={e => setStarts_at(e.target.value)}
-                />
+                /> */}
                 <label>What time does it start?</label>
                 <input
                     name='time'
@@ -309,29 +331,36 @@ const Party = ({ edit, guests }) => {
                 <div className='photo-div'>
                     <img src={image_url} alt='party' className='planit__img'></img>
                 </div>
-                <select
-                    value={image_url}
-                    onChange={e => setImage_url(e.target.value)}
-                >
-                    <option value='https://myplanits.s3-us-west-1.amazonaws.com/newyear.jpg'>New Year</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/valentines.jpg">Valentines</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/stpatrick.jpg">St. Patrick's</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/easter.jpg">Easter</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/mothers.jpg">Mother's Day</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/fathers.jpg">Father's Day</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/july4th.jpg">4th of July</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/halloween.jpg">Halloween</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/thanksgiving.jpg">Thanksgiving</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/christmas.jpg">Christmas</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/birthday.jpg">Birthday</option>
-                    <option value="https://myplanits.s3-us-west-1.amazonaws.com/signup.jpg">Other</option>
-                    {/* <option value={image_url}>add my own photo</option> */}
-                </select>
-                {/* <input
+                <div className='select' >
+                    <select
+                        value={image_url}
+                        onChange={e => setImage_url(e.target.value)}
+                        className='custom_select'
+                        >
+                        <option value='https://myplanits.s3-us-west-1.amazonaws.com/newyear.jpg'>New Year</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/valentines.jpg">Valentines</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/stpatrick.jpg">St. Patrick's</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/easter.jpg">Easter</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/mothers.jpg">Mother's Day</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/fathers.jpg">Father's Day</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/july4th.jpg">4th of July</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/halloween.jpg">Halloween</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/thanksgiving.jpg">Thanksgiving</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/christmas.jpg">Christmas</option>
+                        <option value="https://myplanits.s3-us-west-1.amazonaws.com/birthday.jpg">Birthday</option>
+                        <option value='https://myplanits.s3-us-west-1.amazonaws.com/picupload-gif.gif'>add my own photo</option>
+                        {myImage === true &&
+                        <option value={image_url}>my upload</option>
+                    }
+                    </select>
+                    {image_url === 'https://myplanits.s3-us-west-1.amazonaws.com/picupload-gif.gif' &&
+                        <input
                         name='image_url'
                         type='file'
-                        onChange={e => setImage_url(e.target.value)}
-                        /> */}
+                        onChange={updateImage}
+                        />}
+                        <span className="focus"></span>
+                </div>
                 <div className='button__div' style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
                     <IconButton onClick={onPrev}>
                         <ArrowBackIosIcon />
