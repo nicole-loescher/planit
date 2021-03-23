@@ -11,6 +11,7 @@ import SplashPage from './components/SplashPage'
 import { useDispatch } from "react-redux";
 import Party from "./components/Party";
 import OneParty from "./components/Party/OneParty";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ function App() {
             <User />
           </ProtectedRoute>
         </Switch>
+        <Footer />
     </BrowserRouter>
   );
 }
