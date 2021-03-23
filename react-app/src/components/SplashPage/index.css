@@ -22,18 +22,22 @@
     margin-bottom: 5%;
 }
 .home__info--tag {
-    font-size: 2rem;
-    max-width: 300px;
+    font-size: 1.5rem;
+    max-width: 400px;
     text-align: center;
 }
 .home__info--img {
     max-width: 600px;
     border-radius: 1rem;;
 }
-.home__howto {
+.home__info--welcome {
     text-align: center;
-    padding:.5rem;
-    margin: .5rem;
+    font-size: 3rem;
+}
+.home__howto {
+    text-align: left;
+    padding: 1% 20%;
+    margin: auto;
     margin-bottom: 5%;
 }
 .home__howto h1 {
@@ -93,10 +97,13 @@
     text-align:center;
     box-shadow: 5px 5px 10px rgb( 0 0 0 / 25%);
 }
-@media all and (max-width: 800px){
+@media all and (max-width: 900px){
     .standard__form--div2{
         flex-basis: 100%;
         min-width: 40%;
+    }
+    .home__info--img {
+        display: none;
     }
 }
 .standard__form--container {
