@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 
 const Party = ({ edit, guests }) => {
@@ -220,7 +222,14 @@ const Party = ({ edit, guests }) => {
                     value={details}
                     onChange={e => setDetails(e.target.value)}
                 />
-                <button className='button_primary' onClick={onNext}>Next</button>
+                <div className='button__div' style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
+                    <IconButton  style={{ visibility: 'hidden' }} onClick={onPrev}>
+                        <ArrowBackIosIcon style={{display: 'none'}} />
+                    </IconButton>
+                    <IconButton onClick={onNext}>
+                        <ArrowForwardIosIcon />
+                    </IconButton>
+                </div>
             </div>
         )
     }
@@ -247,9 +256,13 @@ const Party = ({ edit, guests }) => {
                 <IconButton aria-label='add' onClick={e => addItem(e)}>
                     <AddCircleOutlineIcon />
                 </IconButton>
-                <div className='button__div'>
-                    <button className='button_primary' onClick={onNext}>next</button>
-                    <button className='button_primary' onClick={onPrev}>Previous</button>
+                <div className='button__div' style={{ flexDirection: 'row', justifyContent:'space-between', width: '100%',}}>
+                    <IconButton onClick={onPrev}>
+                        <ArrowBackIosIcon/>
+                    </IconButton>
+                    <IconButton  onClick={onNext}>
+                        <ArrowForwardIosIcon />
+                    </IconButton>
                 </div>
             </div>
         )
@@ -257,7 +270,7 @@ const Party = ({ edit, guests }) => {
     if (count === 3) {
         content = (
             <div className='planit__form--div'>
-                <h2 className='title'> invite your friends to the galaxy </h2>
+                <h2 className='title'> Invite your friends to the galaxy </h2>
                 {userList.map((user, index) => {
                     return (
                         <div key={index}>
@@ -278,11 +291,14 @@ const Party = ({ edit, guests }) => {
                         </div>
                     )
                 })}
-                <div className='button__div'>
-                    <button className='button_primary' onClick={onNext}>next</button>
-                    <button className='button_primary' onClick={onPrev}>Previous</button>
+                <div className='button__div' style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
+                    <IconButton onClick={onPrev}>
+                        <ArrowBackIosIcon />
+                    </IconButton>
+                    <IconButton onClick={onNext}>
+                        <ArrowForwardIosIcon />
+                    </IconButton>
                 </div>
-                
             </div>
         )
     }
@@ -316,9 +332,13 @@ const Party = ({ edit, guests }) => {
                         type='file'
                         onChange={e => setImage_url(e.target.value)}
                         /> */}
-                <div className='button__div'>
-                    <button className='button_primary' onClick={onNext}>next</button>
-                    <button className='button_primary' onClick={onPrev}>Previous</button>
+                <div className='button__div' style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
+                    <IconButton onClick={onPrev}>
+                        <ArrowBackIosIcon />
+                    </IconButton>
+                    <IconButton onClick={onNext}>
+                        <ArrowForwardIosIcon />
+                    </IconButton>
                 </div>
             </div>
         )
@@ -327,9 +347,17 @@ const Party = ({ edit, guests }) => {
         content = (
             <div className='planit__form--div'>
                 <h1 className='title'>Prepare to Launch</h1>
+                <img src='https://myplanits.s3-us-west-1.amazonaws.com/giphy.gif' style={{ boxShadow: '5px 5px 10px rgb( 0 0 0 / 25%)', maxWidth: '20rem', borderRadius: '4px'}} />
                 {errordiv}
                 {submitContent}
-                <button className='button_primary' onClick={onPrev}>Previous</button>
+                <div className='button__div' style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', }}>
+                    <IconButton onClick={onPrev}>
+                        <ArrowBackIosIcon />
+                    </IconButton>
+                    <IconButton style={{ display: 'none' }} onClick={onNext}>
+                        <ArrowForwardIosIcon style={{display:'none'}}/>
+                    </IconButton>
+                </div>
             </div>
         )
 
