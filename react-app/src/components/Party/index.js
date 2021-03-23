@@ -14,6 +14,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
+import { format } from 'date-fns'
 
 
 const Party = ({ edit, guests }) => {
@@ -24,7 +25,6 @@ const Party = ({ edit, guests }) => {
     const [userList, setUserList] = useState('')
     const items = useSelector(state => Object.values(state.items))
     const [myImage, setMyImage] = useState(false)
-    const [date, setDate] = useState()
     
     let content;
     let errordiv;
@@ -53,7 +53,7 @@ const Party = ({ edit, guests }) => {
             host_id,
             name,
             details,
-            starts_at,
+            format(starts_at, 'yyyy-MM-dd'),
             time,
             image_url,
             location))
@@ -125,7 +125,7 @@ const Party = ({ edit, guests }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const party = await dispatch(partyActions.create(host_id, name, details, starts_at, time, image_url, location))
+        const party = await dispatch(partyActions.create(host_id, name, details, format(starts_at, 'yyyy-MM-dd'), time, image_url, location))
         if (!party.errors) {
             const party_id = party.id
             const user_id = null
@@ -213,7 +213,7 @@ const Party = ({ edit, guests }) => {
                     onChange={e => setLocation(e.target.value)}
                 />
                 <label>What day is the PlanIt?</label>
-                    <DatePicker date={date} onDateChange={setDate}locale={enGB}>
+                <DatePicker date={starts_at} onDateChange={setStarts_at} locale={enGB} format='dd/MM/yyyy'>
                         {({ inputProps, focused }) => (
                             <input
                                 style={{width: '23rem' }}
