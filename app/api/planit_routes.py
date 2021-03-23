@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import User, Party, Item, Guest_List, db
 from app.forms import PartyForm, ItemForm
+from app.aws import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 planit_routes = Blueprint('planits', __name__)
 
@@ -137,3 +139,23 @@ def delete_party(id):
     db.session.delete(deleted)
     db.session.commit()
     return deleted.to_dict()
+
+
+@planit_routes.route('/image', methods=['POST'])
+def pic():
+
+    if "image" not in request.files:
+            url = ''
+    else:
+        image = request.files["image"]
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            upload['url'] = ''
+        url = upload['url']
+        print('hit.........', url)
+
+    return {'url': url}
+
