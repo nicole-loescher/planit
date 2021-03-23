@@ -8,8 +8,8 @@ const Footer = () => {
     return (
         <div>
             <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', color: 'white', backgroundColor: 'black'}}>
-                <p style={{ color: 'white', margin: '2px 0rem 3px 0rem'}}>Created by:</p>
-                <p style={{ color: 'white', margin: '0rem 0rem 3px 0rem' }}>Nicole Loescher</p>
+                <p style={{ color: 'white', margin: '2px 0rem 1px 0rem'}}>Created by:</p>
+                <p style={{ color: 'white', margin: '0rem 0rem 1px 0rem' }}>Nicole Loescher</p>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', backgroundColor: 'black'}}>
                 <a href='https://github.com/nicole-loescher' style={{margin: '2rem 2rem 2rem 2rem'}}>
