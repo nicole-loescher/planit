@@ -19,7 +19,7 @@ const NavBar = ({ setAuthenticated, authenticated }) => {
     content = (
       <div className='links'>
         <div>
-          <NavLink to="/login" exact={true} activeClassName="active">
+          <NavLink className='login' to="/login" exact={true} activeClassName="active">
             Login
           </NavLink>
         </div>
