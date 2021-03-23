@@ -101,6 +101,7 @@
     .standard__form--div2{
         flex-basis: 100%;
         min-width: 40%;
+        
     }
     .home__info--img {
         display: none;
