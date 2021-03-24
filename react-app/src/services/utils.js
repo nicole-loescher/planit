@@ -1,6 +1,5 @@
 export const realTime = (time) => {
     if (time) {
-        console.log(time)
         let newTime = time.split(':')
         let end;
         let hour = Number(newTime[0])
@@ -15,7 +14,6 @@ export const realTime = (time) => {
     }
 }
 export const realDate = (date) => {
-    console.log(date, '....from utisl....')
     if(date){
         let newDate = date.split('-')
         const months = ['JAN', 'FEB', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUG', 'SEPT', 'OCT', 'NOV', 'DEC']

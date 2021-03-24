@@ -23,7 +23,6 @@ const OneParty = () => {
     let content
     const bringItem = async (e) => {
         e.preventDefault();
-        // console.log(user.id)
         await dispatch(claimOneItem(e.currentTarget.value))
     }
     const cancelBring = async (e) => {
@@ -62,7 +61,6 @@ const OneParty = () => {
                 })}
             </div>
         )
-        console.log(guests)
     }
     const onDelete = async (e) =>{
         e.preventDefault();

@@ -53,7 +53,7 @@ const Party = ({ edit, guests }) => {
             host_id,
             name,
             details,
-            format(starts_at, 'yyyy-MM-dd'),
+            starts_at,
             time,
             image_url,
             location))
@@ -77,13 +77,13 @@ const Party = ({ edit, guests }) => {
         timeContent = edit.time
         let item_List = []
         items.map(item => {
-            item_List.push({item: item})
+            item_List.push(item.name)
         })
         itemContent = { items: item_List }
         let guest_List = []
         if (guests) {
             guests.guest_list.map(guest => {
-                guest_List.push(guest.id)
+                guest_List.push(guest.user_id)
             })
         }
         guestContent = { invites: guest_List}
@@ -110,9 +110,9 @@ const Party = ({ edit, guests }) => {
     const [location, setLocation] = useState(locationContent);
     const [time, setTime] = useState(timeContent);
     const [image_url, setImage_url] = useState(imageContent);
-    const [state, setState] = useState(itemContent);
+    // const [state, setState] = useState(itemContent);
     const [guestList, setGuestList] = useState(guestContent)
-    const [itemList, setItemList] = useState(guestContent)
+    const [itemList, setItemList] = useState(itemContent)
 
     useEffect(async (e) => {
         async function fetchData() {
@@ -125,14 +125,14 @@ const Party = ({ edit, guests }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const party = await dispatch(partyActions.create(host_id, name, details, format(starts_at, 'yyyy-MM-dd'), time, image_url, location))
+        const party = await dispatch(partyActions.create(host_id, name, details, starts_at, time, image_url, location))
         if (!party.errors) {
             const party_id = party.id
             const user_id = null
             guestList.invites.map(async (user_id) => {          
                     await dispatch(inviteActions.inviteGuest(party_id, user_id))
             })
-            state.items.map(async (name) => await dispatch(itemActions.addOneItem(name, party_id, user_id)))
+            itemList.items.map(async (name) => await dispatch(itemActions.addOneItem(name, party_id, user_id)))
             history.push('/')
         }
         if (party.errors) {
@@ -150,31 +150,30 @@ const Party = ({ edit, guests }) => {
     }
     const onInvite = async (e) => {
         e.preventDefault()
-        guestList.invites.push(e.currentTarget.value)
+        guestList.invites.push(Number(e.currentTarget.value))
         setGuestList({ invites: [...guestList.invites] })
     }
     const removeInvite = async (e) => {
         e.preventDefault()
-        let index = guestList.invites.indexOf(e.currentTarget.value)
+        let index = guestList.invites.indexOf(Number(e.currentTarget.value))
         guestList.invites.splice(index, 1)
         setGuestList({ invites: guestList.invites })
     } 
     const addItem = (e) => {
         e.preventDefault();
-        setState({ items: [...state.items, ''] })
+        setItemList({ items: [...itemList.items, ''] })
         
     }
     const handleChange = (e, index) => {
         e.preventDefault();
-        state.items[index] = e.target.value
-        setState({ items: state.items })
         itemList.items[index] = e.target.value
-        setItemList({ items: [...itemList] })
+        setItemList({ items: [...itemList.items] })
     }
-    const handleDelete = (e, index) => {
+    const handleDelete = (e) => {
         e.preventDefault();
-        state.items.splice(index, 1)
-        setState({ items: state.items })
+        let index = itemList.items.indexOf(e.currentTarget.value)
+        itemList.items.splice(index, 1)
+        setItemList({ items: itemList.items })
     }
     const onNext = (e) => {
         e.preventDefault();
@@ -213,7 +212,7 @@ const Party = ({ edit, guests }) => {
                     onChange={e => setLocation(e.target.value)}
                 />
                 <label>What day is the PlanIt?</label>
-                <DatePicker date={starts_at} onDateChange={setStarts_at} locale={enGB} format='dd/MM/yyyy'>
+                {/* <DatePicker date={starts_at} onDateChange={setStarts_at} locale={enGB} format='MM/dd/yyyy'>
                         {({ inputProps, focused }) => (
                             <input
                                 style={{width: '23rem' }}
@@ -223,13 +222,13 @@ const Party = ({ edit, guests }) => {
                                 {...inputProps}
                             />
                         )}
-                </DatePicker>
-                {/* <input
+                </DatePicker> */}
+                <input
                     name='starts_at'
                     type='date'
                     value={starts_at}
                     onChange={e => setStarts_at(e.target.value)}
-                /> */}
+                />
                 <label>What time does it start?</label>
                 <input
                     name='time'
@@ -260,7 +259,7 @@ const Party = ({ edit, guests }) => {
 
             <div className='planit__form--div'>
                 <h2 className='title'>Tell your galaxy what to bring</h2>
-                {state.items.map((item, index) => {
+                {itemList.items.map((item, index) => {
                     return (
                         <div className='party_item--input' key={index}>
                             <input
@@ -268,10 +267,9 @@ const Party = ({ edit, guests }) => {
                                 placeholder='enter item name'
                                 onChange={e => handleChange(e, index)}
                             />
-                            <IconButton aria-label="delete" onClick={e => handleDelete(e, index)}>
+                            <IconButton aria-label="delete" value={item} onClick={e => handleDelete(e)}>
                                 <DeleteIcon />
-                            </IconButton>
-                           
+                            </IconButton>               
                         </div>
                     )
                 })}
@@ -299,8 +297,7 @@ const Party = ({ edit, guests }) => {
                             <div>
                                 <img className='onePlanit--img' src={user.image_url} />
                                 {user.first_name} {user.last_name}
-                                {console.log(guestList)}
-                                {guestList.invites.includes(`${user.id}`) ?
+                                {guestList.invites.includes(user.id) ?
                                     <IconButton className='mdc-icon-button' aria-label='delete' value={user.id} onClick={e => removeInvite(e, index)}>
                                         <RemoveCircleOutlineIcon />
                                     </IconButton> :

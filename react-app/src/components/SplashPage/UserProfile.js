@@ -33,22 +33,6 @@ const UserProfile = ({user}) =>{
         return null
     }
     let imageContent;
-    let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
-    // if(!user.image_url){
-    //     imageContent = 
-    //         <div>
-    //         <div className='blank'>
-    //         {initials}
-    //         </div>
-    //         <img className='profile--pic' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
-    //         </div>
-    // }
-    // const submitPhoto = async(e) =>{
-    //     e.preventDefault()
-    //     setImage(e.target.files[0])
-    //     await dispatch(authActions.updatePhoto(user.id, image))
-    //     console.log(image)
-    // }
     const updateImage = async(e) => {
         e.preventDefault()
         await dispatch(authActions.updatePhoto(user.id, e.target.files[0]))
@@ -87,46 +71,57 @@ const UserProfile = ({user}) =>{
             <div className='standard__form--container'>
                 <div className='standard__form--div2'>
                     <h1> PlanIts hosted by you </h1>
-                    {hosted.hosted_parties.map((party, i) => {
-                       return (
-                           <div key={party.id} >
-                               <Link key={i} to={`/planits/${party.id}`} className='party-tag' style={{ padding: '1rem', display: 'flex', flexDirection: 'row' }}>
-                                    <div style={{ display: 'flex', flexDirection: 'row'}}>
-                                        <img src={party.image_url} className='profile__party-pic'/>
-                                        <div style={{padding: '0rem 1rem'}}>
-                                            <h2 style={{ textTransform: 'capitalize'}}>{party.name}</h2>
-                                            <p>{realDate(party.starts_at)}</p>
-                                            <p style={{margin: '2rem'}}>{realTime(party.time)}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                                <div key={i+party.id}>
-                                    <hr /> 
-                                </div>
+                    {hosted.hosted_parties.length < 1 ? 
+                            <div>
+                            <img src='https://myplanits.s3-us-west-1.amazonaws.com/space-jam-7.gif' style={{ maxHeight: '20rem', borderRadius: '2rem' }} />
+                                <p>Your galaxy is lonely</p>
+                                <Link to='/planits/create' className='button_primary'>Host a PlanIt</Link>
                             </div>
-                        )
+                            
+                            : hosted.hosted_parties.map((party, i) => {
+                                return (
+                                    <div key={party.id} >
+                                        <Link key={i} to={`/planits/${party.id}`} style={{ padding: '1rem', display: 'block', justifyContent:'flex-start' }}>
+                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                                                    <img src={party.image_url} className='profile__party-pic'/>
+                                                    <div style={{padding: '0rem 1rem', textAlign: 'right'}}>
+                                                        <h2 style={{ textTransform: 'capitalize'}}>{party.name}</h2>
+                                                        <p>{realDate(party.starts_at)}</p>
+                                                        <p>{realTime(party.time)}</p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                            <div key={i+party.id}>
+                                                <hr /> 
+                                            </div>
+                                        </div>
+                                    )
                         })}
                     {/* <Link className='button_primary' to={`/user/${user.id}/planits`}> View all my PlanIts </Link> */}
                 </div>
                 <div className='standard__form--div2'>
                     <h1> PlanIts to visit </h1>
-                    {hosted.visiting_parties.map((party, i) => {
-                        console.log(party, '===========')
-                       return (
-                           <div key ={party.id}> 
-                                <Link key={i} to={`/planits/${party.party.id}`} className='party-tag'>
-                                    <img src={party.party.image_url} className='profile__party-pic'/>
-                                    <h2>{party.party.name}</h2>
-                                    <div>
-                                       <p>{realDate(party.party.starts_at)}</p>
-                                        <p>{realTime(party.party.time)}</p>
+                    {hosted.visiting_parties.length < 1 ?
+                        <div>
+                            <img src='https://myplanits.s3-us-west-1.amazonaws.com/planit.gif' style={{ maxHeight: '16rem', borderRadius: '2rem' }} />
+                            <p>It looks like you arent visiting any PlanIts</p>
+                        </div>
+                        :hosted.visiting_parties.map((party, i) => {
+                            return (
+                                <div key ={party.id}> 
+                                        <Link key={i} to={`/planits/${party.party.id}`} className='party-tag'>
+                                            <img src={party.party.image_url} className='profile__party-pic'/>
+                                            <h2>{party.party.name}</h2>
+                                            <div>
+                                            <p>{realDate(party.party.starts_at)}</p>
+                                                <p>{realTime(party.party.time)}</p>
+                                            </div>
+                                        </Link>
+                                        <div key={i+party.id}>
+                                            <hr /> 
+                                        </div>
                                     </div>
-                                </Link>
-                                <div key={i+party.id}>
-                                    <hr /> 
-                                </div>
-                            </div>
-                        )
+                                )
                         })}
                     {/* <Link className='button_primary' to={`/user/${user.id}/planits`}> View all my PlanIts </Link> */}
                 </div>
@@ -135,23 +130,28 @@ const UserProfile = ({user}) =>{
                 </div> */}
                 <div className='standard__form--div2'>
                     <h1> Supplies you're bringing </h1>
-                    {items.party_items.map((item, i)=>{
-                        return (
-                            <div key={item.id}>
-                                <Link key={i} to={`/planits/${item.party.id}`} className='party-tag'>
-                                    <img src={item.party.image_url} className='profile__party-pic'/>
-                                    <h2>{item.name}</h2>
-                                    <div>
-                                    <p>{item.party.name}</p>
-                                    <p>{realDate(item.party.starts_at)}</p>
-                                    <p>{realTime(item.party.time)}</p>
-                                    </div>
-                                </Link>
-                                    <div key={i+item.id}>
-                                        <hr /> 
-                                    </div>
-                            </div>
-                        )
+                    {items.party_items < 1 ?
+                        <div>
+                            <img src='https://myplanits.s3-us-west-1.amazonaws.com/food.gif' style={{maxHeight:'20rem', borderRadius: '2rem'}} />
+                            <p> you arent bringing anything, checkout your PlanIts and sign up!</p>
+                        </div>
+                        : items.party_items.map((item, i)=>{
+                            return (
+                                <div key={item.id}>
+                                    <Link key={i} to={`/planits/${item.party.id}`} className='party-tag'>
+                                        <img src={item.party.image_url} className='profile__party-pic'/>
+                                        <h2>{item.name}</h2>
+                                        <div>
+                                        <p>{item.party.name}</p>
+                                        <p>{realDate(item.party.starts_at)}</p>
+                                        <p>{realTime(item.party.time)}</p>
+                                        </div>
+                                    </Link>
+                                        <div key={i+item.id}>
+                                            <hr /> 
+                                        </div>
+                                </div>
+                            )
                     })}
                     {/* <Link className='button_primary' to={`/user/${user.id}/items`}> View all my Items </Link> */}
                 </div>
