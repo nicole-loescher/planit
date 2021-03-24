@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link,  Redirect } from 'react-router-dom';
 import * as authActions from '../../store/auth'
-import './index.css'
+import './index.css';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+
 
 const SignUpForm = ({authenticated, setAuthenticated}) => {
   const dispatch = useDispatch()
@@ -131,16 +134,20 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
               required={true}
               ></input>
           </div>
-          <div>
-            <label>Upload a profile picture</label>
-          </div>
-          <div>
-              <input
-                type="file"
-                onChange={updateImage}
-                required={false}
-                />
-          </div>
+          <IconButton aria-label="add a photo" style={{borderRadius: '2rem', marginTop: '1rem'}} >
+            <PhotoCameraIcon />
+            <label
+              htmlFor='picupload'
+              > Profile Picture
+            </label>
+            <input
+              type="file"
+              id='picupload'
+              hidden
+              onChange={updateImage}
+              required={false}
+              />
+          </IconButton>
           <button className='button_secondary' type="submit">Sign Up</button>
         </form>
         <Link to='/login'>Already have an account?</Link>

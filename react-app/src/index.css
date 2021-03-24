@@ -48,32 +48,31 @@ body {
     font-size: 1.2rem;
     font-weight: 600;
     margin: 1rem;
-    outline: none;
+    outline:hidden;
 }
 .button_secondary:hover {
     background-color: rgb(238, 135, 45);
     color: white;
-    font-size: 1.5rem;
-    margin: .83rem;
+    outline:hidden;
 }
 .button_primary {
     box-sizing: border-box;
     color:black;
     background-color: rgb(209, 255, 249);
-    border: 2px solid rgb(209, 255, 249);
+    border: 2px solid black;
     border-radius: 2rem;
     padding: 1rem 2rem;
     cursor:grab;
     font-size: 1.2rem;
     font-weight: 600;
     margin: 1rem;
-    outline: none;
+    outline:hidden;
 }
 .button_primary:hover {
-    background-color: rgb(209, 255, 249);
-    color: black;
-    font-size: 1.5rem;
-    margin: .85rem;
+    background-color: black;
+    color: rgb(209, 255, 249);
+    border: 2px solid rgb(209, 255, 249);
+    outline:hidden;
 }
 
 a {
@@ -103,4 +102,12 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+input, textarea {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+.login:hover {
+    border-bottom: 2px solid rgb(238, 135, 45);
+    padding-bottom: .4rem;
 }

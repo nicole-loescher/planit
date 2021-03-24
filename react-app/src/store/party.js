@@ -22,6 +22,16 @@ const removeParty = () => {
         type: REMOVE_PARTY,
     };
 };
+export const uploadPhoto = (image) => async dispatch =>{
+    let form = new FormData()
+    form.append('image', image)
+    const response = await fetch('/api/planits/image', {
+        method: 'POST',
+        body: form
+    })
+    const image_url = await response.json()
+    return image_url
+}
 
 export const updateParty = (id, host_id, name, details, starts_at, time, image_url, location) => async dispatch => {
     const response = await fetch(`/api/planits/${id}`, {
