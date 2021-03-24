@@ -24,7 +24,6 @@ function UsersList() {
   }, []);
 
   const userComponents = users.map((user) => {
-    console.log(user)
     return (
       <div  className='friends--content' key={user.id}>
         <div style={{display:'flex', flexDirection: 'column'}}>

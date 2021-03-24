@@ -70,10 +70,8 @@ const Party = ({ edit, guests }) => {
         timeContent = edit.time
         let item_List = []
         items.map(item => {
-            console.log(item)
-            item_List.push({item: item.name})
+            item_List.push(item.name)
         })
-        console.log(item_List)
         itemContent = { items: item_List }
         let guest_List = []
         if (guests) {
@@ -161,21 +159,12 @@ const Party = ({ edit, guests }) => {
     }
     const handleChange = (e, index) => {
         e.preventDefault();
-        // state.items[index] = e.target.value
-        // setState({ items: state.items })
-        // console.log(itemList)
         itemList.items[index] = e.target.value
         setItemList({ items: [...itemList.items] })
     }
     const handleDelete = (e) => {
         e.preventDefault();
-        const valArr = itemList.items.map(item =>{
-            // console.log(item)
-            return item.item.name
-        })
-        // console.log(itemList.items.Object.values(item))
-        let index = valArr.indexOf(e.currentTarget.value)
-        console.log(index, '........', e.target.value, '......', e.currentTarget.value)
+        let index = itemList.items.indexOf(e.currentTarget.value)
         itemList.items.splice(index, 1)
         setItemList({ items: itemList.items })
     }
@@ -239,16 +228,15 @@ const Party = ({ edit, guests }) => {
 
             <div className='planit__form--div'>
                 <h2 className='title'>Tell your galaxy what to bring</h2>
-                {edit && itemList.items.map((item, index) => {
-                    {console.log(item, '======')}
+                {itemList.items.map((item, index) => {
                     return (
                         <div className='party_item--input' key={index}>
                             <input
-                                value={item.item}
+                                value={item}
                                 placeholder='enter item name'
                                 onChange={e => handleChange(e, index)}
                             />
-                            <IconButton aria-label="delete" value={item.item} onClick={e => handleDelete(e)}>
+                            <IconButton aria-label="delete" value={item} onClick={e => handleDelete(e)}>
                                 <DeleteIcon />
                             </IconButton>
                            
@@ -275,7 +263,6 @@ const Party = ({ edit, guests }) => {
                             <div>
                                 <img className='onePlanit--img' src={user.image_url} />
                                 {user.first_name} {user.last_name}
-                                {console.log(guestList)}
                                 {guestList.invites.includes(user.id) ?
                                     <IconButton className='mdc-icon-button' aria-label='delete' value={user.id} onClick={e => removeInvite(e, index)}>
                                         <RemoveCircleOutlineIcon />

@@ -34,22 +34,6 @@ const UserProfile = ({user}) =>{
         return null
     }
     let imageContent;
-    let initials = user.first_name[0].toUpperCase() + user.last_name[0].toUpperCase()
-    // if(!user.image_url){
-    //     imageContent = 
-    //         <div>
-    //         <div className='blank'>
-    //         {initials}
-    //         </div>
-    //         <img className='profile--pic' src='https://myplanits.s3-us-west-1.amazonaws.com/Screen+Shot+2021-03-08+at+4.58.09+PM.png' />
-    //         </div>
-    // }
-    // const submitPhoto = async(e) =>{
-    //     e.preventDefault()
-    //     setImage(e.target.files[0])
-    //     await dispatch(authActions.updatePhoto(user.id, image))
-    //     console.log(image)
-    // }
     const updateImage = async(e) => {
         e.preventDefault()
         // setImage(e.target.files[0])
@@ -113,7 +97,6 @@ const UserProfile = ({user}) =>{
                 <div className='standard__form--div2'>
                     <h1> PlanIts to visit </h1>
                     {hosted.visiting_parties.map((party, i) => {
-                        console.log(party, '===========')
                        return (
                            <div key ={party.id}> 
                                 <Link key={i} to={`/planits/${party.party.id}`} className='party-tag'>

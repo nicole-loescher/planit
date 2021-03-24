@@ -1,6 +1,5 @@
 export const realTime = (time) => {
     if (time) {
-        console.log(time)
         let newTime = time.split(':')
         let end;
         let hour = Number(newTime[0])
