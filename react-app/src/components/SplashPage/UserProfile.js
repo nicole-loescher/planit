@@ -107,6 +107,7 @@ const UserProfile = ({user}) =>{
                             <p>It looks like you arent visiting any PlanIts</p>
                         </div>
                         :hosted.visiting_parties.map((party, i) => {
+                            {console.log(party, '...............')}
                             return (
                                 <div key ={party.party.id}> 
                                     <Link key={i} to={`/planits/${party.party.id}`} style={{ padding: '1rem', display: 'block', justifyContent: 'flex-start' }}>
