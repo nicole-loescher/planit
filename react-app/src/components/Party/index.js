@@ -53,7 +53,7 @@ const Party = ({ edit, guests }) => {
             host_id,
             name,
             details,
-            format(starts_at, 'yyyy-MM-dd'),
+            starts_at,
             time,
             image_url,
             location))
@@ -125,7 +125,7 @@ const Party = ({ edit, guests }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const party = await dispatch(partyActions.create(host_id, name, details, format(starts_at, 'yyyy-MM-dd'), time, image_url, location))
+        const party = await dispatch(partyActions.create(host_id, name, details, starts_at, time, image_url, location))
         if (!party.errors) {
             const party_id = party.id
             const user_id = null
@@ -212,7 +212,7 @@ const Party = ({ edit, guests }) => {
                     onChange={e => setLocation(e.target.value)}
                 />
                 <label>What day is the PlanIt?</label>
-                <DatePicker date={starts_at} onDateChange={setStarts_at} locale={enGB} format='dd/MM/yyyy'>
+                {/* <DatePicker date={starts_at} onDateChange={setStarts_at} locale={enGB} format='MM/dd/yyyy'>
                         {({ inputProps, focused }) => (
                             <input
                                 style={{width: '23rem' }}
@@ -222,13 +222,13 @@ const Party = ({ edit, guests }) => {
                                 {...inputProps}
                             />
                         )}
-                </DatePicker>
-                {/* <input
+                </DatePicker> */}
+                <input
                     name='starts_at'
                     type='date'
                     value={starts_at}
                     onChange={e => setStarts_at(e.target.value)}
-                /> */}
+                />
                 <label>What time does it start?</label>
                 <input
                     name='time'
@@ -269,8 +269,7 @@ const Party = ({ edit, guests }) => {
                             />
                             <IconButton aria-label="delete" value={item} onClick={e => handleDelete(e)}>
                                 <DeleteIcon />
-                            </IconButton>
-                           
+                            </IconButton>               
                         </div>
                     )
                 })}
