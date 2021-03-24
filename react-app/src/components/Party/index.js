@@ -17,14 +17,17 @@ import 'react-nice-dates/build/style.css'
 import { format } from 'date-fns'
 
 
-const Party = ({ edit, guests }) => {
+const Party = ({ edit}) => {
     const history = useHistory();
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
     const [count, setCount] = useState(1);
     const [userList, setUserList] = useState('')
     const items = useSelector(state => Object.values(state.items))
+    const itemscheck = useSelector(state => state.items)
     const [myImage, setMyImage] = useState(false)
+    const guestscheck = useSelector(state => state.invites)
+    const guests = useSelector(state => Object.values(state.invites))
     
     let content;
     let errordiv;
@@ -58,12 +61,15 @@ const Party = ({ edit, guests }) => {
             image_url,
             location))
         guestList.invites.map(async (user_id) => {
-            if (user_id) {
+            if (!guestscheck[user_id]) {
                 await dispatch(inviteActions.inviteGuest(party.id, user_id))
             }
         })
         itemList.items.map(async (item)=>{
-            if(item.id){
+            let user_id = null;
+            console.log(itemscheck, '............')
+            if(!itemscheck[item.id]){
+                await dispatch(itemActions.addOneItem(item.name, party.id, user_id))
             }
         })
         history.push('/')
@@ -71,7 +77,7 @@ const Party = ({ edit, guests }) => {
     if (edit) {
         nameContent = edit.name
         locationContent = edit.location
-        detailsContent = edit.name
+        detailsContent = edit.details
         imageContent = edit.image_url
         starts_atContent = edit.starts_at
         timeContent = edit.time
@@ -82,7 +88,8 @@ const Party = ({ edit, guests }) => {
         itemContent = { items: item_List }
         let guest_List = []
         if (guests) {
-            guests.guest_list.map(guest => {
+            console.log(guests)
+            guests.map(guest => {
                 guest_List.push(guest.user_id)
             })
         }
