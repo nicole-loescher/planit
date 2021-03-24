@@ -114,8 +114,8 @@
     justify-content: space-evenly;
 }
 .profile__party-pic {
-    max-width: 8rem;
-    max-height: 10rem;
+    width: 8rem;
+    /* height: 6rem; */
     padding: 2px;
     border-radius: 1rem;
 }

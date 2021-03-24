@@ -81,7 +81,7 @@ const UserProfile = ({user}) =>{
                             : hosted.hosted_parties.map((party, i) => {
                                 return (
                                     <div key={party.id} >
-                                        <Link key={i} to={`/planits/${party.id}`} style={{ padding: '1rem', display: 'block', justifyContent:'flex-start' }}>
+                                        <Link key={i} to={`/planits/${party.id}`} style={{ padding: '1rem', display: 'block', justifyContent:'flex-start'}}>
                                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                                                     <img src={party.image_url} className='profile__party-pic'/>
                                                     <div style={{padding: '0rem 1rem', textAlign: 'right'}}>
@@ -109,14 +109,16 @@ const UserProfile = ({user}) =>{
                         :hosted.visiting_parties.map((party, i) => {
                             return (
                                 <div key ={party.id}> 
-                                        <Link key={i} to={`/planits/${party.party.id}`} className='party-tag'>
+                                    <Link key={i} to={`/planits/${party.party.id}`} style={{ padding: '1rem', display: 'block', justifyContent: 'flex-start' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                             <img src={party.party.image_url} className='profile__party-pic'/>
-                                            <h2>{party.party.name}</h2>
-                                            <div>
+                                            <h2 style={{ textTransform: 'capitalize' }}>{party.party.name}</h2>
+                                        <div style={{ padding: '0rem 1rem', textAlign: 'right' }}>
                                             <p>{realDate(party.party.starts_at)}</p>
-                                                <p>{realTime(party.party.time)}</p>
+                                            <p>{realTime(party.party.time)}</p>
                                             </div>
-                                        </Link>
+                                    </div>
+                                    </Link>
                                         <div key={i+party.id}>
                                             <hr /> 
                                         </div>
@@ -133,19 +135,21 @@ const UserProfile = ({user}) =>{
                     {items.party_items < 1 ?
                         <div>
                             <img src='https://myplanits.s3-us-west-1.amazonaws.com/food.gif' style={{maxHeight:'20rem', borderRadius: '2rem'}} />
-                            <p> you arent bringing anything, checkout your PlanIts and sign up!</p>
+                            <p> You arent bringing anything, checkout your PlanIts and sign up!</p>
                         </div>
                         : items.party_items.map((item, i)=>{
                             return (
                                 <div key={item.id}>
-                                    <Link key={i} to={`/planits/${item.party.id}`} className='party-tag'>
+                                    <Link key={i} to={`/planits/${item.party.id}`} style={{ padding: '1rem', display: 'block', justifyContent: 'flex-start' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <img src={item.party.image_url} className='profile__party-pic'/>
                                         <h2>{item.name}</h2>
-                                        <div>
-                                        <p>{item.party.name}</p>
+                                        <div style={{ padding: '0rem 1rem', textAlign: 'right' }}>
+                                        <p style={{textTransform: 'capitalize'}}>{item.party.name}</p>
                                         <p>{realDate(item.party.starts_at)}</p>
                                         <p>{realTime(item.party.time)}</p>
                                         </div>
+                                    </div>
                                     </Link>
                                         <div key={i+item.id}>
                                             <hr /> 

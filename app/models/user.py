@@ -14,13 +14,17 @@ class Guest_List(db.Model):
   party = db.relationship('Party', lazy='joined', back_populates='guests')
   guest = db.relationship('User', lazy='joined', back_populates='')
   def to_dict(self):
+    if self.party:
+      content =  self.party.to_dict()
+    else:
+      content = None
     return {
       'id': self.id,
       'user_id': self.user_id,
       'party_id': self.party_id,
       'rsvp': self.rsvp,
       # 'friend': self.friend.to_dict()
-      'party': self.party.to_dict(),
+      'party': content,
       'guest': self.guest.to_dict()
     }
 
