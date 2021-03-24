@@ -81,7 +81,7 @@ const UserProfile = ({user}) =>{
                             : hosted.hosted_parties.map((party, i) => {
                                 return (
                                     <div key={party.id} >
-                                        <Link key={i} to={`/planits/${party.id}`} style={{ padding: '1rem', display: 'block', justifyContent:'flex-start' }}>
+                                        <Link key={i} to={`/planits/${party.id}`} style={{ padding: '1rem', display: 'block', justifyContent:'flex-start'}}>
                                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                                                     <img src={party.image_url} className='profile__party-pic'/>
                                                     <div style={{padding: '0rem 1rem', textAlign: 'right'}}>

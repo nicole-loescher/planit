@@ -65,12 +65,13 @@ const Party = ({ edit}) => {
                 await dispatch(inviteActions.inviteGuest(party.id, user_id))
             }
         })
-        itemList.items.map(async (item)=>{
+        let allItems = itemList.itemNames.concat(itemList.itemNames)
+        let newItems = [... new Set(allItems)]
+        console.log(allItems, newItems, '........')
+        newItems.map(async (item)=>{
             let user_id = null;
-            console.log(itemscheck, '............')
-            if(!itemscheck[item.id]){
-                await dispatch(itemActions.addOneItem(item.name, party.id, user_id))
-            }
+            await dispatch(itemActions.addOneItem(item, party.id, user_id))
+            
         })
         history.push('/')
     }
@@ -82,10 +83,12 @@ const Party = ({ edit}) => {
         starts_atContent = edit.starts_at
         timeContent = edit.time
         let item_List = []
+        let item_names = []
         items.map(item => {
-            item_List.push(item.name)
+            item_List.push(item)
+            item_names.push(item.name)
         })
-        itemContent = { items: item_List }
+        itemContent = { items: item_List, itemNames: item_names }
         let guest_List = []
         if (guests) {
             console.log(guests)
@@ -105,7 +108,7 @@ const Party = ({ edit}) => {
         starts_atContent = ''
         imageContent = "https://myplanits.s3-us-west-1.amazonaws.com/birthday.jpg"
         timeContent = ''
-        itemContent = { items: [''] }
+        itemContent = { items: [], itemNames: [''] }
         guestContent = { invites: [] }
         submitContent = (
             <button className='button_secondary'>Submit</button>
@@ -139,7 +142,7 @@ const Party = ({ edit}) => {
             guestList.invites.map(async (user_id) => {          
                     await dispatch(inviteActions.inviteGuest(party_id, user_id))
             })
-            itemList.items.map(async (name) => await dispatch(itemActions.addOneItem(name, party_id, user_id)))
+            itemList.itemNames.map(async (name) => await dispatch(itemActions.addOneItem(name, party_id, user_id)))
             history.push('/')
         }
         if (party.errors) {
@@ -168,17 +171,24 @@ const Party = ({ edit}) => {
     } 
     const addItem = (e) => {
         e.preventDefault();
-        setItemList({ items: [...itemList.items, ''] })
+        setItemList({ items: [...itemList.items, ''], itemNames: [...itemList.itemNames, ''] })
         
     }
     const handleChange = (e, index) => {
         e.preventDefault();
-        itemList.items[index] = e.target.value
-        setItemList({ items: [...itemList.items] })
+        console.log(itemList, '..............................')
+        // if(edit){
+        //     itemList.items[index] = e.target.value
+        // }
+        // if(!edit){
+            itemList.itemNames[index] = e.target.value
+        // }
+        setItemList({ items: [...itemList.items], itemNames: [...itemList.itemNames] })
     }
     const handleDelete = (e) => {
         e.preventDefault();
         let index = itemList.items.indexOf(e.currentTarget.value)
+       
         itemList.items.splice(index, 1)
         setItemList({ items: itemList.items })
     }
@@ -266,7 +276,7 @@ const Party = ({ edit}) => {
 
             <div className='planit__form--div'>
                 <h2 className='title'>Tell your galaxy what to bring</h2>
-                {itemList.items.map((item, index) => {
+                {itemList.itemNames.map((item, index) => {
                     return (
                         <div className='party_item--input' key={index}>
                             <input
