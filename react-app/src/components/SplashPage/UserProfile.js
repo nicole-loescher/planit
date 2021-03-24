@@ -108,7 +108,7 @@ const UserProfile = ({user}) =>{
                         </div>
                         :hosted.visiting_parties.map((party, i) => {
                             return (
-                                <div key ={party.id}> 
+                                <div key ={party.party.id}> 
                                     <Link key={i} to={`/planits/${party.party.id}`} style={{ padding: '1rem', display: 'block', justifyContent: 'flex-start' }}>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                             <img src={party.party.image_url} className='profile__party-pic'/>

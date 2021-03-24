@@ -111,3 +111,6 @@ input, textarea {
     border-bottom: 2px solid rgb(238, 135, 45);
     padding-bottom: .4rem;
 }
+button:focus {
+    border-radius: 2rem;
+}
