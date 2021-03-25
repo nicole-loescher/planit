@@ -101,7 +101,7 @@ const UserProfile = ({user}) =>{
                 </div>
                 <div className='standard__form--div2'>
                     <h1> PlanIts to visit </h1>
-                    {hosted.visiting_parties.length < 1 ?
+                    {hosted.visiting_parties.length <= 0 ?
                         <div>
                             <img src='https://myplanits.s3-us-west-1.amazonaws.com/planit.gif' style={{ maxHeight: '16rem', borderRadius: '2rem' }} />
                             <p>It looks like you arent visiting any PlanIts</p>
@@ -109,14 +109,14 @@ const UserProfile = ({user}) =>{
                         :hosted.visiting_parties.map((party, i) => {
                             {console.log(party, '...............')}
                             return (
-                                <div key ={party.party.id}> 
-                                    <Link key={i} to={`/planits/${party.party.id}`} style={{ padding: '1rem', display: 'block', justifyContent: 'flex-start' }}>
+                                <div key ={party.id}> 
+                                    <Link key={i} to={`/planits/${party.party_id}`} style={{ padding: '1rem', display: 'block', justifyContent: 'flex-start' }}>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            <img src={party.party.image_url} className='profile__party-pic'/>
-                                            <h2 style={{ textTransform: 'capitalize' }}>{party.party.name}</h2>
+                                            <img src={party.image_url} className='profile__party-pic'/>
+                                            <h2 style={{ textTransform: 'capitalize' }}>{party.name}</h2>
                                         <div style={{ padding: '0rem 1rem', textAlign: 'right' }}>
-                                            <p>{realDate(party.party.starts_at)}</p>
-                                            <p>{realTime(party.party.time)}</p>
+                                            <p>{realDate(party.starts_at)}</p>
+                                            <p>{realTime(party.time)}</p>
                                             </div>
                                     </div>
                                     </Link>

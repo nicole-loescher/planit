@@ -103,7 +103,7 @@ class Party(db.Model):
   updated_at = db.Column(db.DateTime())
 
   host = db.relationship('User', lazy='joined', back_populates='hosting')
-  guests = db.relationship('Guest_List', back_populates='party')
+  guests = db.relationship('Guest_List', back_populates='party', cascade='all, delete')
   items = db.relationship('Item', lazy='joined', back_populates='party', cascade='all, delete')
 
   def to_dict(self):

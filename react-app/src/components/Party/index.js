@@ -65,7 +65,7 @@ const Party = ({ edit}) => {
                 await dispatch(inviteActions.inviteGuest(party.id, user_id))
             }
         })
-        let allItems = itemList.itemNames.concat(itemList.itemNames)
+        let allItems = itemList.itemNames.concat(itemList.items)
         let newItems = [... new Set(allItems)]
         console.log(allItems, newItems, '........')
         newItems.map(async (item)=>{
