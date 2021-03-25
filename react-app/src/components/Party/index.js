@@ -187,10 +187,10 @@ const Party = ({ edit}) => {
     }
     const handleDelete = (e) => {
         e.preventDefault();
-        let index = itemList.items.indexOf(e.currentTarget.value)
+        let index = itemList.itemNames.indexOf(e.currentTarget.value)
        
-        itemList.items.splice(index, 1)
-        setItemList({ items: itemList.items })
+        itemList.itemNames.splice(index, 1)
+        setItemList({ items: [...itemList.items], itemNames: [...itemList.itemNames] })
     }
     const onNext = (e) => {
         e.preventDefault();

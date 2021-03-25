@@ -110,13 +110,13 @@ const UserProfile = ({user}) =>{
                             {console.log(party, '...............')}
                             return (
                                 <div key ={party.id}> 
-                                    <Link key={i} to={`/planits/${party.party_id}`} style={{ padding: '1rem', display: 'block', justifyContent: 'flex-start' }}>
+                                    <Link key={i} to={`/planits/${party.party.id}`} style={{ padding: '1rem', display: 'block', justifyContent: 'flex-start' }}>
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            <img src={party.image_url} className='profile__party-pic'/>
-                                            <h2 style={{ textTransform: 'capitalize' }}>{party.name}</h2>
+                                            <img src={party.party.image_url} className='profile__party-pic'/>
+                                            <h2 style={{ textTransform: 'capitalize' }}>{party.party.name}</h2>
                                         <div style={{ padding: '0rem 1rem', textAlign: 'right' }}>
-                                            <p>{realDate(party.starts_at)}</p>
-                                            <p>{realTime(party.time)}</p>
+                                            <p>{realDate(party.party.starts_at)}</p>
+                                            <p>{realTime(party.party.time)}</p>
                                             </div>
                                     </div>
                                     </Link>

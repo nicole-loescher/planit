@@ -63,9 +63,27 @@ textarea {
 }
 .party__div--items{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     margin: 1rem;
     padding: 2rem;
+}
+.item_content {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-end;
+    margin: 1rem;
+    padding: 2rem; 
+}
+.guest_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 1rem;
+    padding: 2rem; 
+    max-height: 40rem;
+    width: 19rem;
+    overflow: scroll;
 }
 .party__title {
     margin: 0 0;
@@ -223,4 +241,20 @@ select:focus + .focus {
 }
 label{
     margin-top: 10px;
+}
+.guest_card {
+    box-sizing: border-box;
+    box-shadow: 5px 5px 10px rgb( 0 0 0 / 25%);
+    padding: 1rem 1rem 0rem 1rem;
+    width: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+}
+.guest_card > p {
+    margin-top: 4px;
+    font-size: 1.5rem;
+    text-transform: capitalize;
 }

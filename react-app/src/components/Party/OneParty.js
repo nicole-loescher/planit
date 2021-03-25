@@ -51,11 +51,13 @@ const OneParty = () => {
     }
     if(guests){
         guestContent = (
-            <div>
+            <div className='guest_content'>
+                <h1 style={{textTransform: 'capitalize'}}>{party.name}'s Galaxy</h1>
                 {guests.guest_list.map(guest => {
                     return (
-                        <div key={guest.id}>
-                            {guest.guest.first_name}
+                        <div key={guest.id} className='guest_card' >
+                            <img src={guest.guest.image_url} style={{width: '4rem', height: '4rem', objectFit: 'cover', borderRadius: '100%'}} />
+                            <p>{guest.guest.first_name}</p>
                         </div>
                     )
                 })}
@@ -102,15 +104,15 @@ const OneParty = () => {
         )
     }
     if(host.id !== user.id){
-        content2 = (
-            <button className='button_secondary' onClick={onRSVP}>RSVP</button>
-            )
+        // content2 = (
+            // <button className='button_secondary' style={{height: 'fit-content'}}onClick={onRSVP}>RSVP</button>
+            // )
         }
         
         
         if(editForm){
             content = (
-                <Party edit={party} items={items} guests={guests}/>
+                <Party edit={party}/>
             )
         }
         if(!editForm){
@@ -147,7 +149,7 @@ const OneParty = () => {
                             {content2}
                     </div>
                     <div className='party__div--items'>
-                        <div>
+                        <div className='item_content'>
                             <h1>Supplies needed for the PlanIt:</h1>
                             <p>Sign up by clicking an item below!</p>
                             {items.map((item, i)=>{
