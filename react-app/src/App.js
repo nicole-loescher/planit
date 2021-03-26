@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import Party from "./components/Party";
 import OneParty from "./components/Party/OneParty";
 import Footer from "./components/Footer";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,9 @@ function App() {
           <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
             <User />
           </ProtectedRoute>
+          <Route >
+            <ErrorPage />
+          </Route>
         </Switch>
         <Footer />
     </BrowserRouter>

@@ -150,7 +150,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
           </IconButton>
           <button className='button_secondary' type="submit">Sign Up</button>
         </form>
-        <Link to='/login'>Already have an account?</Link>
+        <Link className='login' to='/login'>Already have an account?</Link>
       </div>
     </div>
   );

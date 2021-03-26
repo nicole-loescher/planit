@@ -2,7 +2,7 @@
 
 const LOAD_PARTY = 'party/loadParty';
 const ONE_PARTY = 'party/oneParty';
-const REMOVE_PARTY = 'auth/removeParty';
+const REMOVE_PARTY = 'party/removeParty';
 
 const loadParty = (party) => {
     return {

@@ -43,8 +43,8 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     errordiv = (
       <div>
       <h3>Houston we have a problem: </h3>
-        {errors.map((error) => (
-          <div>{error}</div>
+        {errors.map((error, i) => (
+          <div key={i}>{error}</div>
         )) }  
       </div>
     )
@@ -84,7 +84,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           </div>
             <button className='button_secondary' type="submit">Log In</button>
         </form>
-        <Link to='/sign-up'>Not a member yet?</Link>
+        <Link className='login' to='/sign-up'>Not a member yet?</Link>
         <div className='demo'>
           <h3>Wanna try it out first? Check out the demo user!</h3>
           <button type='submit' onClick={onDemo} className='button_primary'>Demo</button>

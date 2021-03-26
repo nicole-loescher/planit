@@ -36,7 +36,7 @@ const OneParty = () => {
         setParty(newparty)
         setGuests(loadguestlist)
      
-    },[dispatch])
+    },[dispatch, deleteParty])
     
     if(!items){
         return null
@@ -66,7 +66,7 @@ const OneParty = () => {
     }
     const onDelete = async (e) =>{
         e.preventDefault();
-        dispatch(deleteParty(party.id))
+        await dispatch(deleteParty(party.id))
         history.push('/')
         
     }
@@ -159,6 +159,7 @@ const OneParty = () => {
                                             item.user_id === user.id ?
                                             <button value={item.id} style={{
                                                 backgroundImage: `url("${item.guest.image_url}")`,
+                                                objectFit: 'cover',
                                                 borderRadius: '100%',
                                                 width: '2rem',
                                                 height: '2rem',
@@ -170,6 +171,7 @@ const OneParty = () => {
                                                 <button style={{
                                                     backgroundImage: `url("${item.guest.image_url}")`,
                                                     borderRadius: '100%',
+                                                    objectFit: 'cover',
                                                     width: '2rem',
                                                     height: '2rem',
                                                     outline: 'none',

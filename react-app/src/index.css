@@ -55,6 +55,14 @@ body {
     color: white;
     outline:hidden;
 }
+button:focus {
+    /* border-radius: 1rem; */
+    outline: hidden;
+}
+input:focus {
+    border-radius: 1rem;
+
+}
 .button_primary {
     box-sizing: border-box;
     color:black;
@@ -105,12 +113,15 @@ a {
 }
 input, textarea {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline:hidden;
     
+}
+.login{
+    margin: 2px;
+    padding-bottom: 8px;
 }
 .login:hover {
     border-bottom: 2px solid rgb(238, 135, 45);
-    padding-bottom: .4rem;
+    padding-bottom: 6px;
 }
-button:focus {
-    border-radius: 2rem;
-}
+*:focus {outline:none !important}
