@@ -115,9 +115,11 @@
 }
 .profile__party-pic {
     width: 8rem;
-    /* height: 6rem; */
+    height: 8rem;
     padding: 2px;
     border-radius: 1rem;
+    object-fit: cover;
+
 }
 .party-tag {
     padding: 1rem;
