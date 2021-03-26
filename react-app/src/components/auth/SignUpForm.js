@@ -63,8 +63,8 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
     errordiv = (
       <div>
         <h3>Houston we have a problem: </h3>
-        {errors.map((error) => (
-          <div>{error}</div>
+        {errors.map((error, i) => (
+          <div key={i}>{error}</div>
         ))}
       </div>
     )

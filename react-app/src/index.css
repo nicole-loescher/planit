@@ -55,14 +55,14 @@ body {
     color: white;
     outline:hidden;
 }
-button:focus {
+/* button:focus {
     /* border-radius: 1rem; */
-    outline: hidden;
+    /* outline: hidden;
 }
 input:focus {
     border-radius: 1rem;
 
-}
+} */ 
 .button_primary {
     box-sizing: border-box;
     color:black;
@@ -124,4 +124,7 @@ input, textarea {
     border-bottom: 2px solid rgb(238, 135, 45);
     padding-bottom: 6px;
 }
-*:focus {outline:none !important}
+button:focus, input:focus {
+    outline:none !important;
+    box-shadow: 2px 2px 6px rgb(13, 13, 57);
+}

@@ -166,7 +166,7 @@ const OneParty = () => {
                                                 outline: 'none',
                                                 backgroundSize: 'cover',
                                                 margin: '1rem'
-                                            }} onClick={cancelBring}> :
+                                            }} onClick={cancelBring}>
                                         </button> :
                                                 <button style={{
                                                     backgroundImage: `url("${item.guest.image_url}")`,
